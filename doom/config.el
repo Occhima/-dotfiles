@@ -165,5 +165,3 @@
   (doom-modeline-github-timer nil)
   (doom-modeline-gnus-timer nil))
 
-
-PETERQUIOS
