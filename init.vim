@@ -1,0 +1,583 @@
+call plug#begin()
+" Disclaimer --> LUA VIM VERSION OF MY VIMRC
+
+" Core
+" ====
+Plug 'sheerun/vim-polyglot'
+
+" Themes
+" ======
+Plug 'jam1garner/vim-code-monokai'
+
+
+" Testint Lua Shit
+" =================
+ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'akinsho/nvim-bufferline.lua'
+Plug 'hoob3rt/lualine.nvim'
+Plug 'ryanoasis/vim-devicons'
+Plug 'karb94/neoscroll.nvim'
+"Plug 'tiagovla/tokyodark.nvim'
+"Plug 'folke/which-key.nvim'
+Plug 'glepnir/dashboard-nvim'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-tree.lua'
+"Plug 'nvim-lua/plenary.nvim'
+Plug 'folke/todo-comments.nvim'
+Plug 'folke/lsp-colors.nvim'
+Plug 'folke/trouble.nvim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'kristijanhusak/orgmode.nvim'
+
+" If you want to have icons in your statusline choose one of these
+Plug 'ryanoasis/vim-devicons'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'b3nj5m1n/kommentary'
+Plug 'hrsh7th/nvim-compe'
+Plug 'simrat39/symbols-outline.nvim'
+Plug 'windwp/nvim-spectre'
+Plug 'TimUntersberger/neogit'
+Plug 'matze/vim-move'
+Plug 'norcalli/nvim-colorizer.lua'
+Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'folke/which-key.nvim'
+Plug 'ray-x/navigator.lua'
+Plug 'ray-x/guihua.lua'
+Plug 'akinsho/toggleterm.nvim'
+
+
+call plug#end()
+
+colorscheme codedark
+
+" Colorscheme
+" ===========
+syntax enable 
+syntax on
+set background=dark
+set termguicolors
+set autowrite
+set t_Co=256
+
+"This is for the transparent background
+
+" Setin gup bufferLine
+
+lua require('nvim-web-devicons').setup{}
+lua require('neoscroll').setup{}
+lua require('telescope').setup{}
+lua require('trouble').setup{}
+lua require('lsp-colors').setup{}
+lua require("todo-comments").setup{}
+lua require('lspconfig').pyright.setup{}
+lua require('kommentary.config').use_extended_mappings()
+lua require('symbols-outline').setup{}
+lua require('nvim-tree').setup{}
+lua require('colorizer').setup{}
+lua require('which-key').setup{}
+lua require('navigator').setup{}
+
+lua << EOF
+
+require('lualine').setup({
+    options = {
+    section_separators = { "", "" },
+    component_separators = { "", "" },
+    section_separators = { "", "" },
+    component_separators = { "", "" },
+    icons_enabled = true,
+  },
+  sections = {
+lualine_a = { "mode" },
+lualine_b = { "branch" },
+    lualine_c = { { "diagnostics", sources = { "nvim_lsp" } }, "filename" },
+    lualine_x = { "filetype", lsp_progress },
+    lualine_y = { "progress" },
+    lualine_z = { clock },
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {},
+  },
+})
+
+EOF
+
+" Neogit
+" =======
+nnoremap <leader>M :Neogit<CR>
+
+
+lua <<EOF
+
+require('neogit').setup({
+
+    signs = {
+        -- { CLOSED, OPENED }
+        section = { "", "" },
+        item = { "", "" },
+        hunk = { "", "" },
+      },
+})
+
+EOF
+
+lua << EOF
+
+require('orgmode').setup({
+  org_agenda_files = {'~/org/agenda.org'},
+  org_default_notes_file = '~/org/notes.org',
+})
+
+EOF
+
+
+lua << EOF
+
+require("compe").setup({
+  enabled = true,
+  autocomplete = true,
+  debug = false,
+  min_length = 1,
+  preselect = "always", -- changed to "enable" to prevent auto select
+  throttle_time = 80,
+  source_timeout = 200,
+  incomplete_delay = 400,
+  max_abbr_width = 100,
+  max_kind_width = 100,
+  max_menu_width = 100,
+  documentation = {
+    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+  },
+
+  source = {
+    path = true,
+    buffer = true,
+    calc = true,
+    nvim_lsp = true,
+    nvim_lua = false,
+    vsnip = false,
+    luasnip = true,
+    treesitter = false,
+    emoji = true,
+    spell = true,
+  },
+})
+
+EOF
+
+" Dashboard
+" =========
+let g:dashboard_custom_header = [
+    \'',
+    \'   ⣴⣶⣤⡤⠦⣤⣀⣤⠆     ⣈⣭⣭⣿⣶⣿⣦⣼⣆         ',
+    \'    ⠉⠻⢿⣿⠿⣿⣿⣶⣦⠤⠄⡠⢾⣿⣿⡿⠋⠉⠉⠻⣿⣿⡛⣦       ',
+    \'          ⠈⢿⣿⣟⠦ ⣾⣿⣿⣷⠄⠄⠄⠄⠻⠿⢿⣿⣧⣄     ',
+    \'           ⣸⣿⣿⢧ ⢻⠻⣿⣿⣷⣄⣀⠄⠢⣀⡀⠈⠙⠿⠄    ',
+    \'          ⢠⣿⣿⣿⠈  ⠡⠌⣻⣿⣿⣿⣿⣿⣿⣿⣛⣳⣤⣀⣀   ',
+    \'   ⢠⣧⣶⣥⡤⢄ ⣸⣿⣿⠘⠄ ⢀⣴⣿⣿⡿⠛⣿⣿⣧⠈⢿⠿⠟⠛⠻⠿⠄  ',
+    \'  ⣰⣿⣿⠛⠻⣿⣿⡦⢹⣿⣷   ⢊⣿⣿⡏  ⢸⣿⣿⡇ ⢀⣠⣄⣾⠄   ',
+    \' ⣠⣿⠿⠛⠄⢀⣿⣿⣷⠘⢿⣿⣦⡀ ⢸⢿⣿⣿⣄ ⣸⣿⣿⡇⣪⣿⡿⠿⣿⣷⡄  ',
+    \' ⠙⠃   ⣼⣿⡟  ⠈⠻⣿⣿⣦⣌⡇⠻⣿⣿⣷⣿⣿⣿ ⣿⣿⡇⠄⠛⠻⢷⣄ ',
+    \'      ⢻⣿⣿⣄   ⠈⠻⣿⣿⣿⣷⣿⣿⣿⣿⣿⡟ ⠫⢿⣿⡆     ',
+    \'       ⠻⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣀⣤⣾⡿⠃     ',
+    \'     ⢰⣶  ⣶ ⢶⣆⢀⣶⠂⣶⡶⠶⣦⡄⢰⣶⠶⢶⣦  ⣴⣶     ',
+    \'     ⢸⣿⠶⠶⣿ ⠈⢻⣿⠁ ⣿⡇ ⢸⣿⢸⣿⢶⣾⠏ ⣸⣟⣹⣧    ',
+    \'     ⠸⠿  ⠿  ⠸⠿  ⠿⠷⠶⠿⠃⠸⠿⠄⠙⠷⠤⠿⠉⠉⠿⠆   ',
+    \'',
+    \]
+let g:dashboard_default_executive = "telescope"
+
+
+" Vim Specs
+" =======
+set undofile
+set number
+"let g:auto_save=1
+"set cursorline
+set tabstop=4
+set mouse=a
+set clipboard+=unnamedplus
+set inccommand=split
+set listchars=tab:▸\ ,eol:¬
+set fillchars+=vert:\ 
+set shiftwidth=4
+let &softtabstop = &shiftwidth
+set expandtab 
+set pastetoggle=<F10>
+
+" Key Mapping
+" ===========
+let mapleader="\<space>"
+let g:python_highlight_space_errors = 0
+nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>li A,<esc>o 
+noremap <C-l> :Term<CR>
+
+"BarBar config
+"=============
+" Move to previous/next
+"map gp  :BufferLineCyclePrev<CR>
+"map gn  :BufferLineCycleNext<CR>
+"map gd  :BufferClose<CR>
+
+"Rainbow Brackets
+"===============
+let g:rainbow_active = 1
+
+
+" AutoComplete with tab
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+
+let g:dashboard_default_executive ='fzf'
+nmap <Leader>ss :<C-u>SessionSave<CR>
+nmap <Leader>sl :<C-u>SessionLoad<CR>
+nnoremap <silent> <Leader>fh :DashboardFindHistory<CR>
+nnoremap <silent> <Leader>tc :DashboardChangeColorscheme<CR>
+nnoremap <silent> <Leader>fa :DashboardFindWord<CR>
+nnoremap <silent> <Leader>fb :DashboardJumpMark<CR>
+nnoremap <silent> <Leader>cn :DashboardNewFile<CR>
+
+" Telescope
+"==========
+
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+
+" Spectre
+" ========
+nnoremap <leader>S :lua require('spectre').open()<CR>
+nnoremap <leader>sw :lua require('spectre').open_visual({select_word=true})<CR>
+vnoremap <leader>s :lua require('spectre').open_visual()<CR>
+nnoremap <leader>sp viw:lua require('spectre').open_file_search()<cr>
+
+
+" Nvim-Tree
+" ===========
+lua << EOF
+vim.g.nvim_tree_ignore = { ".git", "node_modules" }
+vim.g.nvim_tree_gitignore = 1
+vim.g.nvim_tree_auto_open = 1
+vim.g.nvim_tree_auto_close = 1
+vim.g.nvim_tree_follow = 1
+vim.g.nvim_tree_auto_ignore_ft = { "dashboard", "startify" }
+vim.g.nvim_tree_indent_markers = 1
+vim.g.nvim_tree_git_hl = 1
+vim.g.nvim_tree_disable_netrw = 0
+vim.g.nvim_tree_lsp_diagnostics = 1
+
+require("nvim-tree.events").on_nvim_tree_ready(function()
+  vim.cmd("NvimTreeRefresh")
+end)
+
+EOF
+    
+nnoremap <leader>op <cmd>NvimTreeToggle<CR>
+nnoremap <leader>tr <cmd>NvimTreeRefresh<CR>
+nnoremap <leade>oP <cmd>NvimTreeFindFile<CR>
+
+
+
+" BufferLine
+" =========
+
+lua << EOF
+require('bufferline').setup({
+  options = {
+    show_close_icon = true,
+    diagnostics = "nvim_lsp",
+    always_show_bufferline = false,
+    separator_style = "slant",
+    diagnostics_indicator = function(_, _, diagnostics_dict)
+      local s = " "
+      for e, n in pairs(diagnostics_dict) do
+        local sym = e == "error" and " " or (e == "warning" and " " or "")
+        s = s .. sym .. n
+      end
+      return s
+    end,
+  },
+})
+
+EOF
+
+nnoremap gn :BufferLineCycleNext<CR>
+nnoremap gp :BufferLineCyclePrev<CR>
+nnoremap gd :bd<CR>
+
+" These commands will move the current buffer backwards or forwards in the bufferline
+nnoremap <silent>ert :BufferLineMoveNext<CR>
+nnoremap <silent>era :BufferLineMovePrev<CR>
+
+" These commands will sort buffers by directory, language, or a custom criteria
+nnoremap <silent>be :BufferLineSortByExtension<CR>
+nnoremap <silent>bd :BufferLineSortByDirectory<CR>
+nnoremap <silent>bdd :lua require'bufferline'.sort_buffers_by(function (buf_a, buf_b) return buf_a.id < buf_b.id end)<CR>
+
+
+" Symbols Outline
+" ================
+map <leader>t :SymbolsOutline<CR>
+map <leader>to :SymbolsOutlineOpen<CR>
+map <leader>tc :SymbolsOutlineClose<CR>
+
+
+" Vim-Move
+" ==========
+let g:move_key_modifier = 'C'
+" <C-k> goes up and <C-j> goes dow
+
+" VimBlankLine
+" =========
+
+lua << EOF
+
+vim.g.indent_blankline_buftype_exclude = { "terminal", "nofile" }
+vim.g.indent_blankline_filetype_exclude = {
+  "help",
+  "startify",
+  "dashboard",
+  "packer",
+  "neogitstatus",
+  "NvimTree",
+  "Trouble",
+}
+vim.g.indent_blankline_char = "."
+vim.g.indent_blankline_use_treesitter = true
+vim.g.indent_blankline_show_trailing_blankline_indent = false
+vim.g.indent_blankline_show_current_context = true
+vim.g.indent_blankline_context_patterns = {
+  "class",
+  "return",
+  "function",
+  "method",
+  "^if",
+  "^while",
+  "jsx_element",
+  "^for",
+  "^object",
+  "^table",
+  "block",
+  "arguments",
+  "if_statement",
+  "else_clause",
+  "jsx_element",
+  "jsx_self_closing_element",
+  "try_statement",
+  "catch_clause",
+  "import_statement",
+  "operation_type",
+}
+-- HACK: work-around for https://github.com/lukas-reineke/indent-blankline.nvim/issues/59
+vim.wo.colorcolumn = "99999"
+
+EOF
+
+lua << EOF
+
+local ts_configs = require("nvim-treesitter.configs")
+
+ts_configs.setup({
+   rainbow = {
+    enable = true,
+    extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+    max_file_lines = nil, -- Do not enable for files with more than n lines, int
+    -- colors = {}, -- table of hex strings
+    -- termcolors = {} -- table of colour name strings
+  },
+  ensure_installed = {
+    "bash",
+    "c",
+    "cmake",
+    "comment",
+    "cpp",
+    "css",
+    "fish",
+    "go",
+    "graphql",
+    "html",
+    "javascript",
+    "jsonc",
+    "latex",
+    "lua",
+    "nix",
+    "python",
+    "regex",
+    "rust",
+    "svelte",
+    "toml",
+    "tsx",
+    "typescript",
+    "vue",
+    "yaml",
+    "json",
+    -- "markdown",
+  },
+  highlight = { enable = true, use_languagetree = true },
+  indent = { enable = false },
+  context_commentstring = { enable = true },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "<C-n>",
+      node_incremental = "<C-n>",
+      scope_incremental = "<C-s>",
+      node_decremental = "<C-r>",
+    },
+  },
+  query_linter = {
+    enable = true,
+    use_virtual_text = true,
+    lint_events = { "BufWrite", "CursorHold" },
+  },
+  textsubjects = {
+    enable = true,
+    keymaps = {
+      ["."] = "textsubjects-smart",
+      [";"] = "textsubjects-container-outer",
+    },
+  },
+  playground = {
+    enable = true,
+    disable = {},
+    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+    persist_queries = true, -- Whether the query persists across vim sessions
+    keybindings = {
+      toggle_query_editor = "o",
+      toggle_hl_groups = "i",
+      toggle_injected_languages = "t",
+      toggle_anonymous_nodes = "a",
+      toggle_language_display = "I",
+      focus_language = "f",
+      unfocus_language = "F",
+      update = "R",
+      goto_node = "<cr>",
+      show_help = "?",
+    },
+  },
+  textobjects = {
+    select = {
+      enable = true,
+      lookahead = true,
+      keymaps = {
+        -- You can use the capture groups defined in textobjects.scm
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
+      },
+    },
+    move = {
+      enable = true,
+      set_jumps = true, -- whether to set jumps in the jumplist
+      goto_next_start = { ["]m"] = "@function.outer", ["]]"] = "@class.outer" },
+      goto_next_end = { ["]M"] = "@function.outer", ["]["] = "@class.outer" },
+      goto_previous_start = { ["[m"] = "@function.outer", ["[["] = "@class.outer" },
+      goto_previous_end = { ["[M"] = "@function.outer", ["[]"] = "@class.outer" },
+    },
+    lsp_interop = {
+      enable = true,
+      peek_definition_code = {
+        ["gD"] = "@function.outer",
+      },
+    },
+  },
+})
+
+-- Add Markdown
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+parser_config.jsonc.used_by = "json"
+parser_config.markdown = {
+  install_info = {
+    url = "https://github.com/ikatyang/tree-sitter-markdown",
+    files = { "src/parser.c", "src/scanner.cc" },
+  },
+}
+
+EOF
+
+" Vim - LSP Trouble
+" ================
+nnoremap <leader>xx <cmd>TroubleToggle<cr>
+nnoremap <leader>xw <cmd>TroubleToggle lsp_workspace_diagnostics<cr>
+nnoremap <leader>xd <cmd>TroubleToggle lsp_document_diagnostics<cr>
+nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
+nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
+nnoremap gR <cmd>TroubleToggle lsp_references<cr>
+
+" ToggleTerm 
+" ===========
+
+lua << EOF
+
+require("toggleterm").setup({
+  size = 20,
+  hide_numbers = true,
+  open_mapping = [[<M-`>]],
+  shade_filetypes = {},
+  shade_terminals = false,
+  shading_factor = 0.3, -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
+  start_in_insert = true,
+  persist_size = true,
+  direction = "float",
+})
+
+EOF
+
+nnoremap <leader>te <cmd>ToggleTerm<cr>
+tnoremap <esc><esc> <C-\><C-N>
+
+" Navigator
+" =========
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
