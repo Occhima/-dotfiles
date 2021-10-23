@@ -44,15 +44,15 @@
 
 ;; Styling and setting variables
 (setq
- doom-font (font-spec :family "Cascadia Code" :size 20)
- doom-big-font (font-spec :family "Cascadia Code" :size 28)
- doom-variable-pitch-font (font-spec :family "Cascadia Code")
+ doom-font (font-spec :family "CaskaydiaCove Nerd Font SemiBold" :size 20)
+ doom-big-font (font-spec :family "CaskaydiaCove Nerd Font SemiBold" :size 28)
+ doom-variable-pitch-font (font-spec :family "CaskaydiaCove Nerd Font SemiBold")
  default-directory "~"
  dart-format-on-save t
  web-mode-markup-indent-offset 2
  web-mode-code-indent-offset 2
  web-mode-css-indent-offset 2
- projectile-project-search-path '("~/projects/ ~/projects/vertical_project")
+ projectile-project-search-path '("~/projects/")
  dired-dwim-target t
  org-ellipsis " ▾ "
  org-bullets-bullet-list '("·")
