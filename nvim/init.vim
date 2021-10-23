@@ -9,7 +9,6 @@ Plug 'sheerun/vim-polyglot'
 " ======
 Plug 'jam1garner/vim-code-monokai'
 
-
 " Testint Lua Shit
 " =================
  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
@@ -22,7 +21,6 @@ Plug 'karb94/neoscroll.nvim'
 Plug 'glepnir/dashboard-nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
-"Plug 'nvim-lua/plenary.nvim'
 Plug 'folke/todo-comments.nvim'
 Plug 'folke/lsp-colors.nvim'
 Plug 'folke/trouble.nvim'
@@ -44,21 +42,30 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'folke/which-key.nvim'
 Plug 'ray-x/navigator.lua'
 Plug 'ray-x/guihua.lua'
+Plug 'ray-x/material_plus.nvim'
 Plug 'akinsho/toggleterm.nvim'
+Plug 'williamboman/nvim-lsp-installer'
+Plug 'luukvbaal/stabilize.nvim'
+Plug 'chentau/marks.nvim'
+Plug 'mfussenegger/nvim-dap'
+Plug 'rcarriga/nvim-dap-ui'
 
-
+" Markdown preview
 call plug#end()
 
-colorscheme codedark
 
 " Colorscheme
 " ===========
+colorscheme codedark 
 syntax enable 
 syntax on
 set background=dark
 set termguicolors
 set autowrite
 set t_Co=256
+
+
+
 
 "This is for the transparent background
 
@@ -70,13 +77,47 @@ lua require('telescope').setup{}
 lua require('trouble').setup{}
 lua require('lsp-colors').setup{}
 lua require("todo-comments").setup{}
-lua require('lspconfig').pyright.setup{}
+
+" lua require('lspconfig').pyright.setup{}
+
 lua require('kommentary.config').use_extended_mappings()
 lua require('symbols-outline').setup{}
 lua require('nvim-tree').setup{}
 lua require('colorizer').setup{}
 lua require('which-key').setup{}
 lua require('navigator').setup{}
+lua require('stabilize').setup{}
+lua require('marks').setup{}
+lua require('dapui').setup{}
+ 
+" LSP Install
+" ===========
+
+lua << EOF
+
+local lsp_installer = require("nvim-lsp-installer")
+
+lsp_installer.on_server_ready(function(server)
+    local opts = {}
+
+    -- (optional) Customize the options passed to the server
+    -- if server.name == "tsserver" then
+    --     opts.root_dir = function() ... end
+    -- end
+
+    -- This setup() function is exactly the same as lspconfig's setup function (:help lspconfig-quickstart)
+    server:setup(opts)
+    vim.cmd [[ do User LspAttachBuffers ]]
+end)
+
+EOF
+
+
+
+
+" Lualine
+" ========
+
 
 lua << EOF
 
