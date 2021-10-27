@@ -23,6 +23,7 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug 'folke/todo-comments.nvim'
 Plug 'folke/lsp-colors.nvim'
 Plug 'folke/trouble.nvim'
+Plug 'folke/twilight.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'kristijanhusak/orgmode.nvim'
 
@@ -88,6 +89,7 @@ lua require('navigator').setup{}
 lua require('stabilize').setup{}
 lua require('marks').setup{}
 lua require('dapui').setup{}
+lua require('twilight').setup{}
 
 
 
