@@ -16,8 +16,7 @@ Plug 'akinsho/nvim-bufferline.lua'
 Plug 'hoob3rt/lualine.nvim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'karb94/neoscroll.nvim'
-"Plug 'tiagovla/tokyodark.nvim'
-"Plug 'folke/which-key.nvim'
+Plug 'tiagovla/tokyodark.nvim'
 Plug 'glepnir/dashboard-nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
@@ -49,6 +48,7 @@ Plug 'luukvbaal/stabilize.nvim'
 Plug 'chentau/marks.nvim'
 Plug 'mfussenegger/nvim-dap'
 Plug 'rcarriga/nvim-dap-ui'
+Plug 'kevinhwang91/nvim-hlslens'
 
 " Markdown preview
 call plug#end()
@@ -56,6 +56,7 @@ call plug#end()
 
 " Colorscheme
 " ===========
+" .vimrc
 colorscheme codedark 
 syntax enable 
 syntax on
@@ -63,8 +64,6 @@ set background=dark
 set termguicolors
 set autowrite
 set t_Co=256
-
-
 
 
 "This is for the transparent background
@@ -89,6 +88,26 @@ lua require('navigator').setup{}
 lua require('stabilize').setup{}
 lua require('marks').setup{}
 lua require('dapui').setup{}
+
+
+
+
+" HSLens
+" ===========
+" -- lua
+
+
+lua << EOF
+require('hlslens').setup({
+    calm_down = true,
+    nearest_only = true,
+    nearest_float_when = 'always'
+})
+
+EOF
+
+
+
  
 " LSP Install
 " ===========
@@ -587,6 +606,7 @@ tnoremap <esc><esc> <C-\><C-N>
 
 " Navigator
 " =========
+" peter quios
 
 
 
