@@ -50,6 +50,7 @@ Plug 'chentau/marks.nvim'
 Plug 'mfussenegger/nvim-dap'
 Plug 'rcarriga/nvim-dap-ui'
 Plug 'kevinhwang91/nvim-hlslens'
+Plug 'github/copilot.vim'
 
 " Markdown preview
 call plug#end()
