@@ -1,0 +1,107 @@
+- import_tasks: repos.yml
+
+- name: install dnf tools
+  become: yes
+  dnf:
+    name:
+      # LinuxBrew Dependencies
+      - "@Development Tools"
+      - procps-ng
+      - curl
+      - file
+      - libxcrypt-compat
+
+      # gui
+      - alacritty
+      - brave-browser-beta
+      - dconf-editor
+      - discord
+      - element
+      - gnome-tweaks
+      - kitty
+      - foot
+      - waybar
+      - sway
+      - wdisplays
+      - nwg-launchers
+      - nwg-panel
+      - slurp
+      - grim
+      - wev
+      - swaylock-effects
+
+      # utils
+      - clipman
+      - pulseaudio-utils
+      - playerctl
+      - brightnessctl
+      - wob
+      - fuzzel
+      - wofi
+      - bemenu
+      - rofi-wayland
+
+      # cli
+      - aria2
+      - aspell
+      - bat
+      - bandwhich
+      - bottom
+      - ctop
+      - curl
+      - gh
+      - git-delta
+      - exa
+      - fd-find
+      - direnv
+      - fzf
+      - fzy
+      - git
+      # - glow
+      - gnupg
+      - htop
+      - httpie
+      - hub
+      - hyperfine
+      - jq
+      # - languagetool
+      - lazydocker
+      - lazygit
+      - neovim
+      - nnn
+      - nodejs
+      - ncdu
+      - osmium-tool
+      - pass
+      - procs
+      - qemu
+      - ranger
+      - ripgrep
+      - ShellCheck
+      - shfmt
+      - starship
+      - tealdeer
+      - tmux
+      # - tmuxinator
+      - tokei
+      - weechat
+      - wget
+      # - wezterm
+      - zoxide
+
+- name: install brew tools
+  community.general.homebrew:
+    path: /home/linuxbrew/.linuxbrew/bin
+    name:
+      # cli
+      - as-tree
+      - broot
+      - duf
+      - dust
+      - fnm
+      - grc
+      - markdownlint-cli
+      - mdcat
+      - pfetch
+      - selene
+      - stylua
