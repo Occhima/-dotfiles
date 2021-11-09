@@ -11,6 +11,8 @@ Plug 'jam1garner/vim-code-monokai'
 
 " Testint Lua Shit
 " =================
+Plug 'jamestthompson3/nvim-remote-containers'
+
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'akinsho/nvim-bufferline.lua'
 Plug 'hoob3rt/lualine.nvim'
