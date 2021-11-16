@@ -1,4 +1,5 @@
 local ts_configs = require("nvim-treesitter.configs")
+
 ts_configs.setup({
   ensure_installed = {
     "bash",
@@ -18,13 +19,14 @@ ts_configs.setup({
     "python",
     "regex",
     "rust",
+    "r",
     "svelte",
     "toml",
     "tsx",
     "typescript",
     "vue",
     "yaml",
-    -- "json",
+    "json",
     -- "markdown",
   },
   highlight = { enable = true, use_languagetree = true },
@@ -98,12 +100,32 @@ ts_configs.setup({
   },
 })
 
--- Add Markdown
 local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-parser_config.jsonc.used_by = "json"
-parser_config.markdown = {
+
+-- Add Markdown
+-- parser_config.jsonc.used_by = "json"
+-- parser_config.markdown = {
+--   install_info = {
+--     url = "https://github.com/ikatyang/tree-sitter-markdown",
+--     files = { "src/parser.c", "src/scanner.cc" },
+--   },
+-- }
+
+-- Add Julia
+parser_config.julia = {
   install_info = {
-    url = "https://github.com/ikatyang/tree-sitter-markdown",
+    url = "tree-sitter/tree-sitter-julia",
     files = { "src/parser.c", "src/scanner.cc" },
   },
+  filetype="jl"
+}
+
+-- Added orgmode support
+parser_config.org = {
+  install_info = {
+    url = 'https://github.com/milisims/tree-sitter-org',
+    revision = 'main',
+    files = {'src/parser.c', 'src/scanner.cc'},
+  },
+  filetype = 'org',
 }

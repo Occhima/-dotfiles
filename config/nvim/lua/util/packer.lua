@@ -63,6 +63,7 @@ function M.setup(config, fn)
   M.bootstrap()
   local packer = require("packer")
   packer.init(config)
+
   M.local_plugins = config.local_plugins or {}
   return packer.startup({
     function(use)

@@ -5,6 +5,11 @@ local config = {
     enable = true,
     threshold = 0, -- the amount in ms that a plugins load time must be over for it to be included in the profile
   },
+
+  log = { 
+      level = 'debug'
+  },
+
   display = {
     open_fn = function()
       return require("packer.util").float({ border = "single" })
@@ -13,25 +18,24 @@ local config = {
   -- list of plugins that should be taken from ~/projects
   -- this is NOT packer functionality!
   local_plugins = {
-    folke = true,
-    ["null-ls.nvim"] = false,
-    ["nvim-lspconfig"] = false,
+    -- folke = false,
+    -- ["nvim-lspconfig"] = false,
+    -- ["null-ls.nvim"] = false,
     -- ["nvim-treesitter"] = true,
   },
 }
 
 local function plugins(use)
+
   -- Packer can manage itself as an optional plugin
   use({ "wbthomason/packer.nvim", opt = true })
   use({ "nathom/filetype.nvim" })
-  use({ "folke/workspace.nvim" })
   -- LSP
   use({
     "neovim/nvim-lspconfig",
     opt = true,
     event = "BufReadPre",
     wants = {
-      "workspace.nvim",
       "nvim-lsp-ts-utils",
       "null-ls.nvim",
       "lua-dev.nvim",
@@ -42,7 +46,6 @@ local function plugins(use)
       require("config.lsp")
     end,
     requires = {
-      "folke/workspace.nvim",
       "jose-elias-alvarez/nvim-lsp-ts-utils",
       "jose-elias-alvarez/null-ls.nvim",
       "folke/lua-dev.nvim",
@@ -106,7 +109,10 @@ local function plugins(use)
       "nvim-treesitter/nvim-treesitter-textobjects",
       "RRethy/nvim-treesitter-textsubjects",
     },
-    config = [[require('config.treesitter')]],
+    config = function ()
+      require('config.treesitter')  
+    end
+    ,
   })
 
   -- Theme: color schemes
@@ -134,9 +140,10 @@ local function plugins(use)
     -- "Th3Whit3Wolf/onebuddy",
     -- "christianchiarulli/nvcode-color-schemes.vim",
     -- "Th3Whit3Wolf/one-nvim"
-
-    "folke/tokyonight.nvim",
-    -- event = "VimEnter",
+    -- "folke/tokyonight.nvim",
+    'jam1garner/vim-code-monokai',
+    -- "srcery-colors/srcery-vim",
+    event = "VimEnter",
     config = function()
       require("config.theme")
     end,
@@ -388,6 +395,7 @@ local function plugins(use)
     end,
   })
 
+
   use({
     "folke/which-key.nvim",
     event = "VimEnter",
@@ -417,12 +425,33 @@ local function plugins(use)
 
   -- use("DanilaMihailov/vim-tips-wiki")
   use("nanotee/luv-vimdocs")
+
   use({
     "andymass/vim-matchup",
     event = "CursorMoved",
   })
   use({ "camspiers/snap", rocks = { "fzy" }, module = "snap" })
+
   use("kmonad/kmonad-vim")
+
+-- My personal added files
+  use({
+
+  "kristijanhusak/orgmode.nvim",
+  config = function()
+    require("config.org")
+  end
+  })
+
+ -- Using github copilot
+  use({
+    "github/copilot.vim",
+    event="VimEnter",
+    config=function ()
+      require("config.copilot")
+    end
+  })
+
 end
 
 return packer.setup(config, plugins)

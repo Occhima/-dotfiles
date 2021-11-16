@@ -2,7 +2,7 @@ require("config.lsp.diagnostics")
 require("config.lsp.kind").setup()
 
 local function on_attach(client, bufnr)
-  require("config.lsp.formatting").setup(client, bufnr)
+  -- require("config.lsp.formatting").setup(client, bufnr)
   require("config.lsp.keys").setup(client, bufnr)
   -- require("config.lsp.completion").setup(client, bufnr)
   require("config.lsp.highlighting").setup(client)
@@ -31,7 +31,6 @@ local servers = {
 
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-require("workspace").setup()
 require("lua-dev").setup()
 
 local options = {

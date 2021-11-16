@@ -46,5 +46,12 @@ vim.g.tokyonight_dark_float = true
 vim.g.tokyonight_colors = {}
 -- vim.g.tokyonight_colors = { border = "orange" }
 
-require("tokyonight").colorscheme()
--- vim.cmd("colorscheme tokyonight") -- Put your favorite colorscheme here
+-- Srcery colorscheme
+vim.g.srcery_italic=true
+vim.g.srcery_italic_types=true
+vim.srcery_bold=true
+vim.srcery_underline=true
+vim.srcery_undercurl=true
+
+-- require("tokyonight").colorscheme()
+vim.cmd("colorscheme codedark") -- Put your favorite colorscheme here

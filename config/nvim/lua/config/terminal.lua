@@ -14,4 +14,5 @@ require("toggleterm").setup({
 -- vim.cmd [[au TermOpen * setlocal nonumber norelativenumber]]
 
 -- Esc twice to get to normal mode
+-- j
 vim.cmd([[tnoremap <esc><esc> <C-\><C-N>]])

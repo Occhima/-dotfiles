@@ -169,10 +169,12 @@ local leader = {
     r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
     n = { "<cmd>enew<cr>", "New File" },
     z = "Zoxide",
-    d = "Dot Files",
+    d = {":Telescope file_browser cwd=~/.config/nvim<CR>", "Browse Nvim Config" }
   },
   o = {
     name = "+open",
+    a = {"lua require('orgmode').action('agenda.prompt')", "Open OrgAgenda"},
+    c = {"lua require('orgmode').action('capture.prompt')", "Capture ToDo's"},
     p = { "<cmd>MarkdownPreview<cr>", "Markdown Preview" },
     g = { "<cmd>Glow<cr>", "Markdown Glow" },
   },

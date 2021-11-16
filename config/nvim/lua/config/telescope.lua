@@ -87,9 +87,12 @@ end
 local util = require("util")
 
 util.nnoremap("<Leader><Space>", M.project_files)
-util.nnoremap("<Leader>fd", function()
-  require("telescope.builtin").git_files({ cwd = "~/dot" })
-end)
+
+-- I commented this because i needed to map this keys to 
+-- open my nvim config with <leader>fd
+-- util.nnoremap("<Leader>fd", function()
+--   require("telescope.builtin").git_files({ cwd = "~/.config/nvim" })
+-- end)
 
 util.nnoremap("<leader>fz", function()
   require("telescope").extensions.z.list({ cmd = { vim.o.shell, "-c", "zoxide query -ls" } })
