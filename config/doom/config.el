@@ -13,12 +13,13 @@
       display-line-numbers-type 'relative
       which-key-idle-delay 0.3                    ; Show key binding help quicker
       which-key-idle-secondary-delay 0
-      vterm-always-compile-module t               ; Compile the vterm-module when needed without asking
+      vterm-always-compile-module t)               ; Compile the vterm-module when needed without asking
+
 
 (after! projectile
   (setq projectile-project-root-files-bottom-up '("package.json" ".projectile" ".project" ".git")
         projectile-ignored-projects '("~/.emacs.d/")
-        projectile-project-search-path '("~/projects"))
+        projectile-project-search-path '("~/projects/remote/"))
   (defun projectile-ignored-project-function (filepath)
     "Return t if FILEPATH is within any of `projectile-ignored-projects'"
     (or (mapcar (lambda (p) (s-starts-with-p p filepath)) projectile-ignored-projects))))
@@ -47,15 +48,15 @@
 
 (advice-add 'counsel-recentf-candidates :filter-return #'+fl/counsel-recentf-candidates)
 
-(after! popup
-  (set-popup-rule! "^\\*Flycheck errors\\*$" :side 'bottom :size 0.2 :select t))
+;; (after! popup
+;;   (set-popup-rule! "^\\*Flycheck errors\\*$" :side 'bottom :size 0.2 :select t))
 
-(after! flycheck
-  (setq flycheck-check-syntax-automatically '(mode-enabled save new-line idle-change)))
+;; (after! flycheck
+;;   (setq flycheck-check-syntax-automatically '(mode-enabled save new-line idle-change)))
 
-(after! (flycheck lsp-mode)
-  (add-hook 'lsp-after-initialize-hook (lambda()
-                                        (flycheck-add-next-checker 'lsp '(warning . javascript-eslint)))))
+;; (after! (flycheck lsp-mode)
+;;   (add-hook 'lsp-after-initialize-hook (lambda()
+;;                                         (flycheck-add-next-checker 'lsp '(warning . javascript-eslint)))))
 (after! lsp-mode
   (setq lsp-lua-diagnostics-globals ["hs" "spoon"]))
 
@@ -84,46 +85,46 @@
 (after! rainbow-mode
   (setq rainbow-html-colors-major-mode-list '(html-mode css-mode php-mode nxml-mode xml-mode typescript-mode javascript-mode)))
 
-; (setq doom-font (font-spec :family "VictorMono Nerd Font Bold" :size 12)
-;       doom-variable-pitch-font (font-spec :family "VictorMono Nerd Font Bold Italic" :size 12))
+(setq doom-font (font-spec :family "CaskaydiaCove NF" :size 17))
+      ; doom-variable-pitch-font (font-spec :family "VictorMono Nerd Font Bold Italic" :size 12))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 ; (setq doom-theme 'doom-moonlight)
-(setq doom-theme 'doom-dracula)
+(setq doom-theme 'doom-molokai)
 (custom-set-faces!
   '(font-lock-comment-face :slant italic))
 ;;(setq doom-theme 'doom-palenight)
 
 
-(defvar +fl/splashcii-query ""
-  "The query to search on asciiur.com")
+; (defvar +fl/splashcii-query ""
+;   "The query to search on asciiur.com")
 
-(defun +fl/splashcii-banner ()
-  (mapc (lambda (line)
-          (insert (propertize (+doom-dashboard--center +doom-dashboard--width line)
-                              'face 'doom-dashboard-banner) " ")
-          (insert "\n"))
-        (split-string (with-output-to-string
-                        (call-process "splashcii" nil standard-output nil +fl/splashcii-query))
-                      "\n" t)))
+; (defun +fl/splashcii-banner ()
+;   (mapc (lambda (line)
+;           (insert (propertize (+doom-dashboard--center +doom-dashboard--width line)
+;                               'face 'doom-dashboard-banner) " ")
+;           (insert "\n"))
+;         (split-string (with-output-to-string
+;                         (call-process "splashcii" nil standard-output nil +fl/splashcii-query))
+;                       "\n" t)))
 
-(setq +doom-dashboard-ascii-banner-fn #'+fl/splashcii-banner)
+; (setq +doom-dashboard-ascii-banner-fn #'+fl/splashcii-banner)
 
-(setq +fl/splashcii-query "christmas")
+; (setq +fl/splashcii-query "christmas")
 
-(after! centaur-tabs
-  (centaur-tabs-group-by-projectile-project)
+; (after! centaur-tabs
+;   (centaur-tabs-group-by-projectile-project)
 
-  (+popup-window-p) ; needed to prevent recursive auto-loading of popup
+;   (+popup-window-p) ; needed to prevent recursive auto-loading of popup
 
-  ;; Automatically turn off tabs in popups
-  (defun +fl/hide-tabs-in-popup ()
-    (if (+popup-window-p)
-        (centaur-tabs-local-mode)
-      (centaur-tabs-local-mode 0)))
-  (add-hook! 'buffer-list-update-hook '+fl/hide-tabs-in-popup))
+;   ;; Automatically turn off tabs in popups
+;   (defun +fl/hide-tabs-in-popup ()
+;     (if (+popup-window-p)
+;         (centaur-tabs-local-mode)
+;       (centaur-tabs-local-mode 0)))
+;   (add-hook! 'buffer-list-update-hook '+fl/hide-tabs-in-popup))
 
 (unless (equal "Battery status not available"
                (battery))
@@ -292,34 +293,34 @@
           ("DONE" . +org-todo-done)
           ("KILL" . +org-todo-done))))
 
-(use-package! ox-tailwind
-  :after ox)
-(after! ox-tailwind
-  (setq org-tailwind-class-inner-container "")
-  (setq org-tailwind-footer ""
-        org-tailwind-class-h1 "mb-6 text-6xl text-gray-700 border-b hover:text-green-500
-border-gray-500"
-        org-tailwind-class-footer "invisible"
-        org-tailwind-class-src-container "my-12 shadow"
-        org-tailwind-class-sidebar "px-24 py-12 bg-gray-200 lg:border-r lg:border-gray-500
-lg:fixed lg:pt-2 lg:w-64 lg:px-2 lg:overflow-y-auto lg:inset-y-0
-lg:mt-16"
-        org-tailwind-class-content-container "flex-grow px-4 py-12 sm:px-8 md:px-12 lg:ml-64 lg:px-12
-lg:overflow-x-auto xl:px-32"
-        org-tailwind-head-files "
-        <!-- Tailwind CSS -->
-        <link href=\"https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.9.2/tailwind.min.css\" rel=\"stylesheet\"/>
-        <!-- Prism Css -->
-        <link href=\"https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism.min.css\" rel=\"stylesheet\" />
-        <!-- Mathjax -->
-        <!-- Toc tree file -->
-        <script>const tocTree = []</script>
-"
-        org-tailwind-bottom-files "
-        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js\"></script>
-        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.2/mermaid.min.js\"></script>
-        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js\"></script>
-        <script>mermaid.initialize({startOnLoad:true});</script>"))
+;; (use-package! ox-tailwind
+;;   :after ox)
+;; (after! ox-tailwind
+;;   (setq org-tailwind-class-inner-container "")
+;;   (setq org-tailwind-footer ""
+;;         org-tailwind-class-h1 "mb-6 text-6xl text-gray-700 border-b hover:text-green-500
+;; border-gray-500"
+;;         org-tailwind-class-footer "invisible"
+;;         org-tailwind-class-src-container "my-12 shadow"
+;;         org-tailwind-class-sidebar "px-24 py-12 bg-gray-200 lg:border-r lg:border-gray-500
+;; lg:fixed lg:pt-2 lg:w-64 lg:px-2 lg:overflow-y-auto lg:inset-y-0
+;; lg:mt-16"
+;;         org-tailwind-class-content-container "flex-grow px-4 py-12 sm:px-8 md:px-12 lg:ml-64 lg:px-12
+;; lg:overflow-x-auto xl:px-32"
+;;         org-tailwind-head-files "
+;;         <!-- Tailwind CSS -->
+;;         <link href=\"https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.9.2/tailwind.min.css\" rel=\"stylesheet\"/>
+;;         <!-- Prism Css -->
+;;         <link href=\"https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism.min.css\" rel=\"stylesheet\" />
+;;         <!-- Mathjax -->
+;;         <!-- Toc tree file -->
+;;         <script>const tocTree = []</script>
+;; "
+;;         org-tailwind-bottom-files "
+;;         <script src=\"https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js\"></script>
+;;         <script src=\"https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.2/mermaid.min.js\"></script>
+;;         <script src=\"https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js\"></script>
+;;         <script>mermaid.initialize({startOnLoad:true});</script>"))
 
 (after! org-roam
   (setq org-roam-directory "~/projects/org/notes"
@@ -401,10 +402,10 @@ lg:overflow-x-auto xl:px-32"
   (setq org-super-agenda-unmatched-name "⚡ Backlog"
         org-super-agenda-unmatched-order 50))
 
-;; (after! org-super-agenda
-;;   (setq org-super-agenda-unmatched-name "⚡ Backlog"
-;;         org-super-agenda-unmatched-order 50)
-;;   (org-super-agenda-mode))
+(after! org-super-agenda
+  (setq org-super-agenda-unmatched-name "⚡ Backlog"
+        org-super-agenda-unmatched-order 50)
+  (org-super-agenda-mode))
 
 ;; Super Agenda seems to jump to the last line, let's fix this!
 (defun +fl/agenda-jump-to-start ()

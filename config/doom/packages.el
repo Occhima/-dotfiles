@@ -11,6 +11,8 @@
 (package! org-super-agenda)
 (package! wakatime-mode)
 (package! bug-hunter)
+(package! org-roam-server)
+
 
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:
@@ -18,8 +20,8 @@
 ;(package! another-package
 ;  :recipe (:host github :repo "username/repo"))
 
-(package! org-ql
-  :recipe (:host github :repo "alphapapa/org-ql"))
+(package! org-ql)
+  ; :recipe (:host github :repo "alphapapa/org-ql"))
 
 ;; (straight-use-package
 ;;  '(webkit :type git :host github :repo "akirakyle/emacs-webkit"
@@ -27,9 +29,9 @@
 ;;           :files (:defaults "*.js" "*.css")
 ;;           :build ("make")))
 
-(straight-use-package '(ox-html :type built-in))
-(package! ox-tailwind
-  :recipe (:host github :repo "vascoferreira25/ox-tailwind"))
+; (straight-use-package '(ox-html :type built-in))
+; (package! ox-tailwind
+;   :recipe (:host github :repo "vascoferreira25/ox-tailwind"))
 
 ;; If the package you are trying to install does not contain a PACKAGENAME.el
 ;; file, or is located in a subdirectory of the repo, you'll need to specify
