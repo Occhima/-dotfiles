@@ -5,7 +5,6 @@
 ;; on the command line, then restart Emacs for the changes to take effect -- or
 ;; use 'M-x doom/reload'.
 
-
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
 (package! org-super-agenda)
@@ -58,10 +57,16 @@
 ;; Use `:pin' to specify a particular commit to install.
 ;(package! builtin-package :pin "1a2b3c4d5e")
 
+(package! lsp-python-ms)
+; (use-package! lsp
+;   :init
+;   (setq lsp-pyls-plugins-pylint-enabled t)
+;   (setq lsp-pyls-plugins-autopep8-enabled nil)
+;   (setq lsp-pyls-plugins-yapf-enabled t)
 
 ;; Doom's packages are pinned to a specific commit and updated from release to
 ;; release. The `unpin!' macro allows you to unpin single packages...
-(unpin! lsp-mode lsp-ui centaur-tabs treemacs)
+; (unpin! lsp-mode lsp-ui centaur-tabs treemacs)
 ;; ...or multiple packages
 ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
