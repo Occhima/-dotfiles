@@ -141,13 +141,14 @@ local function plugins(use)
     -- "christianchiarulli/nvcode-color-schemes.vim",
     -- "Th3Whit3Wolf/one-nvim"
     -- "folke/tokyonight.nvim",
-    'jam1garner/vim-code-monokai',
+    -- 'jam1garner/vim-code-monokai',
     -- "srcery-colors/srcery-vim",
     event = "VimEnter",
     config = function()
       require("config.theme")
     end,
   })
+
 
   -- Theme: icons
   use({

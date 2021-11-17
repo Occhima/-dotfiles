@@ -2,39 +2,34 @@
 ;;; $DOOMDIR/packages.el
 
 ;; To install a package with Doom you must declare them here and run 'doom sync'
-;;
-;;;  -*- lexical-binding: t; -*-
-;;;  -*- no-byte-compile: t; -*-
+;; on the command line, then restart Emacs for the changes to take effect -- or
+;; use 'M-x doom/reload'.
 
-;(package! parinfer)
-
-(package! ob-typescript)
-(package! indium)
-(package! reason-mode)
-(package! prettier-js)
-(package! org-fancy-priorities)
-(package! move-text)
-(package! vue-mode)
-(package! origami)
-(package! org-super-agenda)
-(package! deadgrep)
-(package! dart-mode)
-(package! ob-dart)
-(package! kotlin-mode)
-(package! sql-indent)
-(package! org-brain)
-(package! ascii-art-to-unicode)
-(package! wakatime-mode)
-(package! super-save)
-(package! org-gcal)
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
+(package! org-super-agenda)
+(package! wakatime-mode)
+(package! bug-hunter)
+
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:
 ;; https://github.com/raxod502/straight.el#the-recipe-format
 ;(package! another-package
 ;  :recipe (:host github :repo "username/repo"))
+
+(package! org-ql
+  :recipe (:host github :repo "alphapapa/org-ql"))
+
+;; (straight-use-package
+;;  '(webkit :type git :host github :repo "akirakyle/emacs-webkit"
+;;           :branch "main"
+;;           :files (:defaults "*.js" "*.css")
+;;           :build ("make")))
+
+(straight-use-package '(ox-html :type built-in))
+(package! ox-tailwind
+  :recipe (:host github :repo "vascoferreira25/ox-tailwind"))
 
 ;; If the package you are trying to install does not contain a PACKAGENAME.el
 ;; file, or is located in a subdirectory of the repo, you'll need to specify
@@ -52,7 +47,6 @@
 ;; from Doom or MELPA/ELPA/Emacsmirror:
 ;(package! builtin-package :recipe (:nonrecursive t))
 ;(package! builtin-package-2 :recipe (:repo "myfork/package"))
-;;(package! kaolin-themes)
 
 ;; Specify a `:branch' to install a package from a particular branch or tag.
 ;; This is required for some packages whose default branch isn't 'master' (which
@@ -65,7 +59,7 @@
 
 ;; Doom's packages are pinned to a specific commit and updated from release to
 ;; release. The `unpin!' macro allows you to unpin single packages...
-;(unpin! pinned-package)
+(unpin! lsp-mode lsp-ui centaur-tabs treemacs)
 ;; ...or multiple packages
 ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
