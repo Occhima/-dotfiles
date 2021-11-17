@@ -3,7 +3,7 @@
       user-mail-address "marcoocchialini@usp.br"
       command-line-default-directory "~/"         ; set default directory to home
       +doom-dashboard-pwd-policy "~/"
-      default-directory "~/"
+      default-directory "~/projects/remote"
       ns-use-proxy-icon nil                       ; empty title
       frame-title-format '"\n"                    ; use a new-line to make sure rezising info is on the next line
       undo-limit 80000000                         ; Raise undo-limit to 80Mb
@@ -14,7 +14,6 @@
       which-key-idle-delay 0.3                    ; Show key binding help quicker
       which-key-idle-secondary-delay 0
       vterm-always-compile-module t)               ; Compile the vterm-module when needed without asking
-
 
 (after! projectile
   (setq projectile-project-root-files-bottom-up '("package.json" ".projectile" ".project" ".git")
@@ -48,15 +47,15 @@
 
 (advice-add 'counsel-recentf-candidates :filter-return #'+fl/counsel-recentf-candidates)
 
-;; (after! popup
-;;   (set-popup-rule! "^\\*Flycheck errors\\*$" :side 'bottom :size 0.2 :select t))
+(after! popup
+  (set-popup-rule! "^\\*Flycheck errors\\*$" :side 'bottom :size 0.2 :select t))
 
-;; (after! flycheck
-;;   (setq flycheck-check-syntax-automatically '(mode-enabled save new-line idle-change)))
+(after! flycheck
+  (setq flycheck-check-syntax-automatically '(mode-enabled save new-line idle-change)))
 
-;; (after! (flycheck lsp-mode)
-;;   (add-hook 'lsp-after-initialize-hook (lambda()
-;;                                         (flycheck-add-next-checker 'lsp '(warning . javascript-eslint)))))
+(after! (flycheck lsp-mode)
+  (add-hook 'lsp-after-initialize-hook (lambda()
+                                        (flycheck-add-next-checker 'lsp '(warning . javascript-eslint)))))
 (after! lsp-mode
   (setq lsp-lua-diagnostics-globals ["hs" "spoon"]))
 
@@ -69,7 +68,6 @@
   (after! git-gutter-fringe
     (fringe-mode 8))
   (setq +vc-gutter-diff-unsaved-buffer t))
-
 
 (after! ibuffer
   (set-popup-rule! "^\\*Ibuffer\\*$" :side 'bottom :size 0.4 :select t :ignore nil))
@@ -85,17 +83,17 @@
 (after! rainbow-mode
   (setq rainbow-html-colors-major-mode-list '(html-mode css-mode php-mode nxml-mode xml-mode typescript-mode javascript-mode)))
 
-(setq doom-font (font-spec :family "CaskaydiaCove NF" :size 17))
-      ; doom-variable-pitch-font (font-spec :family "VictorMono Nerd Font Bold Italic" :size 12))
+(setq doom-font (font-spec :family "CaskaydiaCove NF" :size 19))
+      ;; doom-variable-pitch-font (font-spec :family "CaskaydiaCove NF" :size 12))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 ; (setq doom-theme 'doom-moonlight)
+;
 (setq doom-theme 'doom-molokai)
 (custom-set-faces!
   '(font-lock-comment-face :slant italic))
-;;(setq doom-theme 'doom-palenight)
 
 
 ; (defvar +fl/splashcii-query ""
@@ -114,17 +112,17 @@
 
 ; (setq +fl/splashcii-query "christmas")
 
-; (after! centaur-tabs
-;   (centaur-tabs-group-by-projectile-project)
+(after! centaur-tabs
+  (centaur-tabs-group-by-projectile-project)
 
-;   (+popup-window-p) ; needed to prevent recursive auto-loading of popup
+  (+popup-window-p) ; needed to prevent recursive auto-loading of popup
 
-;   ;; Automatically turn off tabs in popups
-;   (defun +fl/hide-tabs-in-popup ()
-;     (if (+popup-window-p)
-;         (centaur-tabs-local-mode)
-;       (centaur-tabs-local-mode 0)))
-;   (add-hook! 'buffer-list-update-hook '+fl/hide-tabs-in-popup))
+  ;; Automatically turn off tabs in popups
+  (defun +fl/hide-tabs-in-popup ()
+    (if (+popup-window-p)
+        (centaur-tabs-local-mode)
+      (centaur-tabs-local-mode 0)))
+  (add-hook! 'buffer-list-update-hook '+fl/hide-tabs-in-popup))
 
 (unless (equal "Battery status not available"
                (battery))
