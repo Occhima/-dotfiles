@@ -83,7 +83,7 @@
 (after! rainbow-mode
   (setq rainbow-html-colors-major-mode-list '(html-mode css-mode php-mode nxml-mode xml-mode typescript-mode javascript-mode)))
 
-(setq doom-font (font-spec :family "CaskaydiaCove NF" :size 19))
+(setq doom-font (font-spec :family "VictorMono Nerd Font" :size 20))
       ;; doom-variable-pitch-font (font-spec :family "CaskaydiaCove NF" :size 12))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
