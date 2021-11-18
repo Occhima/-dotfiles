@@ -83,7 +83,7 @@
 (after! rainbow-mode
   (setq rainbow-html-colors-major-mode-list '(html-mode css-mode php-mode nxml-mode xml-mode typescript-mode javascript-mode)))
 
-(setq doom-font (font-spec :family "VictorMono Nerd Font" :size 20))
+(setq doom-font (font-spec :family "VictorMono Nerd Font" :size 20)
       doom-variable-pitch-font (font-spec :family "VictorMono Nerd Font" :size 12))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
@@ -238,12 +238,15 @@
 
 (setq browse-url-browser-function '+fl/browse-url-xwidget)
 
-(use-package! wakatime-mode
-  :hook (after-init . global-wakatime-mode)
-  :config
-  (setq  wakatime-python-bin "/usr/local/bin/python3"))
+;; (use-package! wakatime-mode
+;;   :hook (after-init . global-wakatime-mode)
+;;   :config
+;;   (setq  wakatime-python-bin "/usr/local/bin/python3"
+;;          wakatime-api-key (+pass-get-secret "wakatime-api")
+;;          wakatime-cli-path "~/.local/bin/wakatime"))
 
-(setq org-directory "~/projects/remote/org/"
+
+(setq org-directory "~/projects/remote/org"
       org-ellipsis "  "                ; nerd fonts chevron character
       org-journal-file-type 'weekly
       org-use-property-inheritance t
@@ -444,4 +447,3 @@
   (setq org-habit-show-all-today nil
         org-habit-today-glyph ?⚡
         org-habit-completed-glyph ?+ ))
-

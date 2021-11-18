@@ -57,12 +57,10 @@
 ;; Use `:pin' to specify a particular commit to install.
 ;(package! builtin-package :pin "1a2b3c4d5e")
 
-(package! lsp-python-ms)
-; (use-package! lsp
-;   :init
-;   (setq lsp-pyls-plugins-pylint-enabled t)
-;   (setq lsp-pyls-plugins-autopep8-enabled nil)
-;   (setq lsp-pyls-plugins-yapf-enabled t)
+;; (package! lsp-python-ms)
+(package! org-brain)
+(package! polymode)
+(package! poly-markdown)
 
 ;; Doom's packages are pinned to a specific commit and updated from release to
 ;; release. The `unpin!' macro allows you to unpin single packages...
