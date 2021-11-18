@@ -84,7 +84,7 @@
   (setq rainbow-html-colors-major-mode-list '(html-mode css-mode php-mode nxml-mode xml-mode typescript-mode javascript-mode)))
 
 (setq doom-font (font-spec :family "VictorMono Nerd Font" :size 20))
-      ;; doom-variable-pitch-font (font-spec :family "CaskaydiaCove NF" :size 12))
+      doom-variable-pitch-font (font-spec :family "VictorMono Nerd Font" :size 12))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -238,11 +238,10 @@
 
 (setq browse-url-browser-function '+fl/browse-url-xwidget)
 
-; (use-package! wakatime-mode
-;   :hook (after-init . global-wakatime-mode)
-;   :config
-;   (setq wakatime-cli-path "/Users/folke/Library/Python/3.8/bin/wakatime"
-;         wakatime-python-bin "/usr/local/bin/python3"))
+(use-package! wakatime-mode
+  :hook (after-init . global-wakatime-mode)
+  :config
+  (setq  wakatime-python-bin "/usr/local/bin/python3"))
 
 (setq org-directory "~/projects/remote/org/"
       org-ellipsis "  "                ; nerd fonts chevron character
