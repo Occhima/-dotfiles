@@ -468,6 +468,6 @@
         org-brain-file-entries-use-title nil))
 
 ;; Allows you to edit entries directly from org-brain-visualize
-(use-package polymode
-  :config
-  (add-hook 'org-brain-visualize-mode-hook #'org-brain-polymode))
+;; (use-package polymode
+;;   :config
+;;   (add-hook 'org-brain-visualize-mode-hook #'org-brain-polymode))
