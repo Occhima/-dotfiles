@@ -89,9 +89,9 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-; (setq doom-theme 'doom-moonlight)
+(setq doom-theme 'doom-moonlight)
 ;
-(setq doom-theme 'doom-molokai)
+;; (setq doom-theme 'doom-molokai)
 (custom-set-faces!
   '(font-lock-comment-face :slant italic))
 
@@ -240,9 +240,9 @@
 
 ;; (use-package! wakatime-mode
 ;;   :hook (after-init . global-wakatime-mode)
-;;   :config
-;;   (setq  wakatime-python-bin "/usr/local/bin/python3"
-;;          wakatime-api-key (+pass-get-secret "wakatime-api")
+
+;;   ;; :config
+;;   ;; (setq  wakatime-python-bin "/usr/local/bin/python3"
 ;;          wakatime-cli-path "~/.local/bin/wakatime"))
 
 

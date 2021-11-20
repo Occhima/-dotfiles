@@ -21,8 +21,8 @@
        ;;layout                        ; auie,ctsrnm is the superior home row
 
        :completion
-       (company +childframe)           ; the ultimate code completion backend
-       ; helm                          ; the *other* search engine for love and life
+       (company +tabnine)           ; the ultimate code completion backend
+       helm                          ; the *other* search engine for love and life
        ;;ido                           ; the other *other* search engine...
        (ivy +icons +fuzzy +prescient +childframe)  ; a search engine for love and life
 
@@ -37,7 +37,7 @@
        ;;hydra
        indent-guides                   ; highlighted indent columns
        (ligatures +extra)              ; ligatures and symbols to make your code pretty again
-       ;;minimap                       ; show a map of the code on the side
+       minimap                       ; show a map of the code on the side
        modeline                        ; snazzy, Atom-inspired modeline, plus API
        ;;nav-flash                     ; blink cursor line after big motions
        ;;neotree                       ; a project drawer, like NERDTree for vim
@@ -45,7 +45,7 @@
        (popup +defaults +all)          ; tame sudden yet inevitable temporary windows
        tabs                            ; a tab bar for Emacs
        treemacs                        ; a project drawer, like neotree but cooler
-       ;;unicode                       ; extended unicode support for various languages
+       unicode                       ; extended unicode support for various languages
        vc-gutter                       ; vcs diff in the fringe
        ;;vi-tilde-fringe               ; fringe tildes to mark beyond EOB
        ;;window-select                 ; visually switch windows
@@ -89,7 +89,7 @@
        debugger                      ; FIXME stepping through code, to help you add bugs
        direnv
        (docker +lsp)
-       ;;editorconfig                  ; let someone else argue about tabs vs spaces
+       editorconfig                  ; let someone else argue about tabs vs spaces
        ;;ein                           ; tame Jupyter notebooks with emacs
        (eval +overlay)                 ; run code, run (also, repls)
        gist                          ; interacting with github gists
@@ -102,9 +102,9 @@
        ;;prodigy                       ; FIXME managing external services & code builders
        rgb                             ; creating color strings
        taskrunner                      ; taskrunner for all your projects
-       ;;terraform                     ; infrastructure as code
+       terraform                     ; infrastructure as code
        tmux                          ; an API for interacting with tmux
-       ;;upload                        ; map local to remote projects via ssh/ftp
+       upload                        ; map local to remote projects via ssh/ftp
 
        :os
        ; (:if IS-MAC macos)              ; improve compatibility with macOS

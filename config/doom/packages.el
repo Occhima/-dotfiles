@@ -60,7 +60,13 @@
 ;; (package! lsp-python-ms)
 (package! org-brain)
 (package! polymode)
+(package! webpaste)
 (package! poly-markdown)
+(package! helm-swoop) 
+(package! crux) 
+(package! emms) 
+(package! elfeed) 
+(package! hyperspace) 
 
 ;; Doom's packages are pinned to a specific commit and updated from release to
 ;; release. The `unpin!' macro allows you to unpin single packages...
