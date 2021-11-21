@@ -3,7 +3,7 @@
       user-mail-address "marcoocchialini@usp.br"
       command-line-default-directory "~/"         ; set default directory to home
       +doom-dashboard-pwd-policy "~/"
-      default-directory "~/projects/remote"
+      default-directory "~/projects/remote/"
       ns-use-proxy-icon nil                       ; empty title
       frame-title-format '"\n"                    ; use a new-line to make sure rezising info is on the next line
       undo-limit 80000000                         ; Raise undo-limit to 80Mb
@@ -13,12 +13,12 @@
       display-line-numbers-type 'relative
       which-key-idle-delay 0.3                    ; Show key binding help quicker
       which-key-idle-secondary-delay 0
-      vterm-always-compile-module t)               ; Compile the vterm-module when needed without asking
+      vterm-always-compile-module t)_               ; Compile the vterm-module when needed without asking
 
 (after! projectile
   (setq projectile-project-root-files-bottom-up '("package.json" ".projectile" ".project" ".git")
         projectile-ignored-projects '("~/.emacs.d/")
-        projectile-project-search-path '("~/projects/remote/"))
+        projectile-project-search-path '("~/projects/remote/ ~/projects/remote/programming/numerai ~/projects/remote/semantix/"))
   (defun projectile-ignored-project-function (filepath)
     "Return t if FILEPATH is within any of `projectile-ignored-projects'"
     (or (mapcar (lambda (p) (s-starts-with-p p filepath)) projectile-ignored-projects))))
@@ -239,7 +239,7 @@
 (setq browse-url-browser-function '+fl/browse-url-xwidget)
 
 (use-package! wakatime-mode
-  :disabled t
+  ;; :disabled t
   :hook (after-init . global-wakatime-mode))
 
 ;;   ;; :config
