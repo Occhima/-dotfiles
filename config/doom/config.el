@@ -12,8 +12,7 @@
       truncate-string-ellipsis "…"                ; Unicode ellispis are nicer than "...", and also save /precious/ space
       display-line-numbers-type 'relative
       which-key-idle-delay 0.3                    ; Show key binding help quicker
-      which-key-idle-secondary-delay 0
-      vterm-always-compile-module t)_               ; Compile the vterm-module when needed without asking
+      which-key-idle-secondary-delay 0)               ; Compile the vterm-module when needed without asking
 
 (after! projectile
   (setq projectile-project-root-files-bottom-up '("package.json" ".projectile" ".project" ".git")
