@@ -91,7 +91,7 @@
 ;; `load-theme' function. This is the default:
 ;; (setq doom-theme 'doom-moonlight)
 ;
-(setq doom-theme 'doom-molokai)
+(setq doom-theme 'doom-one)
 (custom-set-faces!
   '(font-lock-comment-face :slant italic))
 
@@ -239,6 +239,7 @@
 (setq browse-url-browser-function '+fl/browse-url-xwidget)
 
 (use-package! wakatime-mode
+  :disabled t
   :hook (after-init . global-wakatime-mode))
 
 ;;   ;; :config
@@ -293,35 +294,6 @@
           ("DONE" . +org-todo-done)
           ("KILL" . +org-todo-done))))
 
-;; (use-package! ox-tailwind
-;;   :after ox)
-;; (after! ox-tailwind
-;;   (setq org-tailwind-class-inner-container "")
-;;   (setq org-tailwind-footer ""
-;;         org-tailwind-class-h1 "mb-6 text-6xl text-gray-700 border-b hover:text-green-500
-;; border-gray-500"
-;;         org-tailwind-class-footer "invisible"
-;;         org-tailwind-class-src-container "my-12 shadow"
-;;         org-tailwind-class-sidebar "px-24 py-12 bg-gray-200 lg:border-r lg:border-gray-500
-;; lg:fixed lg:pt-2 lg:w-64 lg:px-2 lg:overflow-y-auto lg:inset-y-0
-;; lg:mt-16"
-;;         org-tailwind-class-content-container "flex-grow px-4 py-12 sm:px-8 md:px-12 lg:ml-64 lg:px-12
-;; lg:overflow-x-auto xl:px-32"
-;;         org-tailwind-head-files "
-;;         <!-- Tailwind CSS -->
-;;         <link href=\"https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.9.2/tailwind.min.css\" rel=\"stylesheet\"/>
-;;         <!-- Prism Css -->
-;;         <link href=\"https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism.min.css\" rel=\"stylesheet\" />
-;;         <!-- Mathjax -->
-;;         <!-- Toc tree file -->
-;;         <script>const tocTree = []</script>
-;; "
-;;         org-tailwind-bottom-files "
-;;         <script src=\"https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js\"></script>
-;;         <script src=\"https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.2/mermaid.min.js\"></script>
-;;         <script src=\"https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js\"></script>
-;;         <script>mermaid.initialize({startOnLoad:true});</script>"))
-
 (after! org-roam
   (setq org-roam-directory "~/projects/org/notes"
         org-roam-tag-sources '(prop all-directories)
@@ -334,6 +306,10 @@
            :head "#+title: ${title}\n"
            :unnarrowed t
            :immediate-finish t))))
+
+(use-package! websocket
+    :after org-roam)
+
 
 (after! org
   (setq org-tags-column -80)

@@ -12,14 +12,12 @@
 (package! bug-hunter)
 (package! org-roam-server)
 
-
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:
 ;; https://github.com/raxod502/straight.el#the-recipe-format
 ;(package! another-package
 ;  :recipe (:host github :repo "username/repo"))
 
-(package! org-ql)
   ; :recipe (:host github :repo "alphapapa/org-ql"))
 
 ;; (straight-use-package
@@ -65,8 +63,10 @@
 (package! helm-swoop) 
 (package! crux) 
 (package! emms) 
-(package! elfeed) 
-(package! hyperspace) 
+(package! elfeed)
+(unpin! org-roam)
+(package! org-roam-ui)
+
 
 ;; Doom's packages are pinned to a specific commit and updated from release to
 ;; release. The `unpin!' macro allows you to unpin single packages...

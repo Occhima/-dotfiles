@@ -21,7 +21,10 @@
        ;;layout                        ; auie,ctsrnm is the superior home row
 
        :completion
-       (company +tabnine)           ; the ultimate code completion backend
+       (company
+        +childframe
+        +tng
+        )           ; the ultimate code completion backend
        helm                          ; the *other* search engine for love and life
        ;;ido                           ; the other *other* search engine...
        (ivy +icons +fuzzy +prescient +childframe)  ; a search engine for love and life
@@ -150,14 +153,18 @@
        (org                            ; organize your plain life in plain text
         +pretty
         +journal
-        +roam
-        ;;+pandoc
-        ;;+present
+        +roam2
+        +pomodoro
+        +pandoc
+        +present
         +dragndrop)
        ;;php                           ; perl's insecure younger brother
        ;;plantuml                      ; diagrams for confusing people more
        ;;purescript                    ; javascript, but functional
-       +(python +lsp)                   ; beautiful is better than ugly
+       (python
+        +lsp
+        +pyright
+        +poetry)                   ; beautiful is better than ugly
        ;;qt                            ; the 'cutest' gui framework ever
        ;;racket                        ; a DSL for DSLs
        ;;raku                          ; the artist formerly known as perl6
