@@ -3,7 +3,7 @@
       user-mail-address "marcoocchialini@usp.br"
       command-line-default-directory "~/"         ; set default directory to home
       +doom-dashboard-pwd-policy "~/"
-      default-directory "~/projects/remote/"
+      default-directory "~/backyard/remote/"
       ns-use-proxy-icon nil                       ; empty title
       frame-title-format '"\n"                    ; use a new-line to make sure rezising info is on the next line
       undo-limit 80000000                         ; Raise undo-limit to 80Mb
@@ -17,7 +17,7 @@
 (after! projectile
   (setq projectile-project-root-files-bottom-up '("package.json" ".projectile" ".project" ".git")
         projectile-ignored-projects '("~/.emacs.d/")
-        projectile-project-search-path '("~/projects/remote/ ~/projects/remote/programming/numerai ~/projects/remote/semantix/"))
+        projectile-project-search-path '("~/backyard/remote"))
   (defun projectile-ignored-project-function (filepath)
     "Return t if FILEPATH is within any of `projectile-ignored-projects'"
     (or (mapcar (lambda (p) (s-starts-with-p p filepath)) projectile-ignored-projects))))
@@ -246,7 +246,7 @@
 ;;          wakatime-cli-path "~/.local/bin/wakatime"))
 
 
-(setq org-directory "~/projects/remote/org"
+(setq org-directory "~/backyard/remote/org/"
       org-ellipsis "  "                ; nerd fonts chevron character
       org-journal-file-type 'weekly
       org-use-property-inheritance t
@@ -259,7 +259,7 @@
       org-log-repeat 'time
       org-todo-repeat-to-state "TODO"
       +org-capture-notes-file "inbox.org"
-      deft-directory "~/projects/remote/org"
+      deft-directory "~/projects/remote/org/"
       deft-recursive t)
 
 (after! org
@@ -294,7 +294,7 @@
           ("KILL" . +org-todo-done))))
 
 (after! org-roam
-  (setq org-roam-directory "~/projects/org/notes"
+  (setq org-roam-directory "~/backyard/remote/org/roam/"
         org-roam-tag-sources '(prop all-directories)
         +org-roam-open-buffer-on-find-file t
         ;; Create new roam notes under ~/org/notes
