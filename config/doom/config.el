@@ -3,7 +3,7 @@
       user-mail-address "marcoocchialini@usp.br"
       command-line-default-directory "~/"         ; set default directory to home
       +doom-dashboard-pwd-policy "~/"
-      default-directory "~/projects/remote/"
+      default-directory "~/backyard/remote/"
       ns-use-proxy-icon nil                       ; empty title
       frame-title-format '"\n"                    ; use a new-line to make sure rezising info is on the next line
       undo-limit 80000000                         ; Raise undo-limit to 80Mb
@@ -17,7 +17,7 @@
 (after! projectile
   (setq projectile-project-root-files-bottom-up '("package.json" ".projectile" ".project" ".git")
         projectile-ignored-projects '("~/.emacs.d/")
-        projectile-project-search-path '("~/projects/remote/ ~/projects/remote/programming/numerai ~/projects/remote/semantix/"))
+        projectile-project-search-path '("~/backyard/remote"))
   (defun projectile-ignored-project-function (filepath)
     "Return t if FILEPATH is within any of `projectile-ignored-projects'"
     (or (mapcar (lambda (p) (s-starts-with-p p filepath)) projectile-ignored-projects))))
@@ -246,7 +246,11 @@
 ;;          wakatime-cli-path "~/.local/bin/wakatime"))
 
 
+<<<<<<< HEAD
 (setq org-directory "~/OneDrive/projects/org/"
+=======
+(setq org-directory "~/backyard/remote/org/"
+>>>>>>> ee67e3e1fa9b2fa62a234b0081bc8c9995966df4
       org-ellipsis "  "                ; nerd fonts chevron character
       org-journal-file-type 'weekly
       org-use-property-inheritance t
@@ -259,7 +263,7 @@
       org-log-repeat 'time
       org-todo-repeat-to-state "TODO"
       +org-capture-notes-file "inbox.org"
-      deft-directory "~/projects/remote/org"
+      deft-directory "~/projects/remote/org/"
       deft-recursive t)
 
 (after! org
@@ -294,7 +298,11 @@
           ("KILL" . +org-todo-done))))
 
 (after! org-roam
+<<<<<<< HEAD
   (setq org-roam-directory "~/OneDrive/projects/org/roam/"
+=======
+  (setq org-roam-directory "~/backyard/remote/org/roam/"
+>>>>>>> ee67e3e1fa9b2fa62a234b0081bc8c9995966df4
         org-roam-tag-sources '(prop all-directories)
         +org-roam-open-buffer-on-find-file t
         ;; Create new roam notes under ~/org/notes
@@ -427,26 +435,26 @@
         org-habit-today-glyph ?⚡
         org-habit-completed-glyph ?+ ))
 
-(use-package org-brain :ensure t
-  :init
-  (setq org-brain-path "~/projects/remote/org/brain/")
-  ;; For Evil users
-  (with-eval-after-load 'evil
-    (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
-  :config
-  (bind-key "C-c b" 'org-brain-prefix-map org-mode-map)
-  (setq org-id-track-globally t)
-  (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
-  (add-hook 'before-save-hook #'org-brain-ensure-ids-in-buffer)
-  (push '("b" "Brain" plain (function org-brain-goto-end)
-          "* %i%?" :empty-lines 1)
-        org-capture-templates)
-  (setq org-brain-visualize-default-choices 'all)
-  (setq org-brain-title-max-length 12)
-  (setq org-brain-include-file-entries nil
-        org-brain-file-entries-use-title nil))
+;; (use-package org-brain :ensure t
+;;   :init
+;;   (setq org-brain-path "~/projects/remote/org/brain/")
+;;   ;; For Evil users
+;;   (with-eval-after-load 'evil
+;;     (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
+;;   :config
+;;   (bind-key "C-c b" 'org-brain-prefix-map org-mode-map)
+;;   (setq org-id-track-globally t)
+;;   (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
+;;   (add-hook 'before-save-hook #'org-brain-ensure-ids-in-buffer)
+;;   (push '("b" "Brain" plain (function org-brain-goto-end)
+;;           "* %i%?" :empty-lines 1)
+;;         org-capture-templates)
+;;   (setq org-brain-visualize-default-choices 'all)
+;;   (setq org-brain-title-max-length 12)
+;;   (setq org-brain-include-file-entries nil
+;;         org-brain-file-entries-use-title nil))
 
-;; Allows you to edit entries directly from org-brain-visualize
+;; ;; Allows you to edit entries directly from org-brain-visualize
 ;; (use-package polymode
 ;;   :config
 ;;   (add-hook 'org-brain-visualize-mode-hook #'org-brain-polymode))
