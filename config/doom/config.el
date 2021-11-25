@@ -238,7 +238,7 @@
 (setq browse-url-browser-function '+fl/browse-url-xwidget)
 
 (use-package! wakatime-mode
-  ;; :disabled t
+  :disabled t
   :hook (after-init . global-wakatime-mode))
 
 ;;   ;; :config
@@ -246,7 +246,7 @@
 ;;          wakatime-cli-path "~/.local/bin/wakatime"))
 
 
-(setq org-directory "~/projects/remote/org"
+(setq org-directory "~/OneDrive/projects/org/"
       org-ellipsis "  "                ; nerd fonts chevron character
       org-journal-file-type 'weekly
       org-use-property-inheritance t
@@ -294,7 +294,7 @@
           ("KILL" . +org-todo-done))))
 
 (after! org-roam
-  (setq org-roam-directory "~/projects/org/notes"
+  (setq org-roam-directory "~/OneDrive/projects/org/roam/"
         org-roam-tag-sources '(prop all-directories)
         +org-roam-open-buffer-on-find-file t
         ;; Create new roam notes under ~/org/notes
@@ -309,6 +309,10 @@
 (use-package! websocket
     :after org-roam)
 
+(use-package org-roam-bibtex
+  :after org-roam
+  :config
+  (require 'org-ref)) ; optional: if Org Ref is not loaded anywhere else, load it here
 
 (after! org
   (setq org-tags-column -80)
