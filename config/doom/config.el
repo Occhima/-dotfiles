@@ -245,12 +245,7 @@
 ;;   ;; (setq  wakatime-python-bin "/usr/local/bin/python3"
 ;;          wakatime-cli-path "~/.local/bin/wakatime"))
 
-
-<<<<<<< HEAD
 (setq org-directory "~/OneDrive/projects/org/"
-=======
-(setq org-directory "~/backyard/remote/org/"
->>>>>>> ee67e3e1fa9b2fa62a234b0081bc8c9995966df4
       org-ellipsis "  "                ; nerd fonts chevron character
       org-journal-file-type 'weekly
       org-use-property-inheritance t
@@ -298,11 +293,7 @@
           ("KILL" . +org-todo-done))))
 
 (after! org-roam
-<<<<<<< HEAD
   (setq org-roam-directory "~/OneDrive/projects/org/roam/"
-=======
-  (setq org-roam-directory "~/backyard/remote/org/roam/"
->>>>>>> ee67e3e1fa9b2fa62a234b0081bc8c9995966df4
         org-roam-tag-sources '(prop all-directories)
         +org-roam-open-buffer-on-find-file t
         ;; Create new roam notes under ~/org/notes
