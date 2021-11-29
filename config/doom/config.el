@@ -3,7 +3,7 @@
       user-mail-address "marcoocchialini@usp.br"
       command-line-default-directory "~/"         ; set default directory to home
       +doom-dashboard-pwd-policy "~/"
-      default-directory "~/backyard/remote/"
+      default-directory "~/OneDrive/projects/"
       ns-use-proxy-icon nil                       ; empty title
       frame-title-format '"\n"                    ; use a new-line to make sure rezising info is on the next line
       undo-limit 80000000                         ; Raise undo-limit to 80Mb
@@ -17,7 +17,7 @@
 (after! projectile
   (setq projectile-project-root-files-bottom-up '("package.json" ".projectile" ".project" ".git")
         projectile-ignored-projects '("~/.emacs.d/")
-        projectile-project-search-path '("~/backyard/remote"))
+        projectile-project-search-path '("~/OneDrive/projects"))
   (defun projectile-ignored-project-function (filepath)
     "Return t if FILEPATH is within any of `projectile-ignored-projects'"
     (or (mapcar (lambda (p) (s-starts-with-p p filepath)) projectile-ignored-projects))))
