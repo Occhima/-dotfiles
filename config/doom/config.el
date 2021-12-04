@@ -82,15 +82,17 @@
 (after! rainbow-mode
   (setq rainbow-html-colors-major-mode-list '(html-mode css-mode php-mode nxml-mode xml-mode typescript-mode javascript-mode)))
 
-(setq doom-font (font-spec :family "VictorMono Nerd Font" :size 20)
-      doom-variable-pitch-font (font-spec :family "VictorMono Nerd Font" :size 12))
+
+
+(setq doom-font (font-spec :family "VictorMono Nerd Font" :size 20 :weight 'Bold)
+      doom-variable-pitch-font (font-spec :family "VictorMono Nerd Font" :size 20))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 ;; (setq doom-theme 'doom-moonlight)
-;
-(setq doom-theme 'doom-one)
+                                        ;
+(setq doom-theme 'doom-molokai)
 (custom-set-faces!
   '(font-lock-comment-face :slant italic))
 
@@ -213,12 +215,6 @@
   (set-popup-rule! "^\\*elfeed-entry\\*" :side 'bottom :size 0.6 :select t :slot -1 :vslot -10)
   (add-hook! 'elfeed-search-mode-hook 'elfeed-update)) ; Update Elfeed when launched
 
-;; NOTE: Dont forget to set or g cal
-; (after! org-gcal
-;   (setq org-gcal-client-id (+pass-get-secret "folke^gcal-id@gmail.com")
-;         org-gcal-client-secret (+pass-get-secret "folke^gcal-secret@gmail.com")
-;         org-gcal-fetch-file-alist '(("folke.lemaitre@gmail.com" .  "~/org/gcal/personal.org")
-;                                     ("013uicuadeh4t1culpvrnna5hs@group.calendar.google.com" . "~/org/gcal/family.org"))))
 
 (defvar +fl--browse-url-xwidget-last-session-buffer nil)
 
@@ -268,6 +264,7 @@
 (advice-add 'org-refile :after 'org-save-all-org-buffers)
 (advice-add 'org-gcal-fetch :after 'org-save-all-org-buffers)
 
+
 (after! org
   (with-no-warnings
     (custom-declare-face '+org-todo-soon  '((t (:inherit (bold org-drawer org-todo)))) "")
@@ -291,6 +288,8 @@
           ("HOLD" . +org-todo-onhold)
           ("DONE" . +org-todo-done)
           ("KILL" . +org-todo-done))))
+
+
 
 (after! org-roam
   (setq org-roam-directory "~/OneDrive/projects/org/roam/"
