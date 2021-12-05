@@ -83,8 +83,7 @@
   (setq rainbow-html-colors-major-mode-list '(html-mode css-mode php-mode nxml-mode xml-mode typescript-mode javascript-mode)))
 
 
-
-(setq doom-font (font-spec :family "VictorMono Nerd Font" :size 20 :weight 'Bold)
+(setq doom-font (font-spec :family "VictorMono Nerd Font" :size 20)
       doom-variable-pitch-font (font-spec :family "VictorMono Nerd Font" :size 20))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
@@ -349,7 +348,7 @@
         org-agenda-start-on-weekday 1
         org-agenda-start-day nil
         org-agenda-breadcrumbs-separator "  "
-        org-agenda-files  (list org-directory (concat org-directory "gcal/"))
+        org-agenda-files (directory-files-recursively org-directory "\.org$")
         org-agenda-time-grid (quote ((today daily require-timed remove-match) (0900 2100) " ╴╴╴╴╴" "──────────────────────"))
         org-agenda-current-time-string " now ────────────────")
   (set-face-attribute 'org-agenda-structure nil
