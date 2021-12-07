@@ -83,7 +83,7 @@
   (setq rainbow-html-colors-major-mode-list '(html-mode css-mode php-mode nxml-mode xml-mode typescript-mode javascript-mode)))
 
 
-(setq doom-font (font-spec :family "VictorMono Nerd Font" :size 20)
+(setq doom-font (font-spec :family "VictorMono Nerd Font" :size 20 :weight 'SemiBold)
       doom-variable-pitch-font (font-spec :family "VictorMono Nerd Font" :size 20))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
@@ -233,7 +233,6 @@
 (setq browse-url-browser-function '+fl/browse-url-xwidget)
 
 (use-package! wakatime-mode
-  :disabled t
   :hook (after-init . global-wakatime-mode))
 
 ;;   ;; :config
