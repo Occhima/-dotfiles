@@ -447,3 +447,8 @@
 ;; (use-package polymode
 ;;   :config
 ;;   (add-hook 'org-brain-visualize-mode-hook #'org-brain-polymode))
+;;
+(use-package! org-fragtog
+  :after org
+  :hook (org-mode . org-fragtog) ; this auto-enables it when you enter an org-buffer, remove if you do not want this
+  )
