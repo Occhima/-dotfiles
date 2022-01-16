@@ -75,6 +75,7 @@
 (after! ivy-posframe
   (setf (alist-get t ivy-posframe-display-functions-alist)
         #'ivy-posframe-display-at-frame-top-center))
+
 (setq doom-themes-treemacs-theme "doom-colors")
 (after! treemacs
   (setq +treemacs-git-mode 'extended)
@@ -83,15 +84,15 @@
   (setq rainbow-html-colors-major-mode-list '(html-mode css-mode php-mode nxml-mode xml-mode typescript-mode javascript-mode)))
 
 
-(setq doom-font (font-spec :family "VictorMono Nerd Font" :size 20 :weight 'SemiBold)
-      doom-variable-pitch-font (font-spec :family "VictorMono Nerd Font" :size 20))
+(setq doom-font (font-spec :family "Iosevka Nerd Font" :size 22 :weight 'Bold)
+      doom-variable-pitch-font (font-spec :family "Iosevka Nerd Font" :size 20))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 ;; (setq doom-theme 'doom-moonlight)
                                         ;
-(setq doom-theme 'doom-molokai)
+(setq doom-theme 'doom-horizon)
 (custom-set-faces!
   '(font-lock-comment-face :slant italic))
 
@@ -305,10 +306,10 @@
 (use-package! websocket
     :after org-roam)
 
-(use-package org-roam-bibtex
-  :after org-roam
-  :config
-  (require 'org-ref)) ; optional: if Org Ref is not loaded anywhere else, load it here
+;; (use-package org-roam-bibtex
+;;   :after org-roam
+;;   :config
+;;   (require 'org-ref)) ; optional: if Org Ref is not loaded anywhere else, load it here
 
 (after! org
   (setq org-tags-column -80)
@@ -447,7 +448,7 @@
 ;;   :config
 ;;   (add-hook 'org-brain-visualize-mode-hook #'org-brain-polymode))
 ;;
-(use-package! org-fragtog
-  :after org
-  :hook (org-mode . org-fragtog) ; this auto-enables it when you enter an org-buffer, remove if you do not want this
-  )
+;; (use-package! org-fragtog
+;;   :after org
+;;   :hook (org-mode . org-fragtog) ; this auto-enables it when you enter an org-buffer, remove if you do not want this
+;;   )
