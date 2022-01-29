@@ -86,8 +86,8 @@
 (setq doom-font (font-spec :family "Iosevka Nerd Font" :size 22 :weight 'Bold)
       doom-variable-pitch-font (font-spec :family "Iosevka Nerd Font" :size 20))
 
-(setq dashboard-startup-banner "~/OneDrive/projects/configs/emacs-dash.png"
-      (setq doom-theme 'doom-dracula))
+(setq dashboard-startup-banner "~/OneDrive/projects/configs/emacs-dash.png")
+(setq doom-theme 'doom-dracula)
 
 (custom-set-faces!
   '(font-lock-comment-face :slant italic))
