@@ -67,6 +67,8 @@
 (package! elfeed)
 (unpin! org-roam)
 (package! org-roam-ui)
+(package! elfeed)
+(package! elfeed-goodies)
 ;; (package! org-fragtog)
 
 ;; Doom's packages are pinned to a specific commit and updated from release to
