@@ -42,7 +42,7 @@
        indent-guides                    ; highlighted indent columns
 
        (ligatures
-        +extra
+        ;; +extra
         +iosevka
         )        ; ligatures and symbols to make your code pretty again
 
@@ -52,7 +52,9 @@
        ;;neotree                       ; a project drawer, like NERDTree for vim
        ;; ophints                  ; highlight the region an operation acts on
        (popup +defaults +all)   ; tame sudden yet inevitable temporary windows
-       (tabs +centaur-tabs)                     ; a tab bar for Emacs
+       (tabs
+        ;; +centaur-tabs
+        )                     ; a tab bar for Emacs
        (treemacs +lsp)          ; a project drawer, like neotree but cooler
        unicode                  ; extended unicode support for various languages
        vc-gutter                ; vcs diff in the fringe
@@ -148,10 +150,10 @@
        (javascript +lsp)              ; all(hope(abandon(ye(who(enter(here))))))
        julia                          ; a better, faster MATLAB
        ;;kotlin                        ; a better, slicker Java(Script)
-       ;;latex                         ; writing papers in Emacs has never been so fun
+       latex                         ; writing papers in Emacs has never been so fun
        ;;lean
        ;;factor
-       ;;ledger                        ; an accounting system in Emacs
+       ledger                        ; an accounting system in Emacs
        (lua +lsp)                       ; one-based indices? one-based indices
        (markdown +grip)                 ; writing docs for people to ignore
        ;;nim                           ; python + lisp at the speed of c
@@ -164,6 +166,8 @@
         +pomodoro
         +pandoc
         +present
+        +hugo
+        +jupyter
         +dragndrop)
        ;;php                           ; perl's insecure younger brother
        ;;plantuml                      ; diagrams for confusing people more
@@ -191,7 +195,7 @@
        yaml                             ; JSON, but readable
 
        :email
-       ;;(mu4e +gmail)
+       ;; (mu4e +gmail)
        notmuch
        ;;(wanderlust +gmail)
 
@@ -199,7 +203,7 @@
        calendar
        ;;irc                           ; how neckbeards socialize
        (rss +org)                       ; emacs as an RSS reader
-       ;;twitter                       ; twitter client https://twitter.com/vnought
+       twitter                       ; twitter client https://twitter.com/vnought
 
        :config
                                         ; literate

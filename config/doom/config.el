@@ -1,18 +1,19 @@
 ;;; config.el -*- lexical-binding: t; -*-
 (setq user-full-name "Marco Occhialini"
       user-mail-address "marcoocchialini@usp.br"
-      command-line-default-directory "~/"         ; set default directory to home
-      +doom-dashboard-pwd-policy "~/"
-      default-directory "~/OneDrive/projects/"
-      ns-use-proxy-icon nil                       ; empty title
-      frame-title-format '"\n"                    ; use a new-line to make sure rezising info is on the next line
-      undo-limit 80000000                         ; Raise undo-limit to 80Mb
-      evil-want-fine-undo t                       ; By default while in insert all changes are one big blob. Be more granular
-      auto-save-default t                         ; Nobody likes to loose work, I certainly don't
-      truncate-string-ellipsis "…"                ; Unicode ellispis are nicer than "...", and also save /precious/ space
+      command-line-default-directory "~/" ; set default directory to home
+      +doom-dashboard-pwd-policy "~/OneDrive/projects"
+      default-directory "~/"
+      ns-use-proxy-icon nil             ; empty title
+      frame-title-format '"\n" ; use a new-line to make sure rezising info is on the next line
+      undo-limit 80000000      ; Raise undo-limit to 80Mb
+      evil-want-fine-undo t ; By default while in insert all changes are one big blob. Be more granular
+      auto-save-default t   ; Nobody likes to loose work, I certainly don't
+      truncate-string-ellipsis "…" ; Unicode ellispis are nicer than "...", and also save /precious/ space
       display-line-numbers-type 'relative
-      which-key-idle-delay 0.3                    ; Show key binding help quicker
+      which-key-idle-delay 0.3          ; Show key binding help quicker
       which-key-idle-secondary-delay 0)               ; Compile the vterm-module when needed without asking
+
 
 (after! projectile
   (setq projectile-project-root-files-bottom-up '("package.json" ".projectile" ".project" ".git")
@@ -24,18 +25,6 @@
 
 (setq magit-revision-show-gravatars '("^Author:     " . "^Commit:     "))
 
-(after! forge
-  ;; Add more columns to the issue list
-  (setq forge-topic-list-columns
-        '(("#" 5 forge-topic-list-sort-by-number (:right-align t) number nil)
-          ("State" 10 t nil state nil)
-          ("Title" 65 t nil title  nil)
-          ("Labels" 30 t nil labels nil)
-          ("Updated" 20 t nil updated nil)))
-
-  ;; Show at most 100 open issue and when toggling visibility, the last 10 closed issues
-  (setq forge-topic-list-limit '(100 . -10)
-        forge-owned-accounts '(("folke"))))
 
 (defun +fl/counsel-recentf-candidates (candidates)
   (seq-filter (lambda (f) (not
@@ -86,7 +75,8 @@
 (setq doom-font (font-spec :family "Iosevka Nerd Font" :size 22 :weight 'Bold)
       doom-variable-pitch-font (font-spec :family "Iosevka Nerd Font" :size 20))
 
-(setq dashboard-startup-banner "~/OneDrive/projects/configs/emacs-dash.png")
+(setq +doom-dashboard-startup-banner "~/OneDrive/projects/configs/emacs-dash.png")
+
 (setq doom-theme 'doom-dracula)
 
 (custom-set-faces!
@@ -230,25 +220,24 @@
                         ("http://lxer.com/module/newswire/headlines.rss" lxer linux)
                         ("https://distrowatch.com/news/dwd.xml" distrowatch linux)))))
 
-(use-package elfeed-goodies
-  :init
-  (elfeed-goodies/setup)
-  :config
-  (setq elfeed-goodies/entry-pane-size 0.5))
+;; (use-package elfeed-goodies
+;;   :init
+;;   (elfeed-goodies/setup)
+;;   :config
+;;   (setq elfeed-goodies/entry-pane-size 0.5))
 
-(add-hook 'elfeed-show-mode-hook 'visual-line-mode)
-(evil-define-key 'normal elfeed-show-mode-map
-  (kbd "J") 'elfeed-goodies/split-show-next
-  (kbd "K") 'elfeed-goodies/split-show-prev)
-(evil-define-key 'normal elfeed-search-mode-map
-  (kbd "J") 'elfeed-goodies/split-show-next
-  (kbd "K") 'elfeed-goodies/split-show-prev)
+;; (add-hook 'elfeed-show-mode-hook 'visual-line-mode)
+;; (evil-define-key 'normal elfeed-show-mode-map
+;;   (kbd "J") 'elfeed-goodies/split-show-next
+;;   (kbd "K") 'elfeed-goodies/split-show-prev)
+;; (evil-define-key 'normal elfeed-search-mode-map
+;;   (kbd "J") 'elfeed-goodies/split-show-next
+;;   (kbd "K") 'elfeed-goodies/split-show-prev)
 
 
-
-(after! elfeed
-  (set-popup-rule! "^\\*elfeed-entry\\*" :side 'bottom :size 0.6 :select t :slot -1 :vslot -10)
-  (add-hook! 'elfeed-search-mode-hook 'elfeed-update)) ; Update Elfeed when launched
+;; (after! elfeed
+;;   (set-popup-rule! "^\\*elfeed-entry\\*" :side 'bottom :size 0.6 :select t :slot -1 :vslot -10)
+;;   (add-hook! 'elfeed-search-mode-hook 'elfeed-update)) ; Update Elfeed when launched
 
 
 (defvar +fl--browse-url-xwidget-last-session-buffer nil)
@@ -268,12 +257,19 @@
 
 (setq browse-url-browser-function '+fl/browse-url-xwidget)
 
-(use-package! wakatime-mode
-  :hook (after-init . global-wakatime-mode))
+;; (use-package! wakatime-mode
+;;   :hook (after-init . global-wakatime-mode)
+;;   :config
+;;   (setq wakatime-python-bin "/usr/local/bin/python3"
+;;         wakatime-api-key (auth-source-pass-get 'secret "wakatime/api_key")))
 
-;;   ;; :config
-;;   ;; (setq  wakatime-python-bin "/usr/local/bin/python3"
-;;          wakatime-cli-path "~/.local/bin/wakatime"))
+
+;; (use-package! wakatime-mode
+;;   :hook (after-init . global-wakatime-mode))
+;; (custom-set-variables '(wakatime-api-key (auth-source-pass-)))
+;; :config
+;; (setq  wakatime-python-bin "/usr/local/bin/python3"
+;; wakatime-cli-path "~/.local/bin/wakatime"))
 
 (setq org-directory "~/OneDrive/projects/org/"
       org-ellipsis "  "                ; nerd fonts chevron character
@@ -496,3 +492,107 @@
 
 (setq gc-cons-threshold (* 2 1000 1000))
 
+
+(setq org-re-reveal-klipsify-src t)
+
+(after! org-kanban
+  :config
+(defun org-kanban//link-for-heading (heading file description)
+  "Create a link for a HEADING optionally USE-FILE a FILE and DESCRIPTION."
+  (if heading
+      (format "[[*%s][%s]]" heading description)
+    (error "Illegal state")))
+  )
+
+;; (use-package! org-ref)
+;; (after! org-ref
+;;     (setq org-ref-default-bibliography '("~/bibliography.bib")
+;;           org-ref-pdf-directory "~/bibliography/"
+;;           org-ref-note-title-format "* TODO %y - %t\n :PROPERTIES:\n  :Custom_ID: %k\n  :NOTER_DOCUMENT: %F\n :ROAM_KEY: cite:%k\n  :AUTHOR: %9a\n  :JOURNAL: %j\n  :YEAR: %y\n  :VOLUME: %v\n  :PAGES: %p\n  :DOI: %D\n  :URL: %U\n :END:\n\n"
+;;           org-ref-notes-directory "~/org/"
+;;           org-ref-notes-function 'orb-edit-notes)
+;;     )
+
+;; (use-package! org-roam-bibtex
+;;   :after (org-roam)
+;;   :hook (org-roam-mode . org-roam-bibtex-mode)
+;;   :config
+;;   ;; (setq org-roam-server-host "172.16.3.168")
+;;   (setq orb-preformat-keywords
+;;    '("=key=" "title" "url" "file" "author-or-editor" "keywords"))
+;;   (setq orb-templates
+;;         '(("r" "ref" plain (function org-roam-capture--get-point)
+;;            ""
+;;            :file-name "${=key=}"
+;;            :head "#+TITLE: ${=key=}: ${title}
+;; #+ROAM_KEY: ${ref}
+;; #+ROAM_TAGS: article
+;; - tags ::
+;; - keywords :: ${keywords}
+;; * ${title}
+;;   :PROPERTIES:
+;;   :Custom_ID: ${=key=}
+;;   :URL: ${url}
+;;   :AUTHOR: ${author-or-editor}
+;;   :NOTER_DOCUMENT: %(file-relative-name (orb-process-file-field \"${=key=}\") (print org-directory))
+;;   :NOTER_PAGE:
+;;   :END:
+;; ** CATALOG
+;; *** Motivation :springGreen:
+;; *** Model :lightSkyblue:
+;; *** Remarks
+;; *** Applications
+;; *** Expressions
+;; *** References :violet:
+;; ** NOTES
+;; "
+;;            :unnarrowed t))))
+
+;; (org-roam-bibtex-mode)
+;; (use-package! org-roam-server)
+;; (use-package! org-journal
+;;   :bind
+;;   ("C-c n j" . org-journal-new-entry)
+;;   ("C-c n t" . org-journal-today)
+;;   :config
+;;   (setq org-journal-date-prefix "#+TITLE: "
+;;         org-journal-time-prefix "* "
+;;         org-journal-file-format "private-%Y-%m-%d.org"
+;;         org-journal-dir "~/org/"
+;;         org-journal-carryover-items nil
+;;         org-journal-date-format "%Y-%m-%d")
+;;   ;; do not create title for dailies
+;;   (set-file-template! "/private-.*\\.org$"    :trigger ""    :mode 'org-mode)
+;;   (print +file-templates-alist)
+;;   (defun org-journal-today ()
+;;     (interactive)
+;;     (org-journal-new-entry t)))
+
+;; (use-package! org-noter
+;;
+;;   :config
+;;   (setq
+;;    org-noter-pdftools-markup-pointer-color "yellow"
+;;    org-noter-notes-search-path '("~/OneDrive/projects/org/notes")
+;;    ;; org-noter-insert-note-no-questions t
+;;    org-noter-doc-split-fraction '(0.7 . 03)
+;;    org-noter-always-create-frame nil
+;;    org-noter-hide-other nil
+;;    org-noter-pdftools-free-pointer-icon "Note"
+;;    org-noter-pdftools-free-pointer-color "red"
+;;    org-noter-kill-frame-at-session-end nil
+;;    )
+;;   (map! :map (pdf-view-mode)
+;;         :leader
+;;         (:prefix-map ("n" . "notes")
+;;           :desc "Write notes"                    "w" #'org-noter)
+;;         )
+;;   )
+
+;; (use-package! org-pdftools
+;;   :hook (org-load . org-pdftools-setup-link))
+;; (use-package! org-noter-pdftools
+;;   :after org-noter
+;;   :config
+;;   (with-eval-after-load 'pdf-annot
+;;     (add-hook 'pdf-annot-activate-handler-functions #'org-noter-pdftools-jump-to-note)))

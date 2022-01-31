@@ -7,11 +7,29 @@
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
+;;; Packages:
 (package! org-super-agenda)
 (package! wakatime-mode)
 (package! bug-hunter)
 (package! org-roam-server)
-(package! org-roam-bibtex)
+(package! org-roam-bibtex
+  :recipe (:host github :repo "org-roam/org-roam-bibtex"))
+
+;; When using org-roam via the `+roam` flag
+(unpin! org-roam company-org-roam)
+(unpin! bibtex-completion helm-bibtex ivy-bibtex)
+
+(package! org-journal)
+(package! org-kanban
+  :recipe (:host github :repo "gizmomogwai/org-kanban"))
+(package! org-pdftools
+  :recipe (:host github :repo "fuxialexander/org-pdftools"))
+(package! org-ref
+  :recipe (:host github :repo "jkitchin/org-ref"))
+(package! org-noter
+  :recipe (:host github :repo "weirdNox/org-noter"))
+(package! org-noter-pdftools
+  :recipe (:host github :repo "fuxialexander/org-pdftools"))
 
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:
@@ -69,6 +87,7 @@
 (package! org-roam-ui)
 (package! elfeed)
 (package! elfeed-goodies)
+
 ;; (package! org-fragtog)
 
 ;; Doom's packages are pinned to a specific commit and updated from release to
