@@ -294,6 +294,11 @@
 (advice-add 'org-refile :after 'org-save-all-org-buffers)
 (advice-add 'org-gcal-fetch :after 'org-save-all-org-buffers)
 
+(after! org-gcal
+  (setq org-gcal-client-id (auth-source-pass-get 'secret "org/gcal/client_id")
+        org-gcal-client-secret (auth-source-pass-get 'secret "org/gcal/client_secret")
+        org-gcal-fetch-file-alist '(("marcoocchialini@usp.br" .  "~/OneDrive/projects/org/gcal/personal.org")
+                                    )))
 
 (after! org
   (with-no-warnings
