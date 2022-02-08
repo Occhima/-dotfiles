@@ -19,7 +19,6 @@
 (unpin! org-roam company-org-roam)
 (unpin! bibtex-completion helm-bibtex ivy-bibtex)
 
-(package! org-journal)
 (package! org-kanban
   :recipe (:host github :repo "gizmomogwai/org-kanban"))
 (package! org-pdftools
@@ -83,8 +82,6 @@
 (package! crux) 
 (package! emms) 
 (package! elfeed)
-(unpin! org-roam)
-(package! org-roam-ui)
 (package! elfeed)
 (package! elfeed-goodies)
 

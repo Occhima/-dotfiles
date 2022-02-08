@@ -460,24 +460,24 @@
         org-habit-today-glyph ?⚡
         org-habit-completed-glyph ?+ ))
 
-;; (use-package org-brain :ensure t
-;;   :init
-;;   (setq org-brain-path "~/projects/remote/org/brain/")
-;;   ;; For Evil users
-;;   (with-eval-after-load 'evil
-;;     (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
-;;   :config
-;;   (bind-key "C-c b" 'org-brain-prefix-map org-mode-map)
-;;   (setq org-id-track-globally t)
-;;   (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
-;;   (add-hook 'before-save-hook #'org-brain-ensure-ids-in-buffer)
-;;   (push '("b" "Brain" plain (function org-brain-goto-end)
-;;           "* %i%?" :empty-lines 1)
-;;         org-capture-templates)
-;;   (setq org-brain-visualize-default-choices 'all)
-;;   (setq org-brain-title-max-length 12)
-;;   (setq org-brain-include-file-entries nil
-;;         org-brain-file-entries-use-title nil))
+(use-package org-brain :ensure t
+  :init
+  (setq org-brain-path "~/projects/remote/org/brain/")
+  ;; For Evil users
+  (with-eval-after-load 'evil
+    (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
+  :config
+  (bind-key "C-c b" 'org-brain-prefix-map org-mode-map)
+  (setq org-id-track-globally t)
+  (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
+  (add-hook 'before-save-hook #'org-brain-ensure-ids-in-buffer)
+  (push '("b" "Brain" plain (function org-brain-goto-end)
+          "* %i%?" :empty-lines 1)
+        org-capture-templates)
+  (setq org-brain-visualize-default-choices 'all)
+  (setq org-brain-title-max-length 12)
+  (setq org-brain-include-file-entries nil
+        org-brain-file-entries-use-title nil))
 
 ;; ;; Allows you to edit entries directly from org-brain-visualize
 ;; (use-package polymode
@@ -508,6 +508,8 @@
       (format "[[*%s][%s]]" heading description)
     (error "Illegal state")))
   )
+
+(require 'org-habit)
 
 ;; (use-package! org-ref)
 ;; (after! org-ref
@@ -573,26 +575,26 @@
 ;;     (interactive)
 ;;     (org-journal-new-entry t)))
 
-;; (use-package! org-noter
-;;
-;;   :config
-;;   (setq
-;;    org-noter-pdftools-markup-pointer-color "yellow"
-;;    org-noter-notes-search-path '("~/OneDrive/projects/org/notes")
-;;    ;; org-noter-insert-note-no-questions t
-;;    org-noter-doc-split-fraction '(0.7 . 03)
-;;    org-noter-always-create-frame nil
-;;    org-noter-hide-other nil
-;;    org-noter-pdftools-free-pointer-icon "Note"
-;;    org-noter-pdftools-free-pointer-color "red"
-;;    org-noter-kill-frame-at-session-end nil
-;;    )
-;;   (map! :map (pdf-view-mode)
-;;         :leader
-;;         (:prefix-map ("n" . "notes")
-;;           :desc "Write notes"                    "w" #'org-noter)
-;;         )
-;;   )
+(use-package! org-noter
+
+  :config
+  (setq
+   org-noter-pdftools-markup-pointer-color "yellow"
+   org-noter-notes-search-path '("~/OneDrive/projects/org/notes")
+   ;; org-noter-insert-note-no-questions t
+   org-noter-doc-split-fraction '(0.7 . 03)
+   org-noter-always-create-frame nil
+   org-noter-hide-other nil
+   org-noter-pdftools-free-pointer-icon "Note"
+   org-noter-pdftools-free-pointer-color "red"
+   org-noter-kill-frame-at-session-end nil
+   )
+  (map! :map (pdf-view-mode)
+        :leader
+        (:prefix-map ("n" . "notes")
+          :desc "Write notes"                    "w" #'org-noter)
+        )
+  )
 
 ;; (use-package! org-pdftools
 ;;   :hook (org-load . org-pdftools-setup-link))
