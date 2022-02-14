@@ -135,18 +135,22 @@
        ;;elm                           ; care for a cup of TEA?
        emacs-lisp                       ; drown in parentheses
        ;;erlang                        ; an elegant language for a more civilized age
-       ;;ess                           ; emacs speaks statistics
+       ess                           ; emacs speaks statistics
        ;;faust                         ; dsp, but you get to keep your soul
        ;;fsharp                        ; ML stands for Microsoft's Language
        ;;fstar                         ; (dependent) types and (monadic) effects and Z3
        ;;gdscript                      ; the language you waited for
        (go +lsp)                        ; the hipster dialect
-       ;;(haskell +dante)              ; a language that's lazier than I am
+       (haskell +dante)              ; a language that's lazier than I am
        ;;hy                            ; readability of scheme w/ speed of python
        ;;idris                         ;
        (json +lsp)                      ; At least it ain't XML
        ;;(java +meghanada)             ; the poster child for carpal tunnel syndrome
-       (javascript +lsp)              ; all(hope(abandon(ye(who(enter(here))))))
+       (javascript 
+         +typescript-mode
+         +npm-mode
+         +nodejs-repl
+         +lsp)              ; all(hope(abandon(ye(who(enter(here))))))
        julia                          ; a better, faster MATLAB
        ;;kotlin                        ; a better, slicker Java(Script)
        latex                     ; writing papers in Emacs has never been so fun
