@@ -1,4 +1,4 @@
-;;; init.el -*- lexical-binding: t; -*-
+;;; init:wq.el -*- lexical-binding: t; -*-
 
 ;; This file controls what Doom modules are enabled and what order they load
 ;; in. Remember to run 'doom sync' after modifying it!
@@ -34,28 +34,27 @@
        doom-dashboard            ; a nifty splas screen for Emacs
        doom-quit                 ; DOOM quit-message prompts when you quit Emacs
        (emoji
-        +github
-        +unicode)   ; Displays and inserts emojis (ASCII, Github style, unicode)
+        +unicode
+        +github)    ; Displays and inserts emojis (ASCII, Github style, unicode)
        ;;fill-column                   ; a `fill-column' indicator
        hl-todo                ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;hydra
        indent-guides                    ; highlighted indent columns
-
-       (ligatures
-        ;; +extra
-        +iosevka
-        )        ; ligatures and symbols to make your code pretty again
+       ligatures
 
        minimap                        ; show a map of the code on the side
        modeline                       ; snazzy, Atom-inspired modeline, plus API
        ;;nav-flash                     ; blink cursor line after big motions
        ;;neotree                       ; a project drawer, like NERDTree for vim
        ;; ophints                  ; highlight the region an operation acts on
-       (popup +defaults +all)   ; tame sudden yet inevitable temporary windows
+       (popup +defaults +all)     ; tame sudden yet inevitable temporary windows
+
        (tabs
-        ;; +centaur-tabs
-        )                     ; a tab bar for Emacs
-       (treemacs +lsp)          ; a project drawer, like neotree but cooler
+        +centaur-tabs
+        )                               ; a tab bar for Emacs
+
+       (treemacs +lsp)               ; a project drawer, like neotree but cooler
+
        unicode                  ; extended unicode support for various languages
        vc-gutter                ; vcs diff in the fringe
        ;;vi-tilde-fringe               ; fringe tildes to mark beyond EOB
@@ -69,7 +68,7 @@
        fold                             ; (nigh) universal code folding
        (format +onsave)                 ; automated prettiness
        ;;god                           ; run Emacs commands without modifier keys
-       (pretty-code +iosevka)
+       pretty-code
        lispy                       ; vim for lisp, for people who don't like vim
        multiple-cursors            ; editing in many places at once
        ;;objed                         ; text object editing for the innocent
@@ -124,15 +123,15 @@
 
        :lang
        ;;agda                          ; types of types of types of types...
-       (cc +lsp)                             ; C/C++/Obj-C madness
+       (cc +lsp)              ; C/C++/Obj-C madness
        ;;clojure                       ; java with a lisp
        ;;common-lisp                   ; if you've seen one lisp, you've seen them all
        ;;coq                           ; proofs-as-programs
        ;;crystal                       ; ruby at the speed of c
        ;;csharp                        ; unity, .NET, and mono shenanigans
        data         ; config/data formats
-       ;;(dart +flutter)               ; paint ui and not much else
        ;;elixir                        ; erlang done right
+       ;;(dart +flutter)               ; paint ui and not much else
        ;;elm                           ; care for a cup of TEA?
        emacs-lisp                       ; drown in parentheses
        ;;erlang                        ; an elegant language for a more civilized age
@@ -150,10 +149,10 @@
        (javascript +lsp)              ; all(hope(abandon(ye(who(enter(here))))))
        julia                          ; a better, faster MATLAB
        ;;kotlin                        ; a better, slicker Java(Script)
-       latex                         ; writing papers in Emacs has never been so fun
+       latex                     ; writing papers in Emacs has never been so fun
        ;;lean
        ;;factor
-       ledger                        ; an accounting system in Emacs
+       ledger                           ; an accounting system in Emacs
        (lua +lsp)                       ; one-based indices? one-based indices
        (markdown +grip)                 ; writing docs for people to ignore
        ;;nim                           ; python + lisp at the speed of c
@@ -176,7 +175,7 @@
         +lsp
         +pyright
         ;;+poetry
-        )                        ; beautiful is better than ugly
+        )   ; beautiful is better than ugly
        ;;qt                            ; the 'cutest' gui framework ever
        ;;racket                        ; a DSL for DSLs
        ;;raku                          ; the artist formerly known as perl6
@@ -202,9 +201,10 @@
        :app
        calendar
        ;;irc                           ; how neckbeards socialize
-       (rss +org)                       ; emacs as an RSS reader
-       twitter                       ; twitter client https://twitter.com/vnought
+       (rss +org)                   ; emacs as an RSS reader
+       twitter                      ; twitter client https://twitter.com/vnought
 
        :config
                                         ; literate
-       (default +bindings +smartparens))
+       (default +bindings +smartparens)
+       )
