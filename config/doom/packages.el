@@ -19,6 +19,8 @@
 (unpin! org-roam company-org-roam)
 (unpin! bibtex-completion helm-bibtex ivy-bibtex)
 
+
+(package! pdf-tools)
 (package! org-kanban
   :recipe (:host github :repo "gizmomogwai/org-kanban"))
 (package! org-pdftools
