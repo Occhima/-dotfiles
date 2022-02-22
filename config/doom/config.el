@@ -1,8 +1,15 @@
-;;; config.el -*- lexical-binding: t; -*-
+;;; config.el -*- lexical-binding: t; -*
+;;;
+
+;;; Code:
+
 (setq user-full-name "Marco Occhialini"
+      base-dir "~/OneDrive"
+      projects-dir (concat (file-name-as-directory base-dir) "projects")
       user-mail-address "marcoocchialini@usp.br"
       command-line-default-directory "~/" ; set default directory to home
-      +doom-dashboard-pwd-policy "~/OneDrive/projects"
+      org-directory (concat (file-name-as-directory projects-dir) "org")
+      +doom-dashboard-pwd-policy projects-dir
       default-directory "~/"
       ns-use-proxy-icon nil             ; empty title
       frame-title-format '"\n" ; use a new-line to make sure rezising info is on the next line
@@ -18,7 +25,7 @@
 (after! projectile
   (setq projectile-project-root-files-bottom-up '("package.json" ".projectile" ".project" ".git")
         projectile-ignored-projects '("~/.emacs.d/")
-        projectile-project-search-path '("~/OneDrive/projects"))
+        projectile-project-search-path '(projects-dir))
   (defun projectile-ignored-project-function (filepath)
     "Return t if FILEPATH is within any of `projectile-ignored-projects'"
     (or (mapcar (lambda (p) (s-starts-with-p p filepath)) projectile-ignored-projects))))
@@ -75,7 +82,6 @@
 (setq doom-font (font-spec :family "Iosevka Nerd Font" :size 22 :weight 'Bold)
       doom-variable-pitch-font (font-spec :family "Iosevka Nerd Font" :size 20))
 
-(setq +doom-dashboard-startup-banner "~/OneDrive/projects/configs/emacs-dash.png")
 
 (setq doom-theme 'doom-dracula)
 
@@ -197,28 +203,28 @@
           (:name "  Sent"       :query "tag:sent"                :key "s")
           (:name "  Drafts"     :query "tag:draft"               :key "d"))))
 
-(use-package elfeed
-  :config
-  (setq elfeed-search-feed-face ":foreground #fff :weight bold"
-        elfeed-feeds (quote
-                       (("https://www.reddit.com/r/linux.rss" reddit linux)
-                        ("https://www.reddit.com/r/commandline.rss" reddit commandline)
-                        ("https://www.reddit.com/r/distrotube.rss" reddit distrotube)
-                        ("https://www.reddit.com/r/emacs.rss" reddit emacs)
-                        ("https://www.gamingonlinux.com/article_rss.php" gaming linux)
-                        ("https://hackaday.com/blog/feed/" hackaday linux)
-                        ("https://opensource.com/feed" opensource linux)
-                        ("https://linux.softpedia.com/backend.xml" softpedia linux)
-                        ("https://itsfoss.com/feed/" itsfoss linux)
-                        ("https://www.zdnet.com/topic/linux/rss.xml" zdnet linux)
-                        ("https://www.phoronix.com/rss.php" phoronix linux)
-                        ("http://feeds.feedburner.com/d0od" omgubuntu linux)
-                        ("https://www.computerworld.com/index.rss" computerworld linux)
-                        ("https://www.networkworld.com/category/linux/index.rss" networkworld linux)
-                        ("https://www.techrepublic.com/rssfeeds/topic/open-source/" techrepublic linux)
-                        ("https://betanews.com/feed" betanews linux)
-                        ("http://lxer.com/module/newswire/headlines.rss" lxer linux)
-                        ("https://distrowatch.com/news/dwd.xml" distrowatch linux)))))
+;; (use-package elfeed
+;;   :config
+;;   (setq elfeed-search-feed-face ":foreground #fff :weight bold"
+;;         elfeed-feeds (quote
+;;                        (("https://www.reddit.com/r/linux.rss" reddit linux)
+;;                         ("https://www.reddit.com/r/commandline.rss" reddit commandline)
+;;                         ("https://www.reddit.com/r/distrotube.rss" reddit distrotube)
+;;                         ("https://www.reddit.com/r/emacs.rss" reddit emacs)
+;;                         ("https://www.gamingonlinux.com/article_rss.php" gaming linux)
+;;                         ("https://hackaday.com/blog/feed/" hackaday linux)
+;;                         ("https://opensource.com/feed" opensource linux)
+;;                         ("https://linux.softpedia.com/backend.xml" softpedia linux)
+;;                         ("https://itsfoss.com/feed/" itsfoss linux)
+;;                         ("https://www.zdnet.com/topic/linux/rss.xml" zdnet linux)
+;;                         ("https://www.phoronix.com/rss.php" phoronix linux)
+;;                         ("http://feeds.feedburner.com/d0od" omgubuntu linux)
+;;                         ("https://www.computerworld.com/index.rss" computerworld linux)
+;;                         ("https://www.networkworld.com/category/linux/index.rss" networkworld linux)
+;;                         ("https://www.techrepublic.com/rssfeeds/topic/open-source/" techrepublic linux)
+;;                         ("https://betanews.com/feed" betanews linux)
+;;                         ("http://lxer.com/module/newswire/headlines.rss" lxer linux)
+;;                         ("https://distrowatch.com/news/dwd.xml" distrowatch linux)))))
 
 ;; (use-package elfeed-goodies
 ;;   :init
@@ -271,7 +277,7 @@
 ;; (setq  wakatime-python-bin "/usr/local/bin/python3"
 ;; wakatime-cli-path "~/.local/bin/wakatime"))
 
-(setq org-directory "~/OneDrive/projects/org/"
+(setq
       org-ellipsis "  "                ; nerd fonts chevron character
       org-journal-file-type 'weekly
       org-use-property-inheritance t
@@ -284,7 +290,7 @@
       org-log-repeat 'time
       org-todo-repeat-to-state "TODO"
       +org-capture-notes-file "inbox.org"
-      deft-directory "~/projects/remote/org/"
+      deft-directory "~/"
       deft-recursive t)
 
 (after! org
@@ -294,11 +300,11 @@
 (advice-add 'org-refile :after 'org-save-all-org-buffers)
 (advice-add 'org-gcal-fetch :after 'org-save-all-org-buffers)
 
-(after! org-gcal
-  (setq org-gcal-client-id (auth-source-pass-get 'secret "org/gcal/client_id")
-        org-gcal-client-secret (auth-source-pass-get 'secret "org/gcal/client_secret")
-        org-gcal-fetch-file-alist '(("marcoocchialini@usp.br" .  "~/OneDrive/projects/org/gcal/personal.org")
-                                    )))
+;; (after! org-gcal
+;;   (setq org-gcal-client-id (auth-source-pass-get 'secret "org/gcal/client_id")
+;;         org-gcal-client-secret (auth-source-pass-get 'secret "org/gcal/client_secret")
+;;         org-gcal-fetch-file-alist '(("marcoocchialini@usp.br" .  "~/OneDrive/projects/org/gcal/personal.org")
+;;                                     )))
 
 (after! org
   (with-no-warnings
@@ -327,7 +333,7 @@
 
 
 (after! org-roam
-  (setq org-roam-directory "~/OneDrive/projects/org/roam/"
+  (setq org-roam-directory (concat (file-name-as-directory org-directory) "roam")
         org-roam-tag-sources '(prop all-directories)
         +org-roam-open-buffer-on-find-file t
         ;; Create new roam notes under ~/org/notes
@@ -341,11 +347,6 @@
 
 (use-package! websocket
     :after org-roam)
-
-;; (use-package org-roam-bibtex
-;;   :after org-roam
-;;   :config
-;;   (require 'org-ref)) ; optional: if Org Ref is not loaded anywhere else, load it here
 
 (after! org
   (setq org-tags-column -80)
@@ -460,34 +461,33 @@
         org-habit-today-glyph ?⚡
         org-habit-completed-glyph ?+ ))
 
-;(use-package org-brain :ensure t
+; (use-package org-brain :ensure t
 ;  :init
- ; (setq org-brain-path "~/projects/remote/org/brain/")
-  ;;; For Evil users
-  ;(with-eval-after-load 'evil
-   ; (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
-  ;; :config
-  ;; (bind-key "C-c b" 'org-brain-prefix-map org-mode-map)
-  ;; (setq org-id-track-globally t)
-  ;; (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
-  ;; (add-hook 'before-save-hook #'org-brain-ensure-ids-in-buffer)
-  ;; (push '("b" "Brain" plain (function org-brain-goto-end)
-  ;;         "* %i%?" :empty-lines 1)
-  ;;       org-capture-templates)
-  ;; (setq org-brain-visualize-default-choices 'all)
-  ;; (setq org-brain-title-max-length 12)
-  ;; (setq org-brain-include-file-entries nil
-  ;;       org-brain-file-entries-use-title nil))
+;  (setq org-brain-path (concat (file-name-as-directory org-directory) "brain"))
+;   (with-eval-after-load 'evil
+;    (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
+;   :config
+;   (bind-key "C-c b" 'org-brain-prefix-map org-mode-map)
+;   (setq org-id-track-globally t)
+;   (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
+;   (add-hook 'before-save-hook #'org-brain-ensure-ids-in-buffer)
+;   ; (push '("b" "Brain" plain (function org-brain-goto-end)
+;   ;         "* %i%?" :empty-lines 1)
+;   ;       org-capture-templates)
+;   (setq org-brain-visualize-default-choices 'all)
+;   (setq org-brain-title-max-length 12)
+;   (setq org-brain-include-file-entries nil
+;         org-brain-file-entries-use-title nil))
 
-;; ;; Allows you to edit entries directly from org-brain-visualize
-;; (use-package polymode
-;;   :config
-;;   (add-hook 'org-brain-visualize-mode-hook #'org-brain-polymode))
-;;
-;; (use-package! org-fragtog
-;;   :after org
-;;   :hook (org-mode . org-fragtog) ; this auto-enables it when you enter an org-buffer, remove if you do not want this
-;;   )
+; ;; Allows you to edit entries directly from org-brain-visualize
+; (use-package polymode
+;   :config
+;   (add-hook 'org-brain-visualize-mode-hook #'org-brain-polymode))
+
+; (use-package! org-fragtog
+;   :after org
+;   ; :hook (org-mode . org-fragtog) ; this auto-enables it when you enter an org-buffer, remove if you do not want this
+;   )
 
 ;; Zooming in and out
 (global-set-key (kbd "C-=") 'text-scale-increase)
@@ -511,76 +511,76 @@
 
 (require 'org-habit)
 
-;; (use-package! org-ref)
-;; (after! org-ref
-;;     (setq org-ref-default-bibliography '("~/bibliography.bib")
-;;           org-ref-pdf-directory "~/bibliography/"
-;;           org-ref-note-title-format "* TODO %y - %t\n :PROPERTIES:\n  :Custom_ID: %k\n  :NOTER_DOCUMENT: %F\n :ROAM_KEY: cite:%k\n  :AUTHOR: %9a\n  :JOURNAL: %j\n  :YEAR: %y\n  :VOLUME: %v\n  :PAGES: %p\n  :DOI: %D\n  :URL: %U\n :END:\n\n"
-;;           org-ref-notes-directory "~/org/"
-;;           org-ref-notes-function 'orb-edit-notes)
-;;     )
+(use-package! org-ref)
+(after! org-ref
+  (setq org-ref-default-bibliography (concat (file-name-as-directory org-directory) "bib")
+          org-ref-pdf-directory (concat (file-name-as-directory org-directory) "books")
+          org-ref-note-title-format "* TODO %y - %t\n :PROPERTIES:\n  :Custom_ID: %k\n  :NOTER_DOCUMENT: %F\n :ROAM_KEY: cite:%k\n  :AUTHOR: %9a\n  :JOURNAL: %j\n  :YEAR: %y\n  :VOLUME: %v\n  :PAGES: %p\n  :DOI: %D\n  :URL: %U\n :END:\n\n"
+          org-ref-notes-directory (concat (file-name-as-directory org-directory) "notes")
+          org-ref-notes-function 'orb-edit-notes)
+    )
 
-;; (use-package! org-roam-bibtex
-;;   :after (org-roam)
-;;   :hook (org-roam-mode . org-roam-bibtex-mode)
-;;   :config
-;;   ;; (setq org-roam-server-host "172.16.3.168")
-;;   (setq orb-preformat-keywords
-;;    '("=key=" "title" "url" "file" "author-or-editor" "keywords"))
-;;   (setq orb-templates
-;;         '(("r" "ref" plain (function org-roam-capture--get-point)
-;;            ""
-;;            :file-name "${=key=}"
-;;            :head "#+TITLE: ${=key=}: ${title}
-;; #+ROAM_KEY: ${ref}
-;; #+ROAM_TAGS: article
-;; - tags ::
-;; - keywords :: ${keywords}
-;; * ${title}
-;;   :PROPERTIES:
-;;   :Custom_ID: ${=key=}
-;;   :URL: ${url}
-;;   :AUTHOR: ${author-or-editor}
-;;   :NOTER_DOCUMENT: %(file-relative-name (orb-process-file-field \"${=key=}\") (print org-directory))
-;;   :NOTER_PAGE:
-;;   :END:
-;; ** CATALOG
-;; *** Motivation :springGreen:
-;; *** Model :lightSkyblue:
-;; *** Remarks
-;; *** Applications
-;; *** Expressions
-;; *** References :violet:
-;; ** NOTES
-;; "
-;;            :unnarrowed t))))
+(use-package! org-roam-bibtex
+  :after (org-roam)
+  :hook (org-roam-mode . org-roam-bibtex-mode)
+  :config
+  ;; (setq org-roam-server-host "172.16.3.168")
+  (setq orb-preformat-keywords
+   '("=key=" "title" "url" "file" "author-or-editor" "keywords"))
+  (setq orb-templates
+        '(("r" "ref" plain (function org-roam-capture--get-point)
+           ""
+           :file-name "${=key=}"
+           :head "#+TITLE: ${=key=}: ${title}
+#+ROAM_KEY: ${ref}
+#+ROAM_TAGS: article
+- tags ::
+- keywords :: ${keywords}
+* ${title}
+  :PROPERTIES:
+  :Custom_ID: ${=key=}
+  :URL: ${url}
+  :AUTHOR: ${author-or-editor}
+  :NOTER_DOCUMENT: %(file-relative-name (orb-process-file-field \"${=key=}\") (print org-directory))
+  :NOTER_PAGE:
+  :END:
+** CATALOG
+*** Motivation :springGreen:
+*** Model :lightSkyblue:
+*** Remarks
+*** Applications
+*** Expressions
+*** References :violet:
+** NOTES
+"
+           :unnarrowed t))))
 
-;; (org-roam-bibtex-mode)
-;; (use-package! org-roam-server)
-;; (use-package! org-journal
-;;   :bind
-;;   ("C-c n j" . org-journal-new-entry)
-;;   ("C-c n t" . org-journal-today)
-;;   :config
-;;   (setq org-journal-date-prefix "#+TITLE: "
-;;         org-journal-time-prefix "* "
-;;         org-journal-file-format "private-%Y-%m-%d.org"
-;;         org-journal-dir "~/org/"
-;;         org-journal-carryover-items nil
-;;         org-journal-date-format "%Y-%m-%d")
-;;   ;; do not create title for dailies
-;;   (set-file-template! "/private-.*\\.org$"    :trigger ""    :mode 'org-mode)
-;;   (print +file-templates-alist)
-;;   (defun org-journal-today ()
-;;     (interactive)
-;;     (org-journal-new-entry t)))
+; (org-roam-bibtex-mode)
+; (use-package! org-roam-server)
+(use-package! org-journal
+  ;; :bind
+  ;; ("C-c n j" . org-journal-new-entry)
+  ;; ("C-c n t" . org-journal-today)
+  :config
+  (setq org-journal-date-prefix "#+TITLE: "
+        org-journal-time-prefix "* "
+        org-journal-file-format "private-%Y-%m-%d.org"
+        org-journal-dir (concat (file-name-as-directory org-directory) "journal")
+        org-journal-carryover-items nil
+        org-journal-date-format "%Y-%m-%d")
+  ;; do not create title for dailies
+  (set-file-template! "/private-.*\\.org$"    :trigger ""    :mode 'org-mode)
+  (print +file-templates-alist)
+  (defun org-journal-today ()
+    (interactive)
+    (org-journal-new-entry t)))
 
 (use-package! org-noter
 
   :config
   (setq
    org-noter-pdftools-markup-pointer-color "yellow"
-   org-noter-notes-search-path '("~/OneDrive/projects/org/notes")
+   org-noter-notes-search-path '()
    ;; org-noter-insert-note-no-questions t
    org-noter-doc-split-fraction '(0.7 . 03)
    org-noter-always-create-frame nil
@@ -596,10 +596,10 @@
         )
   )
 
-;; (use-package! org-pdftools
-;;   :hook (org-load . org-pdftools-setup-link))
-;; (use-package! org-noter-pdftools
-;;   :after org-noter
-;;   :config
-;;   (with-eval-after-load 'pdf-annot
-;;     (add-hook 'pdf-annot-activate-handler-functions #'org-noter-pdftools-jump-to-note)))
+(use-package! org-pdftools
+  :hook (org-load . org-pdftools-setup-link))
+(use-package! org-noter-pdftools
+  :after org-noter
+  :config
+  (with-eval-after-load 'pdf-annot
+    (add-hook 'pdf-annot-activate-handler-functions #'org-noter-pdftools-jump-to-note)))
