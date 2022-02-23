@@ -300,11 +300,11 @@
 (advice-add 'org-refile :after 'org-save-all-org-buffers)
 (advice-add 'org-gcal-fetch :after 'org-save-all-org-buffers)
 
-;; (after! org-gcal
-;;   (setq org-gcal-client-id (auth-source-pass-get 'secret "org/gcal/client_id")
-;;         org-gcal-client-secret (auth-source-pass-get 'secret "org/gcal/client_secret")
-;;         org-gcal-fetch-file-alist '(("marcoocchialini@usp.br" .  "~/OneDrive/projects/org/gcal/personal.org")
-;;                                     )))
+(after! org-gcal
+  (setq org-gcal-client-id (auth-source-pass-get 'secret "org/gcal/client_id")
+        org-gcal-client-secret (auth-source-pass-get 'secret "org/gcal/client_secret")
+        org-gcal-fetch-file-alist '(("marcoocchialini@usp.br" .  "~/OneDrive/projects/org/gcal/personal.org")
+                                    )))
 
 (after! org
   (with-no-warnings
@@ -607,3 +607,15 @@
 (require 'python)
 (setq python-shell-interpreter "ipython")
 (setq python-shell-interpreter-args "--pylab")
+
+(use-package! websocket
+    :after org-roam)
+
+(use-package! org-roam-ui
+  :after org-roam ;; or :after org
+  ; :hook (after-init . org-roam-ui-mode)
+  :config
+  (setq org-roam-ui-sync-theme t
+        org-roam-ui-follow t
+        org-roam-ui-update-on-save t
+        ))

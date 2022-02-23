@@ -11,7 +11,6 @@
 (package! org-super-agenda)
 (package! wakatime-mode)
 (package! bug-hunter)
-(package! org-roam-server)
 (package! org-roam-bibtex
   :recipe (:host github :repo "org-roam/org-roam-bibtex"))
 
@@ -89,10 +88,5 @@
 
 ;; (package! org-fragtog)
 
-;; Doom's packages are pinned to a specific commit and updated from release to
-;; release. The `unpin!' macro allows you to unpin single packages...
-; (unpin! lsp-mode lsp-ui centaur-tabs treemacs)
-;; ...or multiple packages
-;(unpin! pinned-package another-pinned-package)
-;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
-;(unpin! t)
+(unpin! org-roam)
+(package! org-roam-ui)
