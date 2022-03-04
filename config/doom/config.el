@@ -82,8 +82,7 @@
 (setq doom-font (font-spec :family "Iosevka Nerd Font" :size 22 :weight 'Bold)
       doom-variable-pitch-font (font-spec :family "Iosevka Nerd Font" :size 20))
 
-
-(setq doom-theme 'doom-dracula)
+(setq doom-theme 'doom-one)
 
 (custom-set-faces!
   '(font-lock-comment-face :slant italic))
@@ -519,6 +518,8 @@
           org-ref-notes-directory (concat (file-name-as-directory org-directory) "notes")
           org-ref-notes-function 'orb-edit-notes)
     )
+
+(setq bibtex-completion-library-path (concat (file-name-as-directory base-dir) "books"))
 
 (use-package! org-roam-bibtex
   :after (org-roam)

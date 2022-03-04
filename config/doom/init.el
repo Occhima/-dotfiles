@@ -33,9 +33,9 @@
        doom                      ; what makes DOOM look the way it does
        doom-dashboard            ; a nifty splas screen for Emacs
        doom-quit                 ; DOOM quit-message prompts when you quit Emacs
-       (emoji
-        +unicode
-        +github)    ; Displays and inserts emojis (ASCII, Github style, unicode)
+       emoji
+        ; +unicode
+        ; +github)    ; Displays and inserts emojis (ASCII, Github style, unicode)
        ;;fill-column                   ; a `fill-column' indicator
        hl-todo                ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;hydra
@@ -145,7 +145,10 @@
        ;;hy                            ; readability of scheme w/ speed of python
        ;;idris                         ;
        (json +lsp)                      ; At least it ain't XML
-       ;;(java +meghanada)             ; the poster child for carpal tunnel syndrome
+       (java 
+        +lsp
+        ;; +meghanada
+        )             ; the poster child for carpal tunnel syndrome
        (javascript 
          +typescript-mode
          +npm-mode
@@ -195,7 +198,7 @@
        ;;scheme                        ; a fully conniving family of lisps
        (sh +fish +bash)              ; she sells {ba,z,fi}sh shells on the C xor
        ;;sml
-       ;;solidity                      ; do you need a blockchain? No.
+       solidity                      ; do you need a blockchain? No.
        ;;swift                         ; who asked for emoji variables?
        ;;terra                         ; Earth and Moon in alignment for performance.
        web                              ; the tubes
