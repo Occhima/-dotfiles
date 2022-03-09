@@ -9,6 +9,8 @@
       user-mail-address "marcoocchialini@usp.br"
       command-line-default-directory "~/" ; set default directory to home
       org-directory (concat (file-name-as-directory projects-dir) "org")
+      library-directory (concat (file-name-as-directory projects-dir) "library")
+      bibliography-directory (concat (file-name-as-directory library-directory) "bib")
       +doom-dashboard-pwd-policy projects-dir
       default-directory "~/"
       ns-use-proxy-icon nil             ; empty title
@@ -512,14 +514,14 @@
 
 (use-package! org-ref)
 (after! org-ref
-  (setq org-ref-default-bibliography (concat (file-name-as-directory org-directory) "bib")
-          org-ref-pdf-directory (concat (file-name-as-directory org-directory) "books")
-          org-ref-note-title-format "* TODO %y - %t\n :PROPERTIES:\n  :Custom_ID: %k\n  :NOTER_DOCUMENT: %F\n :ROAM_KEY: cite:%k\n  :AUTHOR: %9a\n  :JOURNAL: %j\n  :YEAR: %y\n  :VOLUME: %v\n  :PAGES: %p\n  :DOI: %D\n  :URL: %U\n :END:\n\n"
-          org-ref-notes-directory (concat (file-name-as-directory org-directory) "notes")
-          org-ref-notes-function 'orb-edit-notes)
-    )
+  (setq org-ref-default-bibliography (concat (file-name-as-directory bibliography-directory) "bibliography.bib")
+        org-ref-pdf-directory '((concat (file-name-as-directory library-directory) "books") (concat (file-name-as-directory library-directory) "articles"))
+        org-ref-note-title-format "* TODO %y - %t\n :PROPERTIES:\n  :Custom_ID: %k\n  :NOTER_DOCUMENT: %F\n :ROAM_KEY: cite:%k\n  :AUTHOR: %9a\n  :JOURNAL: %j\n  :YEAR: %y\n  :VOLUME: %v\n  :PAGES: %p\n  :DOI: %D\n  :URL: %U\n :END:\n\n"
+        org-ref-notes-directory (concat (file-name-as-directory org-directory) "notes")
+        org-ref-bibliography-notes (concat (file-name-as-directory bibliography-directory) "notes.org")
+        org-ref-notes-function 'orb-edit-notes))
 
-(setq bibtex-completion-library-path (concat (file-name-as-directory base-dir) "books"))
+
 
 (use-package! org-roam-bibtex
   :after (org-roam)
@@ -620,3 +622,9 @@
         org-roam-ui-follow t
         org-roam-ui-update-on-save t
         ))
+
+;; (setq bibtex-completion-library-path "~/org/bibtex-pdfs"
+;;       library (concat (file-name-as-directory bibliography-directory) "bibliography.bib"))
+;;       bibtex-completion-library-path '((concat (file-name-as-directory library-directory) "books") (concat (file-name-as-directory library-directory) "articles"))
+;; org-ref-notes-directory (concat (file-name-as-directory org-directory) "notes")
+;; org-ref-bibliography-notes (concat (file-name-as-directory bibliography-directory) "notes.org")
