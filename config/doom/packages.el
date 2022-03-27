@@ -83,8 +83,8 @@
 (package! crux) 
 (package! emms) 
 (package! elfeed)
-(package! elfeed)
 (package! elfeed-goodies)
+(package! org-trello)
 
 ;; (package! org-fragtog)
 

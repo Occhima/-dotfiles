@@ -13,6 +13,8 @@
       bibliography-directory (concat (file-name-as-directory library-directory) "bib")
       +doom-dashboard-pwd-policy projects-dir
       default-directory "~/"
+      local-projects-directory (concat (file-name-as-directory default-directory) "projects")
+      local-dot-projects-directory (concat (file-name-as-directory local-projects-directory) "dot")
       ns-use-proxy-icon nil             ; empty title
       frame-title-format '"\n" ; use a new-line to make sure rezising info is on the next line
       undo-limit 80000000      ; Raise undo-limit to 80Mb
@@ -84,7 +86,7 @@
 (setq doom-font (font-spec :family "Iosevka Nerd Font" :size 22 :weight 'Bold)
       doom-variable-pitch-font (font-spec :family "Iosevka Nerd Font" :size 20))
 
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-dracula)
 
 (custom-set-faces!
   '(font-lock-comment-face :slant italic))
@@ -330,7 +332,6 @@
           ("HOLD" . +org-todo-onhold)
           ("DONE" . +org-todo-done)
           ("KILL" . +org-todo-done))))
-
 
 
 (after! org-roam
@@ -628,3 +629,19 @@
 ;;       bibtex-completion-library-path '((concat (file-name-as-directory library-directory) "books") (concat (file-name-as-directory library-directory) "articles"))
 ;; org-ref-notes-directory (concat (file-name-as-directory org-directory) "notes")
 ;; org-ref-bibliography-notes (concat (file-name-as-directory bibliography-directory) "notes.org")
+
+(defun python-google-docstring ()
+"Generate google-style docstring for python."
+        (interactive)
+        (if (region-active-p)
+        (progn
+                (call-process-region (region-beginning) (region-end) "python3" nil t t "~/projects/config/doom/snippets/format-g-docs.py")
+                (message "Docs are generated")
+                (deactivate-mark))
+        (message "No region active; can't generate docs!"))
+        )
+
+(map! :localleader
+      :prefix ("p" . "Python AutoDocstring generator")
+      "m" #'python-google-docstring)
+;; (evil-leader/set-key "o o" 'python-google-docstring)
