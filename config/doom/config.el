@@ -630,18 +630,18 @@
 ;; org-ref-notes-directory (concat (file-name-as-directory org-directory) "notes")
 ;; org-ref-bibliography-notes (concat (file-name-as-directory bibliography-directory) "notes.org")
 
-(defun python-google-docstring ()
-"Generate google-style docstring for python."
-        (interactive)
-        (if (region-active-p)
-        (progn
-                (call-process-region (region-beginning) (region-end) "python3" nil t t "~/projects/config/doom/snippets/format-g-docs.py")
-                (message "Docs are generated")
-                (deactivate-mark))
-        (message "No region active; can't generate docs!"))
-        )
+;; (defun python-google-docstring ()
+;; "Generate google-style docstring for python."
+;;         (interactive)
+;;         (if (region-active-p)
+;;         (progn
+;;                 (call-process-region (region-beginning) (region-end) "python3" nil t t "/~/projects/dot/config/doom/snippets/format-g-docs.py")
+;;                 (message "Docs are generated")
+;;                 (deactivate-mark))
+;;         (message "No region active; can't generate docs!"))
+;;         )
 
-(map! :localleader
-      :prefix ("p" . "Python AutoDocstring generator")
-      "m" #'python-google-docstring)
+;; (map! :localleader
+;;       :prefix ("p" . "Python AutoDocstring generator")
+;;       "m" #'python-google-docstring)
 ;; (evil-leader/set-key "o o" 'python-google-docstring)
