@@ -46,16 +46,8 @@
 
 (advice-add 'counsel-recentf-candidates :filter-return #'+fl/counsel-recentf-candidates)
 
-(after! popup
-  (set-popup-rule! "^\\*Flycheck errors\\*$" :side 'bottom :size 0.2 :select t))
-
-(after! flycheck
-  (setq flycheck-check-syntax-automatically '(mode-enabled save new-line idle-change)))
-
-(after! (flycheck lsp-mode)
-  (add-hook 'lsp-after-initialize-hook (lambda()
-                                        (flycheck-add-next-checker 'lsp '(warning . javascript-eslint)))))
-(after! lsp-mode
+(
+ after! lsp-mode
   (setq lsp-lua-diagnostics-globals ["hs" "spoon"]))
 
 (setq swiper-use-visual-line nil
@@ -80,6 +72,7 @@
 (after! treemacs
   (setq +treemacs-git-mode 'extended)
   (treemacs-follow-mode t))
+
 (after! rainbow-mode
   (setq rainbow-html-colors-major-mode-list '(html-mode css-mode php-mode nxml-mode xml-mode typescript-mode javascript-mode)))
 
@@ -88,16 +81,10 @@
 
 (setq doom-theme 'doom-dracula)
 
-
 (setq show-trailing-whitespace t)
 
 (after! all-the-icons
   (setq all-the-icons-scale-factor 1.2))
-
-(after! doom-modeline
-  (setq
-   doom-modeline-major-mode-color-icon t
-   doom-modeline-minor-modes (featurep 'minions)))
 
 (after! doom-themes
   (setq
@@ -105,28 +92,10 @@
    doom-themes-enable-bold t
    doom-themes-enable-italic t))
 
-  (setq doom-themes-treemacs-theme "doom-colors")
-
+(setq fancy-splash-image "~/projects/dot/config/doom/dash.png")
 
 (custom-set-faces!
   '(font-lock-comment-face :slant italic))
-
-
-; (defvar +fl/splashcii-query ""
-;   "The query to search on asciiur.com")
-
-; (defun +fl/splashcii-banner ()
-;   (mapc (lambda (line)
-;           (insert (propertize (+doom-dashboard--center +doom-dashboard--width line)
-;                               'face 'doom-dashboard-banner) " ")
-;           (insert "\n"))
-;         (split-string (with-output-to-string
-;                         (call-process "splashcii" nil standard-output nil +fl/splashcii-query))
-;                       "\n" t)))
-
-; (setq +doom-dashboard-ascii-banner-fn #'+fl/splashcii-banner)
-
-; (setq +fl/splashcii-query "christmas")
 
 (after! centaur-tabs
   (centaur-tabs-group-by-projectile-project)
@@ -177,97 +146,6 @@
 (set-docsets! 'emacs-lisp-mode "Emacs Lisp")
 (setq +lookup-open-url-fn #'+lookup-xwidget-webkit-open-url-fn)
 
-;; ;; change default notmuch func to open primary inbox
-;; (defun +notmuch ()
-;;   "Activate (or switch to) `notmuch' in its workspace."
-;;   (interactive)
-;;   (unless (featurep! :ui workspaces)
-;;     (user-error ":ui workspaces is required, but disabled"))
-;;   (condition-case-unless-debug e
-;;       (progn
-;;         (+workspace-switch "*email*" t)
-;;         (if-let* ((buf (cl-find-if (lambda (it) (string-match-p "^\\*notmuch" (buffer-name (window-buffer it))))
-;;                                    (doom-visible-windows))))
-;;             (select-window (get-buffer-window buf))
-;;           (notmuch-search "(tag:inbox (tag:personal or tag:flagged) not tag:trash"))
-;;         (+workspace/display))
-;;     ('error
-;;      (+notmuch/quit)
-;;      (signal (car e) (cdr e)))))
-
-;; (map! :leader :desc "Open Notmuch" "o m" '+notmuch)
-
-;; (after! notmuch
-;;   ;; Popup rules
-;;   (set-popup-rule! "^\\*notmuch.*search.*" :ignore t)
-;;   (set-popup-rule! "^ \\*notmuch update.*" :select nil :quit t)
-;;   (set-popup-rule! "^\\*notmuch-thread.*" :side 'bottom :size 0.6 :select t)
-
-;;   ;; Show Images
-;;   (setq notmuch-show-text/html-blocked-images nil)
-
-;;   ;; dont use buffernames with thread subjects
-;;   (defun notmuch-show--proper-buffer-name (args)
-;;     (when (= (length args) 5)
-;;       (setq args (butlast args)))
-;;     args)
-;;   (advice-add 'notmuch-show :filter-args 'notmuch-show--proper-buffer-name)
-
-;;   ;; prefer html over text
-;;   (setq notmuch-multipart/alternative-discouraged '("text/plain" "text/html"))
-
-;;   (setq notmuch-saved-searches
-;;         '((:name "  Inbox"      :query "(tag:inbox (tag:personal or tag:flagged) not tag:trash" :key "i")
-;;           (:name "  Social"     :query "tag:social"              :key "cs")
-;;           (:name "  Updates"    :query "tag:updates"             :key "cu")
-;;           (:name "  Promotions" :query "tag:promotions"          :key "cp")
-;;           (:name "  All Mail"   :query ""                        :key "a")
-;;           (:name "  Starred"    :query "tag:flagged"             :key "*")
-;;           (:name "  Sent"       :query "tag:sent"                :key "s")
-;;           (:name "  Drafts"     :query "tag:draft"               :key "d"))))
-
-;; (use-package elfeed
-;;   :config
-;;   (setq elfeed-search-feed-face ":foreground #fff :weight bold"
-;;         elfeed-feeds (quote
-;;                        (("https://www.reddit.com/r/linux.rss" reddit linux)
-;;                         ("https://www.reddit.com/r/commandline.rss" reddit commandline)
-;;                         ("https://www.reddit.com/r/distrotube.rss" reddit distrotube)
-;;                         ("https://www.reddit.com/r/emacs.rss" reddit emacs)
-;;                         ("https://www.gamingonlinux.com/article_rss.php" gaming linux)
-;;                         ("https://hackaday.com/blog/feed/" hackaday linux)
-;;                         ("https://opensource.com/feed" opensource linux)
-;;                         ("https://linux.softpedia.com/backend.xml" softpedia linux)
-;;                         ("https://itsfoss.com/feed/" itsfoss linux)
-;;                         ("https://www.zdnet.com/topic/linux/rss.xml" zdnet linux)
-;;                         ("https://www.phoronix.com/rss.php" phoronix linux)
-;;                         ("http://feeds.feedburner.com/d0od" omgubuntu linux)
-;;                         ("https://www.computerworld.com/index.rss" computerworld linux)
-;;                         ("https://www.networkworld.com/category/linux/index.rss" networkworld linux)
-;;                         ("https://www.techrepublic.com/rssfeeds/topic/open-source/" techrepublic linux)
-;;                         ("https://betanews.com/feed" betanews linux)
-;;                         ("http://lxer.com/module/newswire/headlines.rss" lxer linux)
-;;                         ("https://distrowatch.com/news/dwd.xml" distrowatch linux)))))
-
-;; (use-package elfeed-goodies
-;;   :init
-;;   (elfeed-goodies/setup)
-;;   :config
-;;   (setq elfeed-goodies/entry-pane-size 0.5))
-
-;; (add-hook 'elfeed-show-mode-hook 'visual-line-mode)
-;; (evil-define-key 'normal elfeed-show-mode-map
-;;   (kbd "J") 'elfeed-goodies/split-show-next
-;;   (kbd "K") 'elfeed-goodies/split-show-prev)
-;; (evil-define-key 'normal elfeed-search-mode-map
-;;   (kbd "J") 'elfeed-goodies/split-show-next
-;;   (kbd "K") 'elfeed-goodies/split-show-prev)
-
-
-;; (after! elfeed
-;;   (set-popup-rule! "^\\*elfeed-entry\\*" :side 'bottom :size 0.6 :select t :slot -1 :vslot -10)
-;;   (add-hook! 'elfeed-search-mode-hook 'elfeed-update)) ; Update Elfeed when launched
-
 
 (defvar +fl--browse-url-xwidget-last-session-buffer nil)
 
@@ -286,19 +164,6 @@
 
 (setq browse-url-browser-function '+fl/browse-url-xwidget)
 
-;; (use-package! wakatime-mode
-;;   :hook (after-init . global-wakatime-mode)
-;;   :config
-;;   (setq wakatime-python-bin "/usr/local/bin/python3"
-;;         wakatime-api-key (auth-source-pass-get 'secret "wakatime/api_key")))
-
-
-;; (use-package! wakatime-mode
-;;   :hook (after-init . global-wakatime-mode))
-;; (custom-set-variables '(wakatime-api-key (auth-source-pass-)))
-;; :config
-;; (setq  wakatime-python-bin "/usr/local/bin/python3"
-;; wakatime-cli-path "~/.local/bin/wakatime"))
 
 (setq
       org-ellipsis "  "                ; nerd fonts chevron character
@@ -483,29 +348,6 @@
         org-habit-today-glyph ?⚡
         org-habit-completed-glyph ?+ ))
 
-; (use-package org-brain :ensure t
-;  :init
-;  (setq org-brain-path (concat (file-name-as-directory org-directory) "brain"))
-;   (with-eval-after-load 'evil
-;    (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
-;   :config
-;   (bind-key "C-c b" 'org-brain-prefix-map org-mode-map)
-;   (setq org-id-track-globally t)
-;   (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
-;   (add-hook 'before-save-hook #'org-brain-ensure-ids-in-buffer)
-;   ; (push '("b" "Brain" plain (function org-brain-goto-end)
-;   ;         "* %i%?" :empty-lines 1)
-;   ;       org-capture-templates)
-;   (setq org-brain-visualize-default-choices 'all)
-;   (setq org-brain-title-max-length 12)
-;   (setq org-brain-include-file-entries nil
-;         org-brain-file-entries-use-title nil))
-
-; ;; Allows you to edit entries directly from org-brain-visualize
-; (use-package polymode
-;   :config
-;   (add-hook 'org-brain-visualize-mode-hook #'org-brain-polymode))
-
 ; (use-package! org-fragtog
 ;   :after org
 ;   ; :hook (org-mode . org-fragtog) ; this auto-enables it when you enter an org-buffer, remove if you do not want this
@@ -649,29 +491,6 @@
     :after python
     :config
     (setq py-pyment-options '("--output=google")))
-
-
-;; (setq bibtex-completion-library-path "~/org/bibtex-pdfs"
-;;       library (concat (file-name-as-directory bibliography-directory) "bibliography.bib"))
-;;       bibtex-completion-library-path '((concat (file-name-as-directory library-directory) "books") (concat (file-name-as-directory library-directory) "articles"))
-;; org-ref-notes-directory (concat (file-name-as-directory org-directory) "notes")
-;; org-ref-bibliography-notes (concat (file-name-as-directory bibliography-directory) "notes.org")
-
-;; (defun python-google-docstring ()
-;; "Generate google-style docstring for python."
-;;         (interactive)
-;;         (if (region-active-p)
-;;         (progn
-;;                 (call-process-region (region-beginning) (region-end) "python3" nil t t "/~/projects/dot/config/doom/snippets/format-g-docs.py")
-;;                 (message "Docs are generated")
-;;                 (deactivate-mark))
-;;         (message "No region active; can't generate docs!"))
-;;         )
-
-;; (map! :localleader
-;;       :prefix ("p" . "Python AutoDocstring generator")
-;;       "m" #'python-google-docstring)
-;; (evil-leader/set-key "o o" 'python-google-docstring)
 
 
 ;; ----------------------------------------------------------------------------
