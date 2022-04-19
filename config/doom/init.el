@@ -24,26 +24,26 @@
        (company
         +childframe
         )   ; the ultimate code completion backend
-       helm ; the *other* search engine for love and life
+      ;;  helm ; the *other* search engine for love and life
        ;;ido                           ; the other *other* search engine...
        (ivy +icons +fuzzy +prescient +childframe) ; a search engine for love and life
 
        :ui
-       deft                      ; notational velocity for Emacs
+      ;;  deft                      ; notational velocity for Emacs
        doom                      ; what makes DOOM look the way it does
        doom-dashboard            ; a nifty splas screen for Emacs
        doom-quit                 ; DOOM quit-message prompts when you quit Emacs
-       emoji
+      ;;  emoji
         ; +unicode
         ; +github)    ; Displays and inserts emojis (ASCII, Github style, unicode)
        ;;fill-column                   ; a `fill-column' indicator
        hl-todo                ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;hydra
        indent-guides                    ; highlighted indent columns
-       ligatures
+      ;;  ligatures
 
-       minimap                        ; show a map of the code on the side
-       modeline                       ; snazzy, Atom-inspired modeline, plus API
+      ;;  minimap                        ; show a map of the code on the side
+      ;;  modeline                       ; snazzy, Atom-inspired modeline, plus API
        ;;nav-flash                     ; blink cursor line after big motions
        ;;neotree                       ; a project drawer, like NERDTree for vim
        ;; ophints                  ; highlight the region an operation acts on
@@ -108,13 +108,13 @@
        (lsp +peek)
        (magit +forge)                   ; a git porcelain for Emacs
        make                             ; run make tasks from Emacs
-       (pass +auth)                     ; password manager for nerds
+      ;;  (pass +auth)                     ; password manager for nerds
        pdf                              ; pdf enhancements
        ;;prodigy                       ; FIXME managing external services & code builders
-       rgb                            ; creating color strings
-       taskrunner                     ; taskrunner for all your projects
-       terraform                      ; infrastructure as code
-       tmux                           ; an API for interacting with tmux
+      ;;  rgb                            ; creating color strings
+      ;;  taskrunner                     ; taskrunner for all your projects
+      ;;  terraform                      ; infrastructure as code
+      ;;  tmux                           ; an API for interacting with tmux
        upload                         ; map local to remote projects via ssh/ftp
 
        :os
@@ -141,14 +141,14 @@
        ;;fstar                         ; (dependent) types and (monadic) effects and Z3
        ;;gdscript                      ; the language you waited for
        (go +lsp)                        ; the hipster dialect
-       (haskell +dante)              ; a language that's lazier than I am
+      ;;  (haskell +dante)              ; a language that's lazier than I am
        ;;hy                            ; readability of scheme w/ speed of python
        ;;idris                         ;
        (json +lsp)                      ; At least it ain't XML
-       (java 
-        +lsp
-        ;; +meghanada
-        )             ; the poster child for carpal tunnel syndrome
+      ;;  (java 
+      ;;   +lsp
+      ;;   ;; +meghanada
+      ;;   )             ; the poster child for carpal tunnel syndrome
        (javascript 
          +typescript-mode
          +npm-mode
@@ -198,7 +198,7 @@
        ;;scheme                        ; a fully conniving family of lisps
        (sh +fish +bash)              ; she sells {ba,z,fi}sh shells on the C xor
        ;;sml
-       solidity                      ; do you need a blockchain? No.
+      ;;  solidity                      ; do you need a blockchain? No.
        ;;swift                         ; who asked for emoji variables?
        ;;terra                         ; Earth and Moon in alignment for performance.
        web                              ; the tubes
@@ -206,14 +206,14 @@
 
        :email
        ;; (mu4e +gmail)
-       notmuch
+      ;;  notmuch
        ;;(wanderlust +gmail)
 
        :app
        calendar
        ;;irc                           ; how neckbeards socialize
-       (rss +org)                   ; emacs as an RSS reader
-       twitter                      ; twitter client https://twitter.com/vnought
+      ;;  (rss +org)                   ; emacs as an RSS reader
+      ;;  twitter                      ; twitter client https://twitter.com/vnought
 
        :config
                                         ; literate

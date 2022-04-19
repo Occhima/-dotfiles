@@ -88,6 +88,26 @@
 
 (setq doom-theme 'doom-dracula)
 
+
+(setq show-trailing-whitespace t)
+
+(after! all-the-icons
+  (setq all-the-icons-scale-factor 1.2))
+
+(after! doom-modeline
+  (setq
+   doom-modeline-major-mode-color-icon t
+   doom-modeline-minor-modes (featurep 'minions)))
+
+(after! doom-themes
+  (setq
+   doom-neotree-file-icons t
+   doom-themes-enable-bold t
+   doom-themes-enable-italic t))
+
+  (setq doom-themes-treemacs-theme "doom-colors")
+
+
 (custom-set-faces!
   '(font-lock-comment-face :slant italic))
 
@@ -157,54 +177,54 @@
 (set-docsets! 'emacs-lisp-mode "Emacs Lisp")
 (setq +lookup-open-url-fn #'+lookup-xwidget-webkit-open-url-fn)
 
-;; change default notmuch func to open primary inbox
-(defun +notmuch ()
-  "Activate (or switch to) `notmuch' in its workspace."
-  (interactive)
-  (unless (featurep! :ui workspaces)
-    (user-error ":ui workspaces is required, but disabled"))
-  (condition-case-unless-debug e
-      (progn
-        (+workspace-switch "*email*" t)
-        (if-let* ((buf (cl-find-if (lambda (it) (string-match-p "^\\*notmuch" (buffer-name (window-buffer it))))
-                                   (doom-visible-windows))))
-            (select-window (get-buffer-window buf))
-          (notmuch-search "(tag:inbox (tag:personal or tag:flagged) not tag:trash"))
-        (+workspace/display))
-    ('error
-     (+notmuch/quit)
-     (signal (car e) (cdr e)))))
+;; ;; change default notmuch func to open primary inbox
+;; (defun +notmuch ()
+;;   "Activate (or switch to) `notmuch' in its workspace."
+;;   (interactive)
+;;   (unless (featurep! :ui workspaces)
+;;     (user-error ":ui workspaces is required, but disabled"))
+;;   (condition-case-unless-debug e
+;;       (progn
+;;         (+workspace-switch "*email*" t)
+;;         (if-let* ((buf (cl-find-if (lambda (it) (string-match-p "^\\*notmuch" (buffer-name (window-buffer it))))
+;;                                    (doom-visible-windows))))
+;;             (select-window (get-buffer-window buf))
+;;           (notmuch-search "(tag:inbox (tag:personal or tag:flagged) not tag:trash"))
+;;         (+workspace/display))
+;;     ('error
+;;      (+notmuch/quit)
+;;      (signal (car e) (cdr e)))))
 
-(map! :leader :desc "Open Notmuch" "o m" '+notmuch)
+;; (map! :leader :desc "Open Notmuch" "o m" '+notmuch)
 
-(after! notmuch
-  ;; Popup rules
-  (set-popup-rule! "^\\*notmuch.*search.*" :ignore t)
-  (set-popup-rule! "^ \\*notmuch update.*" :select nil :quit t)
-  (set-popup-rule! "^\\*notmuch-thread.*" :side 'bottom :size 0.6 :select t)
+;; (after! notmuch
+;;   ;; Popup rules
+;;   (set-popup-rule! "^\\*notmuch.*search.*" :ignore t)
+;;   (set-popup-rule! "^ \\*notmuch update.*" :select nil :quit t)
+;;   (set-popup-rule! "^\\*notmuch-thread.*" :side 'bottom :size 0.6 :select t)
 
-  ;; Show Images
-  (setq notmuch-show-text/html-blocked-images nil)
+;;   ;; Show Images
+;;   (setq notmuch-show-text/html-blocked-images nil)
 
-  ;; dont use buffernames with thread subjects
-  (defun notmuch-show--proper-buffer-name (args)
-    (when (= (length args) 5)
-      (setq args (butlast args)))
-    args)
-  (advice-add 'notmuch-show :filter-args 'notmuch-show--proper-buffer-name)
+;;   ;; dont use buffernames with thread subjects
+;;   (defun notmuch-show--proper-buffer-name (args)
+;;     (when (= (length args) 5)
+;;       (setq args (butlast args)))
+;;     args)
+;;   (advice-add 'notmuch-show :filter-args 'notmuch-show--proper-buffer-name)
 
-  ;; prefer html over text
-  (setq notmuch-multipart/alternative-discouraged '("text/plain" "text/html"))
+;;   ;; prefer html over text
+;;   (setq notmuch-multipart/alternative-discouraged '("text/plain" "text/html"))
 
-  (setq notmuch-saved-searches
-        '((:name "  Inbox"      :query "(tag:inbox (tag:personal or tag:flagged) not tag:trash" :key "i")
-          (:name "  Social"     :query "tag:social"              :key "cs")
-          (:name "  Updates"    :query "tag:updates"             :key "cu")
-          (:name "  Promotions" :query "tag:promotions"          :key "cp")
-          (:name "  All Mail"   :query ""                        :key "a")
-          (:name "  Starred"    :query "tag:flagged"             :key "*")
-          (:name "  Sent"       :query "tag:sent"                :key "s")
-          (:name "  Drafts"     :query "tag:draft"               :key "d"))))
+;;   (setq notmuch-saved-searches
+;;         '((:name "  Inbox"      :query "(tag:inbox (tag:personal or tag:flagged) not tag:trash" :key "i")
+;;           (:name "  Social"     :query "tag:social"              :key "cs")
+;;           (:name "  Updates"    :query "tag:updates"             :key "cu")
+;;           (:name "  Promotions" :query "tag:promotions"          :key "cp")
+;;           (:name "  All Mail"   :query ""                        :key "a")
+;;           (:name "  Starred"    :query "tag:flagged"             :key "*")
+;;           (:name "  Sent"       :query "tag:sent"                :key "s")
+;;           (:name "  Drafts"     :query "tag:draft"               :key "d"))))
 
 ;; (use-package elfeed
 ;;   :config
@@ -624,6 +644,13 @@
         org-roam-ui-update-on-save t
         ))
 
+;; Python docstring tool
+(use-package py-pyment
+    :after python
+    :config
+    (setq py-pyment-options '("--output=google")))
+
+
 ;; (setq bibtex-completion-library-path "~/org/bibtex-pdfs"
 ;;       library (concat (file-name-as-directory bibliography-directory) "bibliography.bib"))
 ;;       bibtex-completion-library-path '((concat (file-name-as-directory library-directory) "books") (concat (file-name-as-directory library-directory) "articles"))
@@ -645,3 +672,126 @@
 ;;       :prefix ("p" . "Python AutoDocstring generator")
 ;;       "m" #'python-google-docstring)
 ;; (evil-leader/set-key "o o" 'python-google-docstring)
+
+
+;; ----------------------------------------------------------------------------
+;; ESS related customization
+(after! ess
+  (add-hook! 'prog-mode-hook #'rainbow-delimiters-mode)
+
+  ;; combines https://github.com/fernandomayer/spacemacs/blob/master/private/ess/packages.el and
+  ;; https://github.com/MilesMcBain/spacemacs_cfg/blob/master/private/ess/packages.el.
+  ;;
+  ;; This is a little fishy because it relies on lazy-loading, because
+  ;; +keybindings.el already loaded at the top of this file and there this
+  ;; function is called.
+  (defun tide-insert-pipe ()
+    "Insert a %>%"
+    (interactive)
+    (unless (looking-back "%>%" nil)
+      (just-one-space 1)
+      (insert "%>%"))
+    ;; (newline-and-indent)
+    )
+  (defun tide-insert-assign ()
+    "Insert a %>%"
+    (interactive)
+    (unless (looking-back "<-" nil)
+      (just-one-space 1)
+      (insert "<-"))
+    ;; (newline-and-indent)
+    )
+
+  ;; If I use LSP it is better to let LSP handle lintr. See example in
+  ;; https://github.com/hlissner/doom-emacs/issues/2606.
+  (setq! ess-use-flymake nil)
+  (setq! lsp-ui-doc-enable nil
+         lsp-ui-doc-delay 1.5)
+
+  ;; Code indentation copied from my old config.
+  ;; Follow Hadley Wickham's R style guide
+  (setq
+   ess-style 'RStudio
+   ess-offset-continued 2
+   ess-expression-offset 0)
+
+  (setq comint-move-point-for-output t)
+
+  ;; From https://emacs.readthedocs.io/en/latest/ess__emacs_speaks_statistics.html
+  ;; TODO: find out a way to make settings generic so that I can also set ess-inf-R-font-lock-keywords
+  (setq ess-R-font-lock-keywords
+        '((ess-R-fl-keyword:modifiers  . t)
+          (ess-R-fl-keyword:fun-defs   . t)
+          (ess-R-fl-keyword:keywords   . t)
+          (ess-R-fl-keyword:assign-ops . t)
+          (ess-R-fl-keyword:constants  . t)
+          (ess-fl-keyword:fun-calls    . t)
+          (ess-fl-keyword:numbers      . t)
+          (ess-fl-keyword:operators    . t)
+          (ess-fl-keyword:delimiters) ; don't because of rainbow delimiters
+          (ess-fl-keyword:=            . t)
+          (ess-R-fl-keyword:F&T        . t)
+          (ess-R-fl-keyword:%op%       . t)))
+
+  ;; ESS buffers should not be cleaned up automatically
+  (add-hook 'inferior-ess-mode-hook #'doom-mark-buffer-as-real-h)
+
+  ;; Open ESS R window to the left iso bottom.
+  (set-popup-rule! "^\\*R.*\\*$" :side 'left :size 0.38 :select nil :ttl nil :quit nil :modeline t))
+
+
+;; Ways to disable smartparens for specific characters or fully in a mode.
+;; https://github.com/hlissner/doom-emacs/issues/576
+(after! smartparens
+  ;; this pair change below does not work as good as just disabling overall
+  ;; (which i seem to prefer anyway)
+  ;; (sp-with-modes 'markdown-mode
+  ;;   (sp-local-pair "`" nil))
+  ;; (add-hook 'ess-r-mode-hook    #'turn-off-smartparens-mode)
+  (add-hook 'markdown-mode-hook #'turn-off-smartparens-mode))
+
+;; Make ESS prettier (from tecosaur's config; link see below)
+;; (after! ess-r-mode
+;;   (appendq! +pretty-code-symbols
+;;             '(:assign "⟵"
+;;               :multiply "×"))
+;;   (set-pretty-symbols! 'ess-r-mode
+;;     ;; Functional
+;;     :def "function"
+;;     ;; Types
+;;     :null "NULL"
+;;     :true "TRUE"
+;;     :false "FALSE"
+;;     :int "int"
+;;     :float "float"
+;;     :bool "bool"
+;;     ;; Flow
+;;     :not "!"
+;;     :and "&&" :or "||"
+;;     :for "for"
+;;     :in "%in%"
+;;     :return "return"
+;;     ;; Other
+;;     :assign "<-"
+;;     :multiply "%*%"))
+;; ----------------------------------------------------------------------------
+
+
+;; ----------------------------------------------------------------------------
+;; Activate polymode when loading Rmarkdown documents. Also see
+;; https://github.com/MilesMcBain/spacemacs_cfg/blob/master/private/polymode/packages.el
+;; for somewhat outdated hints about a personal Rmd-mode
+(use-package! polymode
+  :commands (R)
+)
+
+(after! markdown-mode
+  ;; Disable trailing whitespace stripping for Markdown mode
+  (add-hook 'markdown-mode-hook #'doom-disable-delete-trailing-whitespace-h)
+  ;; Doom adds extra line spacing in markdown documents
+  (add-hook! 'markdown-mode-hook :append (setq line-spacing nil)))
+
+;; From Tecosaur's configuration
+(add-hook! (gfm-mode markdown-mode) #'mixed-pitch-mode)
+;; (add-hook! (gfm-mode markdown-mode) #'visual-line-mode #'turn-off-auto-fill)
+;; ----------------------------------------------------------------------------

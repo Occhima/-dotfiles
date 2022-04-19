@@ -9,15 +9,14 @@
 ;(package! some-package)
 ;;; Packages:
 (package! org-super-agenda)
-(package! wakatime-mode)
-(package! bug-hunter)
+;; (package! wakatime-mode)
+;; (package! bug-hunter)
 (package! org-roam-bibtex
   :recipe (:host github :repo "org-roam/org-roam-bibtex"))
 
 ;; When using org-roam via the `+roam` flag
 (unpin! org-roam company-org-roam)
-(unpin! bibtex-completion helm-bibtex ivy-bibtex)
-
+;; (unpin! bibtex-completion helm-bibtex ivy-bibtex)
 
 (package! pdf-tools)
 (package! org-kanban
@@ -75,23 +74,38 @@
 ;(package! builtin-package :pin "1a2b3c4d5e")
 
 ;; (package! lsp-python-ms)
-(package! org-brain)
-(package! polymode)
+;; (package! org-brain)
 (package! webpaste)
-(package! poly-markdown)
-(package! helm-swoop) 
+;; (package! poly-markdown)
+;; (package! helm-swoop) 
 (package! crux) 
-(package! emms) 
-(package! elfeed)
-(package! elfeed-goodies)
-(package! org-trello)
+;; (package! emms) 
+;; (package! elfeed)
+;; (package! elfeed-goodies)
+;; (package! org-trello)
 
 ;; (package! org-fragtog)
 
 (unpin! org-roam)
 (package! org-roam-ui)
 
-(package! org-krita
-  :recipe (:host github
-           :repo "lepisma/org-krita"
-           :files ("resources" "resources" "*.el" "*.el")))
+;; (package! org-krita
+;;   :recipe (:host github
+;;            :repo "lepisma/org-krita"
+;;            :files ("resources" "resources" "*.el" "*.el")))
+
+(package! py-pyment :recipe (:host github :repo "humitos/py-cmd-buffer.el"))
+(package! buftra :recipe (:host github :repo "humitos/buftra.el"))  ;; py-pyment dependency!
+
+(package! polymode :recipe
+  (:host github :repo "polymode/polymode"))
+(package! poly-markdown :recipe
+  (:host github :repo "polymode/poly-markdown"))
+(package! poly-R :recipe
+  (:host github :repo "polymode/poly-R"))
+(package! poly-org :recipe
+  (:host github :repo "polymode/poly-org"))
+;; (package! poly-rst :recipe
+;;   (:host github :repo "polymode/poly-rst"))
+(package! poly-noweb :recipe
+  (:host github :repo "polymode/poly-noweb"))
