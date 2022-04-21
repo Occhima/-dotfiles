@@ -39,13 +39,15 @@
         +unicode
         +github     ; Displays and inserts emojis (ASCII, Github style, unicode)
 
-       )
+        )
 
        ;;fill-column                   ; a `fill-column' indicator
        hl-todo                ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;hydra
        indent-guides                    ; highlighted indent columns
-       ligatures
+       (ligatures
+          +fira
+       )
 
        ;;  minimap                        ; show a map of the code on the side
        modeline                       ; snazzy, Atom-inspired modeline, plus API

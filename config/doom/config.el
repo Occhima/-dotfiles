@@ -76,8 +76,8 @@
 (after! rainbow-mode
   (setq rainbow-html-colors-major-mode-list '(html-mode css-mode php-mode nxml-mode xml-mode typescript-mode javascript-mode)))
 
-(setq doom-font (font-spec :family "Iosevka Nerd Font" :size 22 :weight 'Bold)
-      doom-variable-pitch-font (font-spec :family "Iosevka Nerd Font" :size 20))
+(setq doom-font (font-spec :family "Fira Code Nerd Font" :size 22 :weight 'medium)
+      doom-variable-pitch-font (font-spec :family "Fira Code Nerd Font" :size 20))
 
 (setq doom-theme 'doom-dracula)
 
@@ -104,7 +104,7 @@
         centaur-tabs-set-icons t
         centaur-tabs-gray-out-icons 'buffer
         centaur-tabs-set-bar 'under
-        centaur-tabs--buffer-show-groups t
+        ;; centaur-tabs--buffer-show-groups t
         )
   (+popup-window-p)          ; needed to prevent recursive auto-loading of popup
 
