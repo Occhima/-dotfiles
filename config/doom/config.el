@@ -601,7 +601,7 @@
   (add-hook 'inferior-ess-mode-hook #'doom-mark-buffer-as-real-h)
 
   ;; Open ESS R window to the left iso bottom.
-  (set-popup-rule! "^\\*R.*\\*$" :side 'left :size 0.38 :select nil :ttl nil :quit nil :modeline t))
+  (set-popup-rule! "^\\*R.*\\*$" :side 'bottom :size 0.25 :select nil :ttl nil :quit nil :modeline t))
 
 
 ;; Ways to disable smartparens for specific characters or fully in a mode.
@@ -656,6 +656,6 @@
   (add-hook! 'markdown-mode-hook :append (setq line-spacing nil)))
 
 ;; From Tecosaur's configuration
-;; (add-hook! (gfm-mode markdown-mode) #'mixed-pitch-mode)
-;; (add-hook! (gfm-mode markdown-mode) #'visual-line-mode #'turn-off-auto-fill)
+(add-hook! (gfm-mode markdown-mode) #'mixed-pitch-mode)
+(add-hook! (gfm-mode markdown-mode) #'visual-line-mode #'turn-off-auto-fill)
 ;; ----------------------------------------------------------------------------
