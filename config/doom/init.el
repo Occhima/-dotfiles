@@ -156,12 +156,12 @@
        ;;   +lsp
        ;;   ;; +meghanada
        ;;   )             ; the poster child for carpal tunnel syndrome
-       (javascript 
-        +typescript-mode
-        +npm-mode
-        +nodejs-repl
-        +lsp)   ; all(hope(abandon(ye(who(enter(here))))))
-       julia    ; a better, faster MATLAB
+       ; (javascript
+       ;;  +typescript-mode
+       ;;  +npm-mode
+       ;;  +nodejs-repl
+       ;;  +lsp)   ; all(hope(abandon(ye(who(enter(here))))))
+       (julia +lsp); a better, faster MATLAB
        ;;kotlin                        ; a better, slicker Java(Script)
        (latex
         +auxtex

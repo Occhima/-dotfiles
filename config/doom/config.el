@@ -651,11 +651,52 @@
 
 (after! markdown-mode
   ;; Disable trailing whitespace stripping for Markdown mode
-  (add-hook 'markdown-mode-hook #'doom-disable-delete-trailing-whitespace-h)
+  ;; (add-hook 'markdown-mode-hook #'doom-disable-delete-trailing-whitespace-h)
   ;; Doom adds extra line spacing in markdown documents
   (add-hook! 'markdown-mode-hook :append (setq line-spacing nil)))
 
 ;; From Tecosaur's configuration
-(add-hook! (gfm-mode markdown-mode) #'mixed-pitch-mode)
-(add-hook! (gfm-mode markdown-mode) #'visual-line-mode #'turn-off-auto-fill)
-;; ----------------------------------------------------------------------------
+;; (add-hook! (gfm-mode markdown-mode) #'mixed-pitch-mode)
+;; (add-hook! (gfm-mode markdown-mode) #'visual-line-mode #'turn-off-auto-fill)
+;; ---------------------------------------------------------------------------
+;;
+;;
+;;
+;;
+;; SQL - Mode
+;;
+(use-package sql
+  :mode ("\\.sql\\'" . sql-mode)
+  :hook ((sql-mode . lsp-deferred)
+	 (sql-mode . sqlind-minor-mode)
+	 ;; (sql-mode . sqlformat-on-save)
+	 (sql-interactive-mode . (lambda () (toggle-truncate-lines 1))))
+
+  :config
+  ;; Remove all default login parameters
+  (setq sql-postgres-login-params nil)
+
+  ;; define your connections
+  (setq sql-connection-alist
+        '((primary-db (sql-product 'postgres)
+                      (sql-database (concat "postgresql://"
+                                            "postgres" ;; replace with your username
+                                            ":" (read-passwd "Enter password: ")
+                                            "@localhost" ;; replace with your host
+                                            ":5433" ;; replace with your port
+                                            "/db" ;; replace with your database
+                                            )))
+
+          )
+
+
+        )
+
+
+  )
+
+(use-package sql-indent
+	:after sql)
+
+
+;;

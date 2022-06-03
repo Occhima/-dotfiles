@@ -17,10 +17,10 @@
 ;; When using org-roam via the `+roam` flag
 (unpin! org-roam company-org-roam)
 ;; (unpin! bibtex-completion helm-bibtex ivy-bibtex)
+(package! sql-indent)
+(package! sqlformat)
 
 (package! pdf-tools)
-(package! org-kanban
-  :recipe (:host github :repo "gizmomogwai/org-kanban"))
 (package! org-pdftools
   :recipe (:host github :repo "fuxialexander/org-pdftools"))
 (package! org-ref
