@@ -14,7 +14,6 @@
 ;;      Alternatively, press 'gd' (or 'C-c c d') on a module to browse its
 ;;      directory (for easy access to its source code).
 
-
 (doom! :input
        ;;chinese
        ;;japanese
@@ -46,7 +45,7 @@
        ;;hydra
        indent-guides                    ; highlighted indent columns
        (ligatures
-          +fira
+          +iosevka
        )
 
        ;;  minimap                        ; show a map of the code on the side
@@ -121,8 +120,8 @@
        ;;  rgb                            ; creating color strings
        ;;  taskrunner                     ; taskrunner for all your projects
        ;;  terraform                      ; infrastructure as code
-       ;;  tmux                           ; an API for interacting with tmux
-       upload                         ; map local to remote projects via ssh/ftp
+        tmux                           ; an API for interacting with tmux
+       ;; upload                         ; map local to remote projects via ssh/ftp
 
        :os
                                         ; (:if IS-MAC macos)              ; improve compatibility with macOS
@@ -130,7 +129,7 @@
 
        :lang
        ;;agda                          ; types of types of types of types...
-       (cc +lsp)              ; C/C++/Obj-C madness
+       (cc )              ; C/C++/Obj-C madness
        ;;clojure                       ; java with a lisp
        ;;common-lisp                   ; if you've seen one lisp, you've seen them all
        ;;coq                           ; proofs-as-programs
@@ -147,7 +146,7 @@
        ;;fsharp                        ; ML stands for Microsoft's Language
        ;;fstar                         ; (dependent) types and (monadic) effects and Z3
        ;;gdscript                      ; the language you waited for
-       (go +lsp)                        ; the hipster dialect
+       ;; (go +lsp)                        ; the hipster dialect
        ;;  (haskell +dante)              ; a language that's lazier than I am
        ;;hy                            ; readability of scheme w/ speed of python
        ;;idris                         ;
@@ -170,7 +169,7 @@
         +lsp)                    ; writing papers in Emacs has never been so fun
        ;;lean
        ;;factor
-       ledger                           ; an accounting system in Emacs
+       ;; ledger                           ; an accounting system in Emacs
        (lua +lsp)                       ; one-based indices? one-based indices
        (markdown +grip)                 ; writing docs for people to ignore
        ;;nim                           ; python + lisp at the speed of c
@@ -197,7 +196,7 @@
        ;;qt                            ; the 'cutest' gui framework ever
        ;;racket                        ; a DSL for DSLs
        ;;raku                          ; the artist formerly known as perl6
-       rest                      ; Emacs as a REST client
+       ;; rest                      ; Emacs as a REST client
        ;;rst                           ; ReST in peace
        ;;(ruby +rails)                 ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
        ;;rust                          ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
@@ -208,7 +207,7 @@
        ;;  solidity                      ; do you need a blockchain? No.
        ;;swift                         ; who asked for emoji variables?
        ;;terra                         ; Earth and Moon in alignment for performance.
-       web                              ; the tubes
+       ;; web                              ; the tubes
        yaml                             ; JSON, but readable
 
        :email

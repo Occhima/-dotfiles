@@ -1,10 +1,9 @@
 ;;; config.el -*- lexical-binding: t; -*
 ;;;
-
 ;;; Code:
 
 (setq user-full-name "Marco Occhialini"
-      base-dir "~/OneDrive"
+      base-dir "~/"
       projects-dir (concat (file-name-as-directory base-dir) "projects")
       user-mail-address "marcoocchialini@usp.br"
       command-line-default-directory "~/" ; set default directory to home
@@ -25,12 +24,15 @@
       which-key-idle-delay 0.3          ; Show key binding help quicker
       which-key-idle-secondary-delay 0)               ; Compile the vterm-module when needed without asking
 
-
 (after! projectile
   (setq projectile-project-root-files-bottom-up '("package.json" ".projectile" ".project" ".git")
-        projectile-ignored-projects '("~/.emacs.d/")
-        projectile-project-search-path '(projects-dir))
-  (defun projectile-ignored-project-function (filepath)
+    projectile-ignored-projects '("~/.emacs.d/" "~/")
+    projectile-project-search-path '(projects-dir)
+    projectile-project-root-files-bottom-up (remove ".git" projectile-project-root-files-bottom-up)
+    )
+
+  (defun pojectile-ignored-project-function (filepath)
+
     "Return t if FILEPATH is within any of `projectile-ignored-projects'"
     (or (mapcar (lambda (p) (s-starts-with-p p filepath)) projectile-ignored-projects))))
 
@@ -76,10 +78,10 @@
 (after! rainbow-mode
   (setq rainbow-html-colors-major-mode-list '(html-mode css-mode php-mode nxml-mode xml-mode typescript-mode javascript-mode)))
 
-(setq doom-font (font-spec :family "Fira Code Nerd Font" :size 22 :weight 'medium)
-      doom-variable-pitch-font (font-spec :family "Fira Code Nerd Font" :size 20))
+(setq doom-font (font-spec :family "Iosevka Term" :size 22 :weight 'Semibold)
+      doom-variable-pitch-font (font-spec :family "Iosevka Term " :size 20))
 
-(setq doom-theme 'doom-dracula)
+(setq doom-theme 'doom-tokyo-night)
 
 (setq show-trailing-whitespace t)
 
@@ -102,9 +104,9 @@
   (centaur-tabs-group-by-projectile-project)
   (setq centaur-tabs-style "slant"
         centaur-tabs-set-icons t
-        centaur-tabs-gray-out-icons 'buffer
+        centaur-tabs-gray-out-icons nil
         centaur-tabs-set-bar 'under
-        ;; centaur-tabs--buffer-show-groups t
+        centaur-tabs--buffer-show-groups t
         )
   (+popup-window-p)          ; needed to prevent recursive auto-loading of popup
 
@@ -192,22 +194,22 @@
 (setq +lookup-open-url-fn #'+lookup-xwidget-webkit-open-url-fn)
 
 
-(defvar +fl--browse-url-xwidget-last-session-buffer nil)
+;; (defvar +fl--browse-url-xwidget-last-session-buffer nil)
 
-(defun +fl/browse-url-xwidget (url &optional new-session)
-  (let ((orig-last-session-buffer
-         (if (boundp 'xwidget-webkit-last-session-buffer)
-             xwidget-webkit-last-session-buffer
-           nil)))
-    (setq xwidget-webkit-last-session-buffer +fl--browse-url-xwidget-last-session-buffer)
-    (save-window-excursion
-      (xwidget-webkit-browse-url url new-session))
-    (with-popup-rules! '(("^\\*xwidget" :vslot -10 :size 0.6 :select t :slot -1))
-      (pop-to-buffer xwidget-webkit-last-session-buffer))
-    (setq +fl--browse-url-xwidget-last-session-buffer xwidget-webkit-last-session-buffer
-          xwidget-webkit-last-session-buffer orig-last-session-buffer)))
+;; (defun +fl/browse-url-xwidget (url &optional new-session)
+;;   (let ((orig-last-session-buffer
+;;          (if (boundp 'xwidget-webkit-last-session-buffer)
+;;              xwidget-webkit-last-session-buffer
+;;            nil)))
+;;     (setq xwidget-webkit-last-session-buffer +fl--browse-url-xwidget-last-session-buffer)
+;;     (save-window-excursion
+;;       (xwidget-webkit-browse-url url new-session))
+;;     (with-popup-rules! '(("^\\*xwidget" :vslot -10 :size 0.6 :select t :slot -1))
+;;       (pop-to-buffer xwidget-webkit-last-session-buffer))
+;;     (setq +fl--browse-url-xwidget-last-session-buffer xwidget-webkit-last-session-buffer
+;;           xwidget-webkit-last-session-buffer orig-last-session-buffer)))
 
-(setq browse-url-browser-function '+fl/browse-url-xwidget)
+;; (setq browse-url-browser-function '+fl/browse-url-xwidget)
 
 
 (setq
@@ -233,11 +235,11 @@
 (advice-add 'org-refile :after 'org-save-all-org-buffers)
 (advice-add 'org-gcal-fetch :after 'org-save-all-org-buffers)
 
-(after! org-gcal
-  (setq org-gcal-client-id (auth-source-pass-get 'secret "org/gcal/client_id")
-        org-gcal-client-secret (auth-source-pass-get 'secret "org/gcal/client_secret")
-        org-gcal-fetch-file-alist '(("marcoocchialini@usp.br" .  "~/OneDrive/projects/org/gcal/personal.org")
-                                    )))
+;; (after! org-gcal
+;;   (setq org-gcal-client-id (auth-source-pass-get 'secret "org/gcal/client_id")
+;;         org-gcal-client-secret (auth-source-pass-get 'secret "org/gcal/client_secret")
+;;         org-gcal-fetch-file-alist '(("marcoocchialini@usp.br" .  "~/OneDrive/projects/org/gcal/personal.org")
+;;                                     )))
 
 (after! org
   (with-no-warnings
@@ -282,17 +284,18 @@
 
 (after! org
   (setq org-tags-column -80)
-            `(:checkbox      ""
-                             (appendq! +ligatures-extra-symbols
-              :doing         ""
-              :checkedbox    ""
-              :list_property "∷"))
+  `(:checkbox      ""
+     (appendq! +ligatures-extra-symbols
+       :doing         ""
+       :checkedbox    ""
+       :list_property "∷"))
   (set-ligatures! 'org-mode
     :merge t
     :checkbox      "[ ]"
     :doing         "[-]"
     :checkedbox    "[X]"
-    :list_property "::"))
+    :list_property "::")
+  )
 
 (setq org-agenda-category-icon-alist
       `(("inbox" ,(list (all-the-icons-faicon "inbox" :face 'all-the-icons-blue :v-adjust -0.1)) nil nil :ascent center)
@@ -420,71 +423,70 @@
 
 (require 'org-habit)
 
-(use-package! org-ref)
-(after! org-ref
-  (setq org-ref-default-bibliography (concat (file-name-as-directory bibliography-directory) "bibliography.bib")
-        org-ref-pdf-directory '((concat (file-name-as-directory library-directory) "books") (concat (file-name-as-directory library-directory) "articles"))
-        org-ref-note-title-format "* TODO %y - %t\n :PROPERTIES:\n  :Custom_ID: %k\n  :NOTER_DOCUMENT: %F\n :ROAM_KEY: cite:%k\n  :AUTHOR: %9a\n  :JOURNAL: %j\n  :YEAR: %y\n  :VOLUME: %v\n  :PAGES: %p\n  :DOI: %D\n  :URL: %U\n :END:\n\n"
-        org-ref-notes-directory (concat (file-name-as-directory org-directory) "notes")
-        org-ref-bibliography-notes (concat (file-name-as-directory bibliography-directory) "notes.org")
-        org-ref-notes-function 'orb-edit-notes))
+;; (use-package! org-ref)
+;; (after! org-ref
+;;   (setq org-ref-default-bibliography (concat (file-name-as-directory bibliography-directory) "bibliography.bib")
+;;         org-ref-pdf-directory '((concat (file-name-as-directory library-directory) "books") (concat (file-name-as-directory library-directory) "articles"))
+;;         org-ref-note-title-format "* TODO %y - %t\n :PROPERTIES:\n  :Custom_ID: %k\n  :NOTER_DOCUMENT: %F\n :ROAM_KEY: cite:%k\n  :AUTHOR: %9a\n  :JOURNAL: %j\n  :YEAR: %y\n  :VOLUME: %v\n  :PAGES: %p\n  :DOI: %D\n  :URL: %U\n :END:\n\n"
+;;         org-ref-notes-directory (concat (file-name-as-directory org-directory) "notes")
+;;         org-ref-bibliography-notes (concat (file-name-as-directory bibliography-directory) "notes.org")
+;;         org-ref-notes-function 'orb-edit-notes))
 
 
-
-(use-package! org-roam-bibtex
-  :after (org-roam)
-  :hook (org-roam-mode . org-roam-bibtex-mode)
-  :config
-  ;; (setq org-roam-server-host "172.16.3.168")
-  (setq orb-preformat-keywords
-   '("=key=" "title" "url" "file" "author-or-editor" "keywords"))
-  (setq orb-templates
-        '(("r" "ref" plain (function org-roam-capture--get-point)
-           ""
-           :file-name "${=key=}"
-           :head "#+TITLE: ${=key=}: ${title}
-#+ROAM_KEY: ${ref}
-#+ROAM_TAGS: article
-- tags ::
-- keywords :: ${keywords}
-* ${title}
-  :PROPERTIES:
-  :Custom_ID: ${=key=}
-  :URL: ${url}
-  :AUTHOR: ${author-or-editor}
-  :NOTER_DOCUMENT: %(file-relative-name (orb-process-file-field \"${=key=}\") (print org-directory))
-  :NOTER_PAGE:
-  :END:
-** CATALOG
-*** Motivation :springGreen:
-*** Model :lightSkyblue:
-*** Remarks
-*** Applications
-*** Expressions
-*** References :violet:
-** NOTES
-"
-           :unnarrowed t))))
+;; (use-package! org-roam-bibtex
+;;   :after (org-roam)
+;;   :hook (org-roam-mode . org-roam-bibtex-mode)
+;;   :config
+;;   ;; (setq org-roam-server-host "172.16.3.168")
+;;   (setq orb-preformat-keywords
+;;    '("=key=" "title" "url" "file" "author-or-editor" "keywords"))
+;;   (setq orb-templates
+;;         '(("r" "ref" plain (function org-roam-capture--get-point)
+;;            ""
+;;            :file-name "${=key=}"
+;;            :head "#+TITLE: ${=key=}: ${title}
+;; #+ROAM_KEY: ${ref}
+;; #+ROAM_TAGS: article
+;; - tags ::
+;; - keywords :: ${keywords}
+;; * ${title}
+;;   :PROPERTIES:
+;;   :Custom_ID: ${=key=}
+;;   :URL: ${url}
+;;   :AUTHOR: ${author-or-editor}
+;;   :NOTER_DOCUMENT: %(file-relative-name (orb-process-file-field \"${=key=}\") (print org-directory))
+;;   :NOTER_PAGE:
+;;   :END:
+;; ** CATALOG
+;; *** Motivation :springGreen:
+;; *** Model :lightSkyblue:
+;; *** Remarks
+;; *** Applications
+;; *** Expressions
+;; *** References :violet:
+;; ** NOTES
+;; "
+;;            :unnarrowed t))))
 
 ; (org-roam-bibtex-mode)
 ; (use-package! org-roam-server)
-(use-package! org-journal
-  ;; :bind
-  ;; ("C-c n j" . org-journal-new-entry)
-  ;; ("C-c n t" . org-journal-today)
-  :config
-  (setq org-journal-date-prefix "#+TITLE: "
-        org-journal-time-prefix "* "
-        org-journal-file-format "private-%Y-%m-%d.org"
-        org-journal-dir (concat (file-name-as-directory org-directory) "journal")
-        org-journal-carryover-items nil
-        org-journal-date-format "%Y-%m-%d")
-  ;; do not create title for dailies
-  (set-file-template! "/private-.*\\.org$"    :trigger ""    :mode 'org-mode)
-  (print +file-templates-alist)
-  (defun org-journal-today ()
-    (interactive)
-    (org-journal-new-entry t)))
+;; (use-package! org-journal
+;;   ;; :bind
+;;   ;; ("C-c n j" . org-journal-new-entry)
+;;   ;; ("C-c n t" . org-journal-today)
+;;   :config
+;;   (setq org-journal-date-prefix "#+TITLE: "
+;;         org-journal-time-prefix "* "
+;;         org-journal-file-format "private-%Y-%m-%d.org"
+;;         org-journal-dir (concat (file-name-as-directory org-directory) "journal")
+;;         org-journal-carryover-items nil
+;;         org-journal-date-format "%Y-%m-%d")
+;;   ;; do not create title for dailies
+;;   (set-file-template! "/private-.*\\.org$"    :trigger ""    :mode 'org-mode)
+;;   (print +file-templates-alist)
+;;   (defun org-journal-today ()
+;;     (interactive)
+;;     (org-journal-new-entry t)))
 
 (use-package! org-noter
 
@@ -519,17 +521,17 @@
 (setq python-shell-interpreter "ipython")
 (setq python-shell-interpreter-args "--pylab")
 
-(use-package! websocket
-    :after org-roam)
+;; (use-package! websocket
+;;     :after org-roam)
 
-(use-package! org-roam-ui
-  :after org-roam ;; or :after org
-  ; :hook (after-init . org-roam-ui-mode)
-  :config
-  (setq org-roam-ui-sync-theme t
-        org-roam-ui-follow t
-        org-roam-ui-update-on-save t
-        ))
+;; (use-package! org-roam-ui
+;;   :after org-roam ;; or :after org
+;;   ; :hook (after-init . org-roam-ui-mode)
+;;   :config
+;;   (setq org-roam-ui-sync-theme t
+;;         org-roam-ui-follow t
+;;         org-roam-ui-update-on-save t
+;;         ))
 
 ;; Python docstring tool
 (use-package py-pyment
@@ -699,4 +701,37 @@
 	:after sql)
 
 
-;;
+;; beacon
+(beacon-mode 1)
+
+;;;  clippy
+(global-org-modern-mode)
+
+(defun calendar-helper () ;; doesn't have to be interactive
+
+  (cfw:open-calendar-buffer
+   :contents-sources
+   (list
+    (cfw:org-create-source "Purple")
+
+(defun calendar-init ()
+  ;; switch to existing calendar buffer if applicable
+  (if-let (win (cl-find-if (lambda (b) (string-match-p "^\\*cfw:" (buffer-name b)))
+                           (doom-visible-windows)
+                           :key #'window-buffer))
+      (select-window win)
+    (calendar-helper)))
+
+(defun =my-calendar ()
+  "Activate (or switch to) *my* `calendar' in its workspace."
+  (interactive)
+  (if (featurep! :ui workspaces) ;; create workspace (if enabled)
+      (progn
+        (+workspace-switch "Calendar" t)
+        (doom/switch-to-scratch-buffer)
+        (calendar-init)
+        (+workspace/display))
+    (setq +calendar--wconf (current-window-configuration))
+    (delete-other-windows)
+    (switch-to-buffer (doom-fallback-buffer))
+    (calendar-init)))

@@ -11,20 +11,22 @@
 (package! org-super-agenda)
 ;; (package! wakatime-mode)
 ;; (package! bug-hunter)
-(package! org-roam-bibtex
-  :recipe (:host github :repo "org-roam/org-roam-bibtex"))
+;; (package! org-roam-bibtex
+;;   :recipe (:host github :repo "org-roam/org-roam-bibtex"))
 
 ;; When using org-roam via the `+roam` flag
 (unpin! org-roam company-org-roam)
 ;; (unpin! bibtex-completion helm-bibtex ivy-bibtex)
 (package! sql-indent)
 (package! sqlformat)
+(package! org-modern)
+;; (package! telega)
 
 (package! pdf-tools)
 (package! org-pdftools
   :recipe (:host github :repo "fuxialexander/org-pdftools"))
-(package! org-ref
-  :recipe (:host github :repo "jkitchin/org-ref"))
+;; (package! org-ref
+;;   :recipe (:host github :repo "jkitchin/org-ref"))
 (package! org-noter
   :recipe (:host github :repo "weirdNox/org-noter"))
 (package! org-noter-pdftools
@@ -75,10 +77,10 @@
 
 ;; (package! lsp-python-ms)
 ;; (package! org-brain)
-(package! webpaste)
+;; (package! webpaste)
 ;; (package! poly-markdown)
 ;; (package! helm-swoop) 
-(package! crux) 
+;; (package! crux)
 ;; (package! emms) 
 ;; (package! elfeed)
 ;; (package! elfeed-goodies)
@@ -87,7 +89,9 @@
 ;; (package! org-fragtog)
 
 (unpin! org-roam)
-(package! org-roam-ui)
+;; (package! org-roam-ui)
+(package! beacon)
+;; (package! clippy)
 
 ;; (package! org-krita
 ;;   :recipe (:host github
