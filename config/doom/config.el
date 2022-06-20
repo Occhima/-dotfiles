@@ -78,8 +78,8 @@
 (after! rainbow-mode
   (setq rainbow-html-colors-major-mode-list '(html-mode css-mode php-mode nxml-mode xml-mode typescript-mode javascript-mode)))
 
-(setq doom-font (font-spec :family "FiraCode Nerd Font" :size 22 :weight 'Semibold)
-      doom-variable-pitch-font (font-spec :family "FiraCode Nerd Font" :size 20))
+(setq doom-font (font-spec :family "Iosevka" :size 22 :weight 'Semibold)
+      doom-variable-pitch-font (font-spec :family "Iosevka" :size 20))
 
 (setq doom-theme 'doom-molokai)
 
@@ -735,3 +735,14 @@
     (delete-other-windows)
     (switch-to-buffer (doom-fallback-buffer))
     (calendar-init)))
+
+;; (setq telega-use-images "Noto Color")
+;; (after! telega
+;;   (setq
+
+;;     telega-use-docker t
+
+
+
+;;     )
+;;   )

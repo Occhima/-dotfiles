@@ -20,7 +20,14 @@
 (package! sql-indent)
 (package! sqlformat)
 (package! org-modern)
+(package! notebook-mode)
 (package! telega)
+
+(package! notebook-mode
+  :recipe (:host github :repo "rougier/notebook-mode"))
+
+(package! mu4e-dashboard
+  :recipe (:host github :repo "rougier/mu4e-dashboard"))
 
 (package! pdf-tools)
 (package! org-pdftools

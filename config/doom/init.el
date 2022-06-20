@@ -45,7 +45,7 @@
        ;;hydra
        indent-guides                    ; highlighted indent columns
        (ligatures
-          fira+
+         +iosevka
        )
 
        ;;  minimap                        ; show a map of the code on the side
@@ -212,7 +212,7 @@
        yaml                             ; JSON, but readable
 
        :email
-       ;; (mu4e +gmail)
+       (mu4e +gmail)
        ;;  notmuch
        ;;(wanderlust +gmail)
 
