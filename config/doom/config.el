@@ -78,10 +78,10 @@
 (after! rainbow-mode
   (setq rainbow-html-colors-major-mode-list '(html-mode css-mode php-mode nxml-mode xml-mode typescript-mode javascript-mode)))
 
-(setq doom-font (font-spec :family "Iosevka Term" :size 22 :weight 'Semibold)
-      doom-variable-pitch-font (font-spec :family "Iosevka Term " :size 20))
+(setq doom-font (font-spec :family "FiraCode Nerd Font" :size 22 :weight 'Semibold)
+      doom-variable-pitch-font (font-spec :family "FiraCode Nerd Font" :size 20))
 
-(setq doom-theme 'doom-tokyo-night)
+(setq doom-theme 'doom-molokai)
 
 (setq show-trailing-whitespace t)
 
@@ -104,7 +104,7 @@
   (centaur-tabs-group-by-projectile-project)
   (setq centaur-tabs-style "slant"
         centaur-tabs-set-icons t
-        centaur-tabs-gray-out-icons nil
+        centaur-tabs-gray-out-icons 'buffer
         centaur-tabs-set-bar 'under
         centaur-tabs--buffer-show-groups t
         )
@@ -712,7 +712,7 @@
   (cfw:open-calendar-buffer
    :contents-sources
    (list
-    (cfw:org-create-source "Purple")
+    (cfw:org-create-source "Purple"))))
 
 (defun calendar-init ()
   ;; switch to existing calendar buffer if applicable

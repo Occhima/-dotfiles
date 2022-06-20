@@ -20,7 +20,7 @@
 (package! sql-indent)
 (package! sqlformat)
 (package! org-modern)
-;; (package! telega)
+(package! telega)
 
 (package! pdf-tools)
 (package! org-pdftools
