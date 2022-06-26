@@ -81,7 +81,7 @@
 (setq doom-font (font-spec :family "Iosevka" :size 22 :weight 'Semibold)
       doom-variable-pitch-font (font-spec :family "Iosevka" :size 20))
 
-(setq doom-theme 'doom-molokai)
+(setq doom-theme 'doom-dracula)
 
 (setq show-trailing-whitespace t)
 

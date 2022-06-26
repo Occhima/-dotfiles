@@ -44,8 +44,9 @@
        hl-todo                ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;hydra
        indent-guides                    ; highlighted indent columns
+
        (ligatures
-         +iosevka
+         ;; +iosevka
        )
 
        ;;  minimap                        ; show a map of the code on the side
@@ -192,7 +193,7 @@
        (python
         +lsp
         +pyright
-        +poetry
+        ;; +poetry
         )   ; beautiful is better than ugly
        ;;qt                            ; the 'cutest' gui framework ever
        ;;racket                        ; a DSL for DSLs
