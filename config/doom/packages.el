@@ -22,6 +22,7 @@
 (package! org-modern)
 (package! notebook-mode)
 (package! telega)
+(package! vue-mode)
 
 (package! notebook-mode
   :recipe (:host github :repo "rougier/notebook-mode"))

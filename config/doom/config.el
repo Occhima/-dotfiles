@@ -736,6 +736,15 @@
     (switch-to-buffer (doom-fallback-buffer))
     (calendar-init)))
 
+
+(use-package vue-mode
+  :mode "\\.vue\\'"
+  :hook (vue-mode . prettier-js-mode)
+  :config
+  (add-hook 'vue-mode-hook #'lsp)
+  (setq prettier-js-args '("--parser vue")))
+
+
 ;; (setq telega-use-images "Noto Color")
 ;; (after! telega
 ;;   (setq
