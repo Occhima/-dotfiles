@@ -81,7 +81,8 @@
 (setq doom-font (font-spec :family "Iosevka" :size 22 :weight 'Semibold)
       doom-variable-pitch-font (font-spec :family "Iosevka" :size 20))
 
-(setq doom-theme 'doom-dracula)
+(setq doom-theme 'doom-monokai-classic)
+;; (load-theme 'srcery t)
 
 (setq show-trailing-whitespace t)
 
@@ -736,22 +737,30 @@
     (switch-to-buffer (doom-fallback-buffer))
     (calendar-init)))
 
-
 (use-package vue-mode
   :mode "\\.vue\\'"
-  :hook (vue-mode . prettier-js-mode)
+  ;; :hook (vue-mode . prettier-js-mode)
   :config
-  (add-hook 'vue-mode-hook #'lsp)
-  (setq prettier-js-args '("--parser vue")))
+  (setq vue-mode-packages
+    '(vue-mode))
+  (setq vue-mode-excluded-packages '())
+  (defun vue-mode/init-vue-mode ()
+    (use-package vue-mode
+                :config
+                ;; 0, 1, or 2, representing (respectively) none, low, and high coloring
+                (setq mmm-submode-decoration-level 2)))
 
 
-;; (setq telega-use-images "Noto Color")
-;; (after! telega
-;;   (setq
 
-;;     telega-use-docker t
-
+  ;; (add-hook 'vue-mode-hook #'lsp)
+  ;; (setq prettier-js-args '("--parser vue"))
+  )
 
 
-;;     )
-;;   )
+;; (use-package vue-html-mode
+  ;; :mode "\\.vue\\'"
+  ;; :hook (vue-mode . prettier-js-mode)
+  ;; :config
+  ;; (add-hook 'vue-mode-hook #'lsp)
+  ;; (setq prettier-js-args '("--parser vue"))
+  ;; )

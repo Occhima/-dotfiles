@@ -23,6 +23,8 @@
 (package! notebook-mode)
 (package! telega)
 (package! vue-mode)
+;; (package! vue-html-mode)
+(package! srcery-theme)
 
 (package! notebook-mode
   :recipe (:host github :repo "rougier/notebook-mode"))

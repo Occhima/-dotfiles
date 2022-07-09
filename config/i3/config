@@ -229,5 +229,5 @@ for_window [class="^.*"] border pixel 1
 
 
 exec_always --no-startup-id feh --bg-scale ~/Pictures/quiet-japanese.png
-exec_always --no-startup-id ~/polybar-collection/launch.sh 
+# exec_always --no-startup-id ~/.config/polybar/launch.sh 
 
