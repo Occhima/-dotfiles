@@ -22,15 +22,14 @@
 (package! org-modern)
 (package! notebook-mode)
 (package! telega)
-(package! vue-mode)
+;; (package! vue-mode)
 ;; (package! vue-html-mode)
-(package! srcery-theme)
 
 (package! notebook-mode
   :recipe (:host github :repo "rougier/notebook-mode"))
 
-(package! mu4e-dashboard
-  :recipe (:host github :repo "rougier/mu4e-dashboard"))
+;; (package! mu4e-dashboard
+;;   :recipe (:host github :repo "rougier/mu4e-dashboard"))
 
 (package! pdf-tools)
 (package! org-pdftools
@@ -84,6 +83,10 @@
 
 ;; Use `:pin' to specify a particular commit to install.
 ;(package! builtin-package :pin "1a2b3c4d5e")
+
+(package! nvm)
+(package! tree-sitter)
+(package! tree-sitter-langs)
 
 ;; (package! lsp-python-ms)
 ;; (package! org-brain)

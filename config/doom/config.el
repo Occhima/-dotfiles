@@ -737,24 +737,49 @@
     (switch-to-buffer (doom-fallback-buffer))
     (calendar-init)))
 
-(use-package vue-mode
-  :mode "\\.vue\\'"
-  ;; :hook (vue-mode . prettier-js-mode)
-  :config
-  (setq vue-mode-packages
-    '(vue-mode))
-  (setq vue-mode-excluded-packages '())
-  (defun vue-mode/init-vue-mode ()
-    (use-package vue-mode
-                :config
-                ;; 0, 1, or 2, representing (respectively) none, low, and high coloring
-                (setq mmm-submode-decoration-level 2)))
-
+;; (use-package vue-mode
+;;   :mode "\\.vue\\'"
+;;   ;; :hook (vue-mode . prettier-js-mode)
+;;   :config
+;;   (setq vue-mode-packages
+;;     '(vue-mode))
+;;   (setq vue-mode-excluded-packages '())
+;;   (defun vue-mode/init-vue-mode ()
+;;     (use-package vue-mode
+;;                 :config
+;;                 ;; 0, 1, or 2, representing (respectively) none, low, and high coloring
+;;                 (setq mmm-submode-decoration-level 2)))
 
 
   ;; (add-hook 'vue-mode-hook #'lsp)
   ;; (setq prettier-js-args '("--parser vue"))
-  )
+
+;; (use-package vue-mode
+;;   :mode "\\.vue\\'"
+;;   :config
+;;   (add-hook 'vue-mode-hook #'lsp))
+
+;; (defun vuejs-custom ()
+;;   (setq vue-html-tab-width 2)
+;;   (global-set-key (kbd "C-c C-l") 'vue-mode-reparse)
+;;   (global-set-key (kbd "C-c C-e") 'vue-mode-edit-indirect-at-point)
+;;   (add-to-list 'write-file-functions 'delete-trailing-whitespace)
+;;   (turn-on-diff-hl-mode))
+
+;; (add-hook 'vue-mode-hook 'vuejs-custom)
+
+;; (setq mmm-submode-decoration-level 0)
+
+;; (defun js-custom ()
+;;   (flycheck-mode t)
+;;   (company-mode)
+;;   (set (make-local-variable 'tab-width) 2)
+;;   (setq js-indent-level 2))
+
+;; (add-hook 'js-mode-hook 'js-custom)
+
+;; (setq mmm-js-mode-enter-hook (lambda () (setq syntax-ppss-table nil)))
+;; (setq mmm-typescript-mode-enter-hook (lambda () (setq syntax-ppss-table nil)))
 
 
 ;; (use-package vue-html-mode

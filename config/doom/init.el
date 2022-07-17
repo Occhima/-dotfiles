@@ -131,7 +131,7 @@
 
   :lang
   ;;agda                          ; types of types of types of types...
-  (cc )                       ; C/C++/Obj-C madness
+  (cc)                       ; C/C++/Obj-C madness
   ;;clojure                       ; java with a lisp
   ;;common-lisp                   ; if you've seen one lisp, you've seen them all
   ;;coq                           ; proofs-as-programs
@@ -159,9 +159,9 @@
   ;;   ;; +meghanada
   ;;   )             ; the poster child for carpal tunnel syndrome
   (javascript
+    +js2-mode
     +typescript-mode
     +npm-mode
-    +nodejs-repl
     +tide
     +lsp)                             ; all(hope(abandon(ye(who(enter(here))))))
 
@@ -212,7 +212,7 @@
   ;;  solidity                      ; do you need a blockchain? No.
   ;;swift                         ; who asked for emoji variables?
   ;;terra                         ; Earth and Moon in alignment for performance.
-  ;; web                              ; the tubes
+  (web +lsp)                              ; the tubes
   yaml                                  ; JSON, but readable
 
   :email
